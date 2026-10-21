@@ -1,6 +1,6 @@
 ---
 author: Ugandhar
-coverImage: "https://github.com/uga961/StayActive/blob/main/Images/main.jpg"
+coverImage: "https://raw.githubusercontent.com/uga961/StayActive/main/Images/main.jpg"
 date: 2026-10-21
 excerpt: "StayActive started with a simple thought: working for hours
   should not mean forgetting water, rest, or movement. This is the story
@@ -113,7 +113,7 @@ filling the screen with unnecessary details.
 
 ![StayActive dashboard showing the session clock and eye, water, and
 walking
-reminders](https://github.com/uga961/StayActive/blob/main/Images/1.jpg)
+reminders](https://raw.githubusercontent.com/uga961/StayActive/main/Images/1.jpg)
 
 *The dashboard shows the elapsed session time, the next reminder for
 each activity, and quick actions for water and walking.*
@@ -123,7 +123,7 @@ reminder intervals. I can use the Windows theme, Light mode, or Dark
 mode, and I can choose whether the app starts with Windows.
 
 ![StayActive settings page showing appearance, startup, and reminder
-options](https://github.com/uga961/StayActive/blob/main/Images/2.jpg)
+options](https://raw.githubusercontent.com/uga961/StayActive/main/Images/2.jpg)
 
 *The settings are intentionally straightforward. I can adjust the
 schedules without having to configure a complicated routine.*
@@ -133,7 +133,7 @@ wearing my computer glasses before opening the dashboard. It is a manual
 reminder, not a camera-based check.
 
 ![StayActive start-up glasses
-reminder](https://github.com/uga961/StayActive/blob/main/Images/3.jpg)
+reminder](https://raw.githubusercontent.com/uga961/StayActive/main/Images/3.jpg)
 
 *The glasses screen is a prompt to remember a habit. It does not attempt
 to verify anything about the person using the computer.*
