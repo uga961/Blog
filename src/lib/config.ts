@@ -9,7 +9,7 @@ export const siteConfig = {
   author: {
     name: process.env.NEXT_PUBLIC_SITE_NAME || "Ugandhar Vaddi",
     initials: "UV",
-    avatar: process.env.NEXT_PUBLIC_SITE_AVATAR || "public\\Logo.png",
+    avatar: process.env.NEXT_PUBLIC_SITE_AVATAR || "https://raw.githubusercontent.com/uga961/blog/main/public/Logo.png",
     social: {
       github: process.env.NEXT_PUBLIC_SITE_GITHUB || "https://github.com/uga961",
       youtube: process.env.NEXT_PUBLIC_SITE_YOUTUBE || "https://www.youtube.com/@uga961",
