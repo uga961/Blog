@@ -2,22 +2,13 @@
 
 import React, { useState, useMemo } from "react";
 import { ArticleCard } from "./ArticleCard";
+import { Post } from "@/lib/posts";
 import { Search, X, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
-
-export interface PostItem {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt?: string | null;
-  content: string;
-  publishedAt: Date | string | null;
-  readingTime: number;
-  tags?: { tag: { name: string; slug: string } }[];
-}
+import { Badge } from "@/components/ui/Badge";
 
 interface ArticleListProps {
-  posts: PostItem[];
-  allTags: { name: string; slug: string; count: number }[];
+  posts: Post[];
+  allTags: { name: string; count: number }[];
   postsPerPage?: number;
 }
 
@@ -41,8 +32,7 @@ export function ArticleList({
         post.content.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesTag =
-        !selectedTag ||
-        post.tags?.some((t) => t.tag.slug === selectedTag);
+        !selectedTag || post.tags.includes(selectedTag);
 
       return matchesSearch && matchesTag;
     });
@@ -55,8 +45,8 @@ export function ArticleList({
     return filteredPosts.slice(start, start + postsPerPage);
   }, [filteredPosts, currentPage, postsPerPage]);
 
-  const handleTagSelect = (tagSlug: string) => {
-    setSelectedTag((prev) => (prev === tagSlug ? null : tagSlug));
+  const handleTagSelect = (tagName: string) => {
+    setSelectedTag((prev) => (prev === tagName ? null : tagName));
     setCurrentPage(1);
   };
 
@@ -68,20 +58,20 @@ export function ArticleList({
 
   return (
     <div className="w-full space-y-8">
-      {/* Search and Filters */}
+      {/* Material 3 Search & Filters */}
       <div className="space-y-4">
-        {/* Search Input */}
+        {/* M3 Search Bar */}
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/60" />
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-on-surface-variant/70" />
           <input
             type="text"
-            placeholder="Search articles by title, topic, or keyword…"
+            placeholder="Search articles, topics, keywords…"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="h-10 w-full rounded-xl border border-border/80 bg-background pl-10 pr-9 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-accent/40 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 transition-all"
+            className="h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container pl-11 pr-10 text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary focus:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-xs"
           />
           {searchQuery && (
             <button
@@ -89,53 +79,47 @@ export function ArticleList({
                 setSearchQuery("");
                 setCurrentPage(1);
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface"
+              aria-label="Clear search"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-4 w-4" />
             </button>
           )}
         </div>
 
-        {/* Tag Filters */}
+        {/* M3 Filter Chips */}
         {allTags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <div className="flex flex-wrap items-center gap-2 pt-1">
             <button
               onClick={() => {
                 setSelectedTag(null);
                 setCurrentPage(1);
               }}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                selectedTag === null
-                  ? "bg-accent text-accent-foreground shadow-sm"
-                  : "border border-border/70 bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
+              className="focus:outline-none"
             >
-              All Articles ({posts.length})
+              <Badge active={selectedTag === null}>
+                All Posts ({posts.length})
+              </Badge>
             </button>
 
-            {allTags.map((t) => {
-              const isSelected = selectedTag === t.slug;
-              return (
-                <button
-                  key={t.slug}
-                  onClick={() => handleTagSelect(t.slug)}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                    isSelected
-                      ? "bg-accent text-accent-foreground shadow-sm"
-                      : "border border-border/70 bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
+            {allTags.map((t) => (
+              <button
+                key={t.name}
+                onClick={() => handleTagSelect(t.name)}
+                className="focus:outline-none"
+              >
+                <Badge active={selectedTag === t.name}>
                   {t.name} ({t.count})
-                </button>
-              );
-            })}
+                </Badge>
+              </button>
+            ))}
           </div>
         )}
       </div>
 
-      {/* Article List or Empty State */}
+      {/* Article Cards Grid */}
       {paginatedPosts.length > 0 ? (
-        <div className="divide-y divide-border/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {paginatedPosts.map((post) => (
             <ArticleCard
               key={post.id}
@@ -145,30 +129,30 @@ export function ArticleList({
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/80 py-16 text-center">
-          <BookOpen className="h-8 w-8 text-muted-foreground/50 mb-3" />
-          <h3 className="text-base font-semibold text-foreground">
-            No articles found
+        <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-outline-variant/50 bg-surface-container-low/50 py-16 text-center">
+          <BookOpen className="h-10 w-10 text-on-surface-variant/40 mb-3" />
+          <h3 className="text-base font-semibold text-on-surface">
+            No matching articles
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground max-w-sm">
+          <p className="mt-1 text-xs text-on-surface-variant max-w-sm">
             {searchQuery || selectedTag
-              ? "We couldn't find any articles matching your search filters."
-              : "No published articles yet. Check back soon!"}
+              ? "We couldn't find any articles matching your search query or tag."
+              : "No articles found in /posts. Create one using template.md!"}
           </p>
           {(searchQuery || selectedTag) && (
             <button
               onClick={resetFilters}
-              className="mt-4 text-xs font-medium text-accent hover:underline"
+              className="mt-4 text-xs font-semibold text-primary hover:underline"
             >
-              Clear filters
+              Reset filters
             </button>
           )}
         </div>
       )}
 
-      {/* Pagination Controls */}
+      {/* M3 Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between border-t border-border/60 pt-6 text-xs text-muted-foreground">
+        <div className="flex items-center justify-between border-t border-outline-variant/30 pt-6 text-xs text-on-surface-variant">
           <span>
             Page {currentPage} of {totalPages} ({filteredPosts.length} total)
           </span>
@@ -177,18 +161,18 @@ export function ArticleList({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 rounded-lg border border-border/80 px-3 py-1.5 font-medium transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-full bg-surface-container px-4 py-2 font-medium text-on-surface transition-colors hover:bg-surface-container-high disabled:opacity-40 disabled:pointer-events-none"
             >
-              <ChevronLeft className="h-3.5 w-3.5" />
+              <ChevronLeft className="h-4 w-4" />
               <span>Previous</span>
             </button>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 rounded-lg border border-border/80 px-3 py-1.5 font-medium transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-full bg-surface-container px-4 py-2 font-medium text-on-surface transition-colors hover:bg-surface-container-high disabled:opacity-40 disabled:pointer-events-none"
             >
               <span>Next</span>
-              <ChevronRight className="h-3.5 w-3.5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

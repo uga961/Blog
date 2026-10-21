@@ -1,32 +1,12 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/config";
+import { getAllPosts } from "@/lib/posts";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const now = new Date();
+  const posts = getAllPosts(false);
   const siteUrl = siteConfig.url.replace(/\/+$/, "");
-
-  let posts: { slug: string; updatedAt: Date; publishedAt: Date | null }[] = [];
-
-  try {
-    posts = await prisma.post.findMany({
-      where: {
-        status: "PUBLISHED",
-        publishedAt: {
-          lte: now,
-        },
-      },
-      select: {
-        slug: true,
-        updatedAt: true,
-        publishedAt: true,
-      },
-    });
-  } catch {
-    // If DB is offline or not yet migrated during build, continue gracefully
-  }
 
   const staticUrls = [
     `
@@ -38,11 +18,10 @@ export async function GET() {
   ];
 
   const postUrls = posts.map((post) => {
-    const lastMod = (post.updatedAt || post.publishedAt || new Date()).toISOString();
     return `
     <url>
       <loc>${siteUrl}/posts/${post.slug}</loc>
-      <lastmod>${lastMod}</lastmod>
+      <lastmod>${new Date(post.date).toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>`;

@@ -10,13 +10,15 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
   if (!items || items.length < 2) return null;
 
   return (
-    <div className="my-8 rounded-xl border border-border/70 bg-card p-4 transition-all shadow-sm">
+    <div className="my-8 rounded-3xl border border-outline-variant/30 bg-surface-container-low p-5 transition-all shadow-xs">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between text-xs font-semibold tracking-wider uppercase text-muted-foreground hover:text-foreground"
+        className="flex w-full items-center justify-between text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-on-surface"
       >
         <div className="flex items-center gap-2">
-          <List className="h-4 w-4 text-accent" />
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-container text-primary-on-container">
+            <List className="h-3.5 w-3.5" />
+          </div>
           <span>Table of Contents</span>
         </div>
         {isOpen ? (
@@ -27,13 +29,13 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
       </button>
 
       {isOpen && (
-        <nav className="mt-3.5 space-y-1.5 border-t border-border/50 pt-3">
+        <nav className="mt-4 space-y-2 border-t border-outline-variant/20 pt-4">
           {items.map((item, index) => (
             <a
               key={index}
               href={`#${item.id}`}
-              className={`block text-sm text-muted-foreground transition-colors hover:text-accent ${
-                item.level === 3 ? "pl-4 text-xs" : "font-medium"
+              className={`block text-sm text-on-surface-variant transition-colors hover:text-primary ${
+                item.level === 3 ? "pl-5 text-xs" : "font-medium"
               }`}
             >
               {item.text}

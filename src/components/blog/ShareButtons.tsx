@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Link2, Check, Twitter, Linkedin } from "lucide-react";
+import { Link2, Check, Twitter, Linkedin, MessageCircle } from "lucide-react";
 
 interface ShareButtonsProps {
   title: string;
@@ -21,25 +21,25 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
     }
   };
 
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
     title
-  )}&url=${encodeURIComponent(url)}`;
+  )}%20${encodeURIComponent(url)}`;
 
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
     url
   )}`;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       <button
         onClick={handleCopyLink}
-        className="flex items-center gap-1.5 rounded-lg border border-border/70 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="flex items-center gap-1.5 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface transition-colors hover:bg-surface-container-high hover:text-primary shadow-xs"
         title="Copy article link"
       >
         {copied ? (
           <>
-            <Check className="h-3.5 w-3.5 text-accent" />
-            <span className="text-accent font-medium">Link Copied</span>
+            <Check className="h-3.5 w-3.5 text-primary" />
+            <span className="text-primary font-semibold">Link Copied!</span>
           </>
         ) : (
           <>
@@ -50,13 +50,13 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
       </button>
 
       <a
-        href={twitterUrl}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-lg border border-border/70 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-        title="Share on X / Twitter"
+        className="flex items-center gap-1.5 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface transition-colors hover:bg-surface-container-high hover:text-primary shadow-xs"
+        title="Share on WhatsApp"
       >
-        <Twitter className="h-3.5 w-3.5" />
+        <MessageCircle  className="h-3.5 w-3.5" />
         <span>Post</span>
       </a>
 
@@ -64,7 +64,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-lg border border-border/70 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="flex items-center gap-1.5 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface transition-colors hover:bg-surface-container-high hover:text-primary shadow-xs"
         title="Share on LinkedIn"
       >
         <Linkedin className="h-3.5 w-3.5" />

@@ -10,9 +10,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     if (stored === "dark" || (!stored && systemPrefersDark)) {
       setTheme("dark");
@@ -39,7 +37,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   if (!mounted) {
     return (
       <div
-        className={`h-9 w-9 rounded-lg border border-border/60 bg-transparent ${className}`}
+        className={`h-10 w-10 rounded-full bg-surface-container ${className}`}
         aria-hidden="true"
       />
     );
@@ -48,7 +46,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={toggleTheme}
-      className={`inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/80 bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
+      className={`flex h-10 w-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className}`}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
       title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >

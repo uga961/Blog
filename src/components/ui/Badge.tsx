@@ -1,8 +1,9 @@
 import React from "react";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "default" | "accent" | "draft" | "scheduled" | "published" | "outline";
+  variant?: "default" | "primary" | "tonal" | "outline";
   size?: "sm" | "md";
+  active?: boolean;
 }
 
 export function Badge({
@@ -10,25 +11,29 @@ export function Badge({
   className = "",
   variant = "default",
   size = "sm",
+  active = false,
   ...props
 }: BadgeProps) {
   const sizeStyles = {
-    sm: "px-2 py-0.5 text-xs",
-    md: "px-2.5 py-1 text-xs font-medium",
+    sm: "px-3 py-1 text-xs",
+    md: "px-3.5 py-1.5 text-xs font-medium",
   };
 
   const variantStyles = {
-    default: "bg-muted text-foreground border border-border/70",
-    accent: "bg-accent/10 text-accent border border-accent/20 font-medium",
-    draft: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 font-medium",
-    scheduled: "bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-500/20 font-medium",
-    published: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-medium",
-    outline: "border border-border text-muted-foreground",
+    default: active
+      ? "bg-primary text-primary-foreground font-semibold shadow-xs"
+      : "bg-surface-container text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container-high hover:text-on-surface",
+    primary:
+      "bg-primary text-primary-foreground font-medium shadow-xs",
+    tonal:
+      "bg-primary-container text-primary-on-container font-medium",
+    outline:
+      "border border-outline-variant/50 text-on-surface-variant bg-transparent",
   };
 
   return (
     <span
-      className={`inline-flex items-center rounded-full transition-colors ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full transition-all duration-150 select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {children}

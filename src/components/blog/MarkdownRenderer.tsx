@@ -30,20 +30,20 @@ function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative my-6 overflow-hidden rounded-xl border border-border/80 bg-muted/40 font-mono text-sm shadow-sm group">
-      <div className="flex items-center justify-between border-b border-border/60 bg-muted/70 px-4 py-2 text-xs text-muted-foreground">
-        <span className="font-medium tracking-wide uppercase">
-          {language || "text"}
+    <div className="relative my-7 overflow-hidden rounded-2xl border border-outline-variant/35 bg-surface-container font-mono text-sm shadow-xs group">
+      <div className="flex items-center justify-between border-b border-outline-variant/20 bg-surface-container-high px-4 py-2.5 text-xs text-on-surface-variant">
+        <span className="font-semibold tracking-wider uppercase text-[11px]">
+          {language || "code"}
         </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded px-2 py-1 transition-colors hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 transition-colors hover:bg-surface-container-highest hover:text-on-surface focus-visible:outline-none"
           title="Copy code"
         >
           {copied ? (
             <>
-              <Check className="h-3.5 w-3.5 text-accent" />
-              <span className="text-[11px] text-accent font-medium">Copied</span>
+              <Check className="h-3.5 w-3.5 text-primary" />
+              <span className="text-[11px] text-primary font-semibold">Copied!</span>
             </>
           ) : (
             <>
@@ -53,7 +53,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
           )}
         </button>
       </div>
-      <div className="overflow-x-auto p-4">
+      <div className="overflow-x-auto p-4 leading-relaxed">
         <code className={className}>{children}</code>
       </div>
     </div>
@@ -62,7 +62,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
 
 export function MarkdownRenderer({ content }: { content: string }) {
   return (
-    <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:tracking-tight prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-0">
+    <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-0">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug, rehypeHighlight]}
@@ -72,7 +72,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
             if (isInline) {
               return (
                 <code
-                  className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.875em] text-foreground font-normal border border-border/60"
+                  className="rounded-md bg-surface-container-high px-1.5 py-0.5 font-mono text-[0.875em] text-primary font-medium border border-outline-variant/25"
                   {...props}
                 >
                   {children}
@@ -89,11 +89,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
                 <img
                   src={src}
                   alt={alt || ""}
-                  className="w-full rounded-xl border border-border/60 object-cover shadow-sm transition-transform"
+                  className="w-full rounded-3xl border border-outline-variant/30 object-cover shadow-sm transition-transform"
                   loading="lazy"
                 />
                 {alt && (
-                  <figcaption className="mt-2 text-center text-xs text-muted-foreground italic">
+                  <figcaption className="mt-2.5 text-center text-xs text-on-surface-variant italic">
                     {alt}
                   </figcaption>
                 )}
@@ -102,8 +102,8 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           table({ children }) {
             return (
-              <div className="my-6 w-full overflow-x-auto">
-                <table className="w-full text-left text-sm border-collapse border border-border">
+              <div className="my-6 w-full overflow-x-auto rounded-2xl border border-outline-variant/30">
+                <table className="w-full text-left text-sm border-collapse">
                   {children}
                 </table>
               </div>
@@ -111,21 +111,21 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           th({ children }) {
             return (
-              <th className="border border-border bg-muted/60 px-4 py-2 font-semibold text-foreground">
+              <th className="border-b border-outline-variant/30 bg-surface-container-high px-4 py-3 font-semibold text-on-surface">
                 {children}
               </th>
             );
           },
           td({ children }) {
             return (
-              <td className="border border-border px-4 py-2 text-muted-foreground">
+              <td className="border-b border-outline-variant/20 px-4 py-3 text-on-surface-variant">
                 {children}
               </td>
             );
           },
           blockquote({ children }) {
             return (
-              <blockquote className="my-6 border-l-2 border-accent bg-accent/5 px-4 py-3 italic text-muted-foreground rounded-r-lg">
+              <blockquote className="my-6 border-l-4 border-primary bg-primary-container/20 px-5 py-4 italic text-on-surface-variant rounded-r-2xl">
                 {children}
               </blockquote>
             );
