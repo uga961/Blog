@@ -1,0 +1,305 @@
+# Build a Complete Personal Blogging Platform
+
+Act as a Principal Full-Stack Engineer, Senior UI/UX Designer, and DevOps Engineer. Build a complete, production-ready personal blogging platform that I can develop in VS Code, push to GitHub, and deploy on my own server.
+
+Do not merely generate a plan, mockup, or static frontend. Implement the working application, connect its components, test critical flows, fix errors, and document how to run and deploy it.
+
+## 1. Product Overview
+
+Build a sleek personal blogging website with a public reading experience and a private admin panel.
+
+Use a configurable domain, with the public site hosted at `blog.xyz.in` (replace `xyz.in` with my actual domain).
+
+Routes:
+- `/` — Public blog homepage.
+- `/posts/[slug]` — Individual blog article.
+- `/admin` — Admin login.
+- `/admin/dashboard` — Manage posts.
+- `/admin/editor` — Create a post.
+- `/admin/editor/[id]` — Edit an existing post.
+
+The public website must be accessible without login. Only the administrator can create, edit, publish, unpublish, or delete posts.
+
+## 2. Design Direction — Highest Priority
+
+Create a premium, minimalist, editorial design. Use the attached UI screenshot as a visual reference for clean spacing, simple layouts, thin borders, rounded elements, and restrained green accents. Do not copy WhatsApp branding.
+
+The website should feel handcrafted, calm, modern, and focused on reading.
+
+Avoid:
+- Generic AI-generated website templates.
+- Purple gradients, excessive shadows, and glowing effects.
+- Unnecessary cards, excessive rounded containers, and decorative clutter.
+- Oversized navigation, distracting animations, and excessive whitespace.
+- Emojis used as interface icons.
+
+Design principles:
+- Typography-led layouts with carefully selected sans-serif and serif fonts.
+- A restrained palette of off-white, charcoal, muted gray, and one subtle accent color.
+- Fine borders, subtle hover states, consistent spacing, and clear visual hierarchy.
+- Light and dark modes, respecting system preferences with a manual toggle.
+- Consistent Lucide icons and polished focus, loading, empty, error, and success states.
+
+Use a combination such as Geist and Newsreader, or similarly suitable fonts. Keep article text highly readable, with a comfortable line height and an approximately 680–760px reading width on desktop.
+
+Every page must look intentional and polished on both desktop and mobile. Avoid fixed-width layouts and hardcoded viewport assumptions.
+
+## 3. Public Homepage
+
+Build a responsive personal blog homepage containing:
+
+- A compact header with an author avatar or initials, site name, and theme toggle.
+- A short introduction, biography, and optional social links.
+- A clean list of published articles, ordered by publication date.
+- Each article entry should show its title, date, estimated reading time, optional excerpt, and tags.
+- Subtle hover interactions and a clear indication that an entry is clickable.
+- Search and tag filtering.
+- Pagination or a sensible load-more mechanism when the post count grows.
+- A minimal footer with copyright and optional social links.
+
+Do not force every post into a card. Prefer a clean editorial list with subtle dividers, strong typography, and restrained visual grouping.
+
+Only published posts should be visible publicly. Drafts and scheduled posts must never leak through public API responses or rendered pages.
+
+## 4. Individual Article Page
+
+Route: `/posts/[slug]`
+
+Make reading the main experience.
+
+Article layout:
+1. A subtle top banner or breadcrumb linking back to the homepage.
+2. A small, muted metadata row containing publication date, estimated reading time, and optional tags.
+3. A large, bold, beautifully typeset title.
+4. An optional subtitle or excerpt.
+5. Optional cover image with a responsive aspect ratio.
+6. The article body in a centered, readable column.
+7. Optional author information and related articles at the end.
+
+Content rendering must support:
+- H1–H4 headings with a logical hierarchy.
+- Paragraphs, bold, italic, links, and inline code.
+- Ordered and unordered lists.
+- Blockquotes, tables, and horizontal rules.
+- Syntax-highlighted code blocks with language labels and a copy button.
+- Responsive inline images with alt text, captions, and appropriate spacing.
+- Embedded content only where explicitly supported and safely validated.
+
+Add a thin reading-progress indicator at the top of the viewport. Use subtle scroll-triggered effects only when they improve readability. Respect `prefers-reduced-motion`.
+
+Make metadata readable without competing with the title. Avoid excessive animation, sticky elements that obstruct content, and layout shifts while images load.
+
+Provide a useful not-found page for invalid slugs.
+
+## 5. Secure Admin Authentication
+
+Implement real server-side authentication, not a fake login form or client-side password check.
+
+Requirements:
+- A clean login page matching the public design.
+- An administrator username and password configured through environment variables or a secure user record.
+- Password hashing when credentials are stored in the database.
+- Secure, HTTP-only, SameSite cookies and server-managed sessions.
+- Secure password verification using an established authentication library.
+- Rate limiting or equivalent protection against repeated login attempts.
+- Server-side authorization for every administrative page, API route, and mutation.
+- CSRF protection where applicable.
+- Safe logout and session expiration.
+- No hardcoded credentials, secrets, or default production passwords.
+- No public administrator registration.
+
+Redirect unauthenticated users to `/admin`. Never rely solely on hiding buttons or protecting pages in the browser.
+
+## 6. Admin Dashboard
+
+Build a functional content management dashboard.
+
+Display:
+- Total posts, published posts, and drafts.
+- A searchable and filterable post list.
+- Post title, slug, last updated date, publication date, and status.
+- Actions to create, edit, preview, publish, unpublish, and delete posts.
+- Confirmation before destructive actions.
+- Clear feedback for successful saves and failed operations.
+
+Use a compact, clean layout rather than an oversized analytics dashboard.
+
+## 7. Blog Editor and Publishing
+
+Provide a practical editor with the following fields:
+
+- Title.
+- Slug, generated automatically but editable.
+- Subtitle or excerpt.
+- Publication date.
+- Tags.
+- Optional cover image.
+- Main article body.
+- Draft or published status.
+- Optional scheduled publication time.
+
+Use a Markdown editor with a live preview or a reliable rich-text editor. Prefer Markdown if it provides a simpler, portable content format.
+
+The editor must support:
+- Saving and updating drafts.
+- Publishing and unpublishing.
+- Previewing the exact public rendering before publication.
+- Automatic slug generation and collision detection.
+- Input validation and useful error messages.
+- Unsaved-change warnings.
+- A clear save/publish workflow.
+- Reliable handling of long articles.
+
+Prevent duplicate submissions and ensure that concurrent edits or failed requests do not silently overwrite content.
+
+## 8. Image Uploads and Content Assets
+
+Implement real image uploads.
+
+Requirements:
+- Support common formats such as JPEG, PNG, and WebP.
+- Validate MIME type, extension, file size, and upload authorization on the server.
+- Generate safe unique filenames rather than trusting uploaded filenames.
+- Allow multiple image uploads and insertion into the article.
+- Store descriptive alt text.
+- Display images responsively with appropriate dimensions and loading behavior.
+- Avoid broken links when a post is edited or published.
+
+Use S3-compatible object storage or another production-ready image storage service. Configure credentials through environment variables. Local storage may be used for development only unless the production deployment explicitly provides persistent storage and backups.
+
+For Markdown content, support normal image references such as:
+
+`![Description](image-url)`
+
+If convenient, provide sequential aliases such as `01.png`, `02.webp`, and `03.jpg` within a post-specific asset namespace. Resolve aliases to validated stored image URLs at render time. Never use ambiguous global filenames that could point to another post's images.
+
+## 9. Technology Stack
+
+Use a coherent, maintainable stack:
+
+- Next.js App Router.
+- TypeScript with strict type checking.
+- Tailwind CSS with custom design tokens.
+- Lucide React for icons.
+- PostgreSQL for persistent application data.
+- Prisma ORM with migrations.
+- A proven authentication library or a well-implemented server-side session system.
+- A secure Markdown rendering pipeline with GitHub Flavored Markdown support and syntax highlighting.
+- S3-compatible object storage for production image uploads.
+- Docker and Docker Compose for reproducible deployment.
+
+Choose stable, mutually compatible package versions. Avoid unnecessary dependencies and do not mix multiple frameworks or competing libraries without a clear reason.
+
+Keep the database, storage provider, and domain configurable. Never commit `.env` files or secrets.
+
+## 10. Database and Content Model
+
+Design a proper schema for:
+
+- Administrator accounts.
+- Blog posts.
+- Tags or categories.
+- Post-to-tag relationships.
+- Uploaded media, where useful.
+- Session records if required by the authentication design.
+
+A post should include an ID, title, unique slug, excerpt, body, cover image, publication status, publication timestamp, creation timestamp, and update timestamp.
+
+Enforce slug uniqueness and suitable database constraints. Store dates consistently and display them in the configured site timezone.
+
+Support drafts and scheduled publication. A scheduled post must not become publicly accessible before its publication time, even if the homepage is cached.
+
+Use database migrations and provide a safe way to initialize the first administrator account.
+
+## 11. Git-Based Content Workflow
+
+The primary publishing workflow should be through the admin dashboard and database. Publishing a post must not require a new deployment.
+
+Additionally, support an optional Git-based Markdown workflow if practical:
+
+- Store Markdown files under `content/posts/`.
+- Use frontmatter for title, slug, date, excerpt, tags, and publication status.
+- Include sample Markdown posts.
+- Provide a documented import or synchronization command.
+- Validate metadata, slugs, and image references before importing.
+- Do not silently overwrite database-managed posts.
+- Do not automatically publish arbitrary `.txt` files.
+
+If implementing both workflows adds unnecessary complexity, prioritize the reliable admin dashboard and document Markdown import as a future extension.
+
+## 12. Performance, SEO, Accessibility, and Security
+
+Implement:
+- Server-rendered public pages where appropriate.
+- Optimized images, lazy loading, and reserved image dimensions.
+- Correct cache invalidation when posts are published, edited, or unpublished.
+- Page titles, meta descriptions, canonical URLs, Open Graph metadata, and social sharing images.
+- XML sitemap, robots.txt, and RSS feed.
+- Accessible semantic HTML, keyboard navigation, visible focus states, and sufficient contrast.
+- Responsive layouts for mobile, tablet, laptop, and wide desktop screens.
+- Input validation on both client and server.
+- Safe Markdown rendering, sanitized HTML where needed, and protection against XSS.
+- Secure handling of database queries, uploaded files, cookies, and secrets.
+- Useful error pages and structured server-side logging.
+
+Never expose unpublished content, database credentials, storage secrets, or administrative data through client bundles, public APIs, metadata, or error messages.
+
+## 13. Deployment and Domain Setup
+
+Prepare the application for deployment to my own Linux server.
+
+Provide:
+- A production Dockerfile.
+- A Docker Compose configuration for the application and PostgreSQL, where appropriate.
+- An `.env.example` containing placeholders only.
+- Database migration and initial administrator setup commands.
+- A production build and start procedure.
+- A reverse proxy configuration suitable for Nginx or an equivalent proxy.
+- HTTPS setup instructions.
+- DNS instructions for pointing `blog.xyz.in` to the server.
+- Persistent database and media storage.
+- Backup and restore instructions.
+- A GitHub-based deployment workflow or clear manual deployment steps.
+- A health-check endpoint and basic operational troubleshooting guide.
+
+Do not assume my domain, server IP, storage credentials, or hosting provider. Make them configurable and explain where I must supply them.
+
+The application should be deployable by pulling the repository, configuring environment variables, applying migrations, building the image, and starting the services. A new blog post should not require rebuilding or redeploying the application.
+
+## 14. Testing and Quality Assurance
+
+Implement and run appropriate tests.
+
+Cover at least:
+- Homepage rendering with published posts.
+- Article rendering and invalid slugs.
+- Login success and failure.
+- Access denial for unauthenticated admin requests.
+- Authorization checks for all post mutations and image uploads.
+- Draft visibility and scheduled publication rules.
+- Creating, editing, publishing, unpublishing, and deleting posts.
+- Slug uniqueness and image reference validation.
+- Mobile layouts and navigation.
+- Production build, type checking, linting, and database migrations.
+
+Fix errors discovered during testing. Do not claim a test passed unless it was actually executed successfully. Clearly identify any tests that require external credentials or services.
+
+## 15. Execution Instructions
+
+Work directly in the current VS Code workspace.
+
+1. Inspect the existing project before making changes. Preserve useful existing code and configuration.
+2. If the workspace is empty, initialize the project with the selected stack.
+3. Establish the design system and build the public homepage and article reader.
+4. Implement the database schema, migrations, authentication, and authorization.
+5. Implement the dashboard, editor, publishing workflow, and image uploads.
+6. Add SEO, accessibility, caching, error handling, and deployment configuration.
+7. Add tests and sample content.
+8. Run the available checks and fix failures.
+9. Write a detailed README covering local development, environment setup, administrator initialization, testing, deployment, DNS, HTTPS, backups, and troubleshooting.
+
+Create clean, modular files with sensible names. Avoid giant components, duplicated business logic, placeholder buttons, mock authentication, fake API responses, and unfinished core features.
+
+Do not stop after generating the initial files. Continue implementing and verifying the application until the core workflows work end to end. If a required external service cannot be configured without my credentials, finish the integration, provide safe local defaults where possible, and clearly explain the remaining setup.
+
+**Final acceptance criteria:** The public blog looks polished on mobile and desktop; articles are pleasant to read; the administrator can securely log in, upload images, edit drafts, preview posts, and publish them; published posts appear at their correct URLs without a redeployment; and the project can be built and deployed using the documented instructions.
