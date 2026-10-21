@@ -5,7 +5,7 @@ export const siteConfig = {
   bio:
     process.env.NEXT_PUBLIC_SITE_BIO ||
     "Associate Data Scientist and open-source enthusiast. Exploring Statistics, Data Analysis, and resilient systems.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://blog.ugandhar.in/",
   author: {
     name: process.env.NEXT_PUBLIC_SITE_NAME || "Ugandhar Vaddi",
     initials: "UV",

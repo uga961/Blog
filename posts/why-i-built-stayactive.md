@@ -10,9 +10,6 @@ published: true
 slug: why-i-built-stayactive
 tags:
 - Projects
-- Windows
-- CSharp
-- WPF
 - Digital Wellbeing
 title: "Why I Built StayActive: A Small Reminder to Take Care of Myself"
 ---
