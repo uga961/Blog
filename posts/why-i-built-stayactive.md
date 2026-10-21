@@ -40,19 +40,6 @@ personal information or becoming another distraction.
 
 [Explore StayActive on GitHub](https://github.com/uga961/StayActive)
 
-## Contents
-
--   [The problem I wanted to solve](#the-problem-i-wanted-to-solve)
--   [What I wanted StayActive to be](#what-i-wanted-stayactive-to-be)
--   [A look at the app](#a-look-at-the-app)
--   [How I built it](#how-i-built-it)
--   [The reminders and how they
-    behave](#the-reminders-and-how-they-behave)
--   [Making it fit around real life](#making-it-fit-around-real-life)
--   [Privacy was a design decision](#privacy-was-a-design-decision)
--   [What changed in version 2.1](#what-changed-in-version-21)
--   [What I learned](#what-i-learned)
--   [Try it yourself](#try-it-yourself)
 
 ## The problem I wanted to solve
 
