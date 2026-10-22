@@ -1,6 +1,6 @@
 ---
 author: Ugandhar
-coverImage: "https://i.imgur.com/eZhrZgl.jpeg"
+coverImage: "https://i.imgur.com/Acw6z6A.jpeg"
 date: 2026-10-22
 excerpt: A visibly misaligned ₹500 note led me to question currency
   quality control, test it with a currency counter, and contact the
@@ -41,7 +41,7 @@ not the sort of small visual difference I would normally ignore when
 handling cash.
 
 ![₹500 note showing visibly misaligned
-borders](https://i.imgur.com/eZhrZgl.jpeg)
+borders](https://i.imgur.com/Acw6z6A.jpeg)
 
 *The note that prompted me to look more closely at its alignment.*
 
@@ -72,7 +72,7 @@ electronics, printed materials, and almost every product made at scale.
 Quality control exists because the possibility of an error is not the
 same as accepting every error that gets through.
 
-![Second photograph of the ₹500 note](https://i.imgur.com/Ipob38A.jpeg)
+![Second photograph of the ₹500 note](https://i.imgur.com/uVeMtNG.jpeg)
 
 *Another view of the note that raised the concern.*
 

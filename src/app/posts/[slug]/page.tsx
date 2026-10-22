@@ -13,12 +13,13 @@ import { ShareButtons } from "@/components/blog/ShareButtons";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+//export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   // const { slug } = await params;
   // const post = getPostBySlug(slug);
 
@@ -51,61 +52,6 @@ interface PageProps {
   //   },
   // };
 // }
-
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) {
-    return {
-      title: "Article Not Found",
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
-  }
-
-  const postUrl = new URL(
-    `/posts/${post.slug}`,
-    siteConfig.url
-  ).toString();
-
-  const description = post.excerpt?.trim()
-    || `Read ${post.title} by ${siteConfig.name}.`;
-
-  const images = post.coverImage
-    ? [{ url: post.coverImage, alt: post.title }]
-    : undefined;
-
-  return {
-    title: post.title,
-    description,
-    alternates: {
-      canonical: postUrl,
-    },
-    openGraph: {
-      type: "article",
-      url: postUrl,
-      siteName: siteConfig.name,
-      title: post.title,
-      description,
-      publishedTime: post.date,
-      authors: [siteConfig.name],
-      images,
-    },
-    twitter: {
-      card: images ? "summary_large_image" : "summary",
-      title: post.title,
-      description,
-      images: post.coverImage ? [post.coverImage] : undefined,
-    },
-  };
-}
-
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
@@ -192,11 +138,15 @@ export default async function PostPage({ params }: PageProps) {
         {post.coverImage && (
           <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/30 shadow-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="h-auto w-full object-cover max-h-[480px]"
-            />
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                // width={640}
+                // height={400}
+                // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 310px"
+                //quality={75}
+                className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105 max-h-[480px]"
+              />
           </div>
         )}
 

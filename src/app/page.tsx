@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/config";
 import { getAllPosts, getAllTags, getFeaturedPost } from "@/lib/posts";
 import { Github, Twitter, Linkedin, ArrowRight, Sparkles, Calendar, Clock, BookOpen, Youtube, Rss } from "lucide-react";
 import { FaRedditAlien } from "react-icons/fa";
+import Image from "next/image";
 
 export default function HomePage() {
   const posts = getAllPosts(false);
@@ -103,10 +104,15 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 {featured.coverImage && (
                   <div className="md:col-span-5 overflow-hidden rounded-2xl border border-outline-variant/20 shadow-xs">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    {/* eslint-disable-next-line @next/next/no-img-element */}       
+                    <Image
                       src={featured.coverImage}
                       alt={featured.title}
+                      width={640}
+                      height={400}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 310px"
+                      quality={75}
+                      priority
                       className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
