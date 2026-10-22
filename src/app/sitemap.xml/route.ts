@@ -1,36 +1,40 @@
+
 import { NextResponse } from "next/server";
 import { siteConfig } from "@/lib/config";
 import { getAllPosts } from "@/lib/posts";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
-  const posts = getAllPosts(false);
-  const siteUrl = siteConfig.url.replace(/\/+$/, "");
+function escapeXml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
 
-  const staticUrls = [
-    `
-    <url>
-      <loc>${siteUrl}</loc>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
-    </url>`,
+export async function GET() {
+  const siteUrl = siteConfig.url.replace(/\/+$/, "");
+  const posts = getAllPosts(false);
+
+  const urls = [
+    siteUrl,
+    ...posts.map((post) => `${siteUrl}/posts/${post.slug}`),
   ];
 
-  const postUrls = posts.map((post) => {
-    return `
-    <url>
-      <loc>${siteUrl}/posts/${post.slug}</loc>
-      <lastmod>${new Date(post.date).toISOString()}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>`;
-  });
+  const entries = urls
+    .map(
+      (url) => `
+  <url>
+    <loc>${escapeXml(url)}</loc>
+  </url>`
+    )
+    .join("");
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${staticUrls.join("")}
-  ${postUrls.join("")}
+${entries}
 </urlset>`;
 
   return new NextResponse(sitemapXml, {
