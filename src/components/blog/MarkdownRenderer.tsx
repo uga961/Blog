@@ -7,6 +7,44 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { Check, Copy } from "lucide-react";
 
+
+/**
+ * ReactMarkdown normally wraps standalone Markdown images in <p>.
+ * Our custom image renderer returns <figure>, which cannot be nested in <p>.
+ * Convert paragraphs containing only an image into <div> before React renders.
+ */
+function rehypeUnwrapImageParagraphs() {
+  return (tree: { children?: Array<any> }) => {
+    const visit = (node: any) => {
+      if (!node || !Array.isArray(node.children)) return;
+
+      for (const child of node.children) {
+        if (
+          child.type === "element" &&
+          child.tagName === "p" &&
+          Array.isArray(child.children)
+        ) {
+          const meaningfulChildren = child.children.filter(
+            (item: any) => !(item.type === "text" && !item.value.trim()),
+          );
+
+          if (
+            meaningfulChildren.length === 1 &&
+            meaningfulChildren[0].type === "element" &&
+            meaningfulChildren[0].tagName === "img"
+          ) {
+            child.tagName = "div";
+          }
+        }
+
+        visit(child);
+      }
+    };
+
+    visit(tree);
+  };
+}
+
 interface CodeBlockProps {
   children?: React.ReactNode;
   className?: string;
@@ -65,7 +103,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
     <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-0">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSlug, rehypeHighlight]}
+        rehypePlugins={[rehypeSlug, rehypeHighlight, rehypeUnwrapImageParagraphs]}
         components={{
           code({ className, children, ...props }) {
             const isInline = !className && typeof children === "string" && !children.includes("\n");
