@@ -111,8 +111,9 @@ export default function HomePage() {
                       width={640}
                       height={400}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 310px"
-                      quality={75}
+                      quality={65}
                       priority
+                      fetchPriority="high"
                       className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
