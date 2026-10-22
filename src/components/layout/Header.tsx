@@ -24,6 +24,8 @@ export function Header() {
               alt="Ugandhar Vaddi"
               width={40}
               height={40}
+              sizes="40px"
+              quality={90}
               className="h-full w-full object-contain"
               priority
             />
