@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/config";
 import { Github, Twitter, Linkedin, Rss, Youtube } from "lucide-react";
-
+import { FaRedditAlien } from "react-icons/fa";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -36,6 +36,17 @@ export function Footer() {
               aria-label="YouTube Profile"
             >
               <Youtube className="h-4 w-4" />
+            </a>
+          )}
+          {siteConfig.author.social.reddit && (
+            <a
+              href={siteConfig.author.social.reddit}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary"
+              aria-label="Reddit Profile"
+            >
+              <FaRedditAlien  className="h-4 w-4" />
             </a>
           )}
           {siteConfig.author.social.linkedin && (

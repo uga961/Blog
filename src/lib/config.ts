@@ -14,6 +14,7 @@ export const siteConfig = {
       github: process.env.NEXT_PUBLIC_SITE_GITHUB || "https://github.com/uga961",
       youtube: process.env.NEXT_PUBLIC_SITE_YOUTUBE || "https://www.youtube.com/@uga961",
       linkedin: process.env.NEXT_PUBLIC_SITE_LINKEDIN || "https://www.linkedin.com/in/vaddi-ugandhar/",
+      reddit: process.env.NEXT_PUBLIC_SITE_REDDIT || "https://www.reddit.com/user/uga961",
     },
   },
   postsPerPage: 8,

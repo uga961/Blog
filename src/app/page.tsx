@@ -5,7 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { ArticleList } from "@/components/blog/ArticleList";
 import { siteConfig } from "@/lib/config";
 import { getAllPosts, getAllTags, getFeaturedPost } from "@/lib/posts";
-import { Github, Twitter, Linkedin, ArrowRight, Sparkles, Calendar, Clock, BookOpen, Youtube } from "lucide-react";
+import { Github, Twitter, Linkedin, ArrowRight, Sparkles, Calendar, Clock, BookOpen, Youtube, Rss } from "lucide-react";
+import { FaRedditAlien } from "react-icons/fa";
 
 export default function HomePage() {
   const posts = getAllPosts(false);
@@ -62,6 +63,17 @@ export default function HomePage() {
                 >
                   <Youtube className="h-3.5 w-3.5" />
                   <span>YouTube</span>
+                </a>
+              )}
+              {siteConfig.author.social.reddit && (
+                <a
+                  href={siteConfig.author.social.reddit}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
+                >
+                  <FaRedditAlien  className="h-3.5 w-3.5" />
+                  <span>Reddit</span>
                 </a>
               )}
               {siteConfig.author.social.linkedin && (

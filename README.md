@@ -79,6 +79,7 @@ cp .env.example .env
 | `NEXT_PUBLIC_SITE_GITHUB` | GitHub profile URL |
 | `NEXT_PUBLIC_SITE_YOUTUBE` | Youtube Channel URL |
 | `NEXT_PUBLIC_SITE_LINKEDIN` | LinkedIn profile URL |
+| `NEXT_PUBLIC_SITE_REDDIT` | Reddit profile URL |
 
 ## Scripts
 
