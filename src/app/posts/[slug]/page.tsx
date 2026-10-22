@@ -70,7 +70,7 @@ export async function generateMetadata({
     };
   }
 
-  const postUrl = `${siteConfig.url}/posts/${post.slug}`;
+  const postUrl = new URL(`/posts/${post.slug}`,siteConfig.url).toString(); // `${siteConfig.url}/posts/${post.slug}`;
   const description =
     post.excerpt || `${post.title} — Written by ${siteConfig.name}`;
 
