@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/config";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Rss, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
   return (
@@ -12,9 +13,22 @@ export function Header() {
           className="group flex items-center gap-3 transition-opacity hover:opacity-90"
         >
           {/* M3 Tonal Avatar */}
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-container text-primary-on-container font-mono text-sm font-bold shadow-xs transition-transform group-hover:scale-105">
+          {/* <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-container text-primary-on-container font-mono text-sm font-bold shadow-xs transition-transform group-hover:scale-105">
             {siteConfig.author.initials}
+          </div> */}
+
+          {/* Brand Logo */}
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-surface-container">
+            <Image
+              src="/Logo.png"
+              alt="Ugandhar Vaddi"
+              width={40}
+              height={40}
+              className="h-full w-full object-contain"
+              priority
+            />
           </div>
+          
           <div className="flex flex-col">
             <span className="text-sm font-semibold tracking-tight text-on-surface">
               {siteConfig.name}

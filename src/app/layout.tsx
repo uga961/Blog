@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+// @ts-expect-error Next.js handles this stylesheet import at build time.
 import "./globals.css";
 import { siteConfig } from "@/lib/config";
 
