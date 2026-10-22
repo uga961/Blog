@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   },
   description: siteConfig.tagline,
   metadataBase: new URL(siteConfig.url),
+
+  verification:{
+    google: "d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8"
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.tagline,
