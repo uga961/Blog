@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
   verification:{
-    google: "d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8"
+    google: "d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8" // replace with your actual Google site verification code
   },
   openGraph: {
     title: siteConfig.title,
