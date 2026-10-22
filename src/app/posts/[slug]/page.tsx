@@ -18,39 +18,94 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  // const { slug } = await params;
+  // const post = getPostBySlug(slug);
+
+  // if (!post) {
+  //   return { title: "Article Not Found" };
+  // }
+
+  // const postUrl = `${siteConfig.url}/posts/${slug}`;
+  // const ogImages = post.coverImage ? [{ url: post.coverImage }] : [];
+
+  // return {
+  //   title: post.title,
+  //   description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
+  //   alternates: {
+  //     canonical: postUrl,
+  //   },
+  //   openGraph: {
+  //     title: post.title,
+  //     description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
+  //     url: postUrl,
+  //     type: "article",
+  //     publishedTime: post.date,
+  //     images: ogImages,
+  //   },
+  //   twitter: {
+  //     card: post.coverImage ? "summary_large_image" : "summary",
+  //     title: post.title,
+  //     description: post.excerpt || post.title,
+  //     images: post.coverImage ? [post.coverImage] : [],
+  //   },
+  // };
+// }
+
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
-    return { title: "Article Not Found" };
+    return {
+      title: "Article Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
   }
 
-  const postUrl = `${siteConfig.url}/posts/${slug}`;
-  const ogImages = post.coverImage ? [{ url: post.coverImage }] : [];
+  const postUrl = new URL(
+    `/posts/${post.slug}`,
+    siteConfig.url
+  ).toString();
+
+  const description = post.excerpt?.trim()
+    || `Read ${post.title} by ${siteConfig.name}.`;
+
+  const images = post.coverImage
+    ? [{ url: post.coverImage, alt: post.title }]
+    : undefined;
 
   return {
     title: post.title,
-    description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
+    description,
     alternates: {
       canonical: postUrl,
     },
     openGraph: {
-      title: post.title,
-      description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
-      url: postUrl,
       type: "article",
+      url: postUrl,
+      siteName: siteConfig.name,
+      title: post.title,
+      description,
       publishedTime: post.date,
-      images: ogImages,
+      authors: [siteConfig.name],
+      images,
     },
     twitter: {
-      card: post.coverImage ? "summary_large_image" : "summary",
+      card: images ? "summary_large_image" : "summary",
       title: post.title,
-      description: post.excerpt || post.title,
-      images: post.coverImage ? [post.coverImage] : [],
+      description,
+      images: post.coverImage ? [post.coverImage] : undefined,
     },
   };
 }
+
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;

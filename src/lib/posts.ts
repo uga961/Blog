@@ -80,7 +80,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
         ? data.tags.map((t: string) => String(t).trim()).filter(Boolean)
         : [];
       const coverImage = data.coverImage || undefined;
-      const author = data.author || "Alex Johnson";
+      const author = data.author || "Ugandhar Vaddi";
 
       const rt = readingTime(content);
       const minutes = Math.max(1, Math.ceil(rt.minutes));

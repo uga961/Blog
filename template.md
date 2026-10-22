@@ -5,7 +5,7 @@ date: "2026-10-21"
 excerpt: "A short 1-2 sentence preview or hook describing what this article covers."
 tags: ["Technology", "Engineering"]
 coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" or "https://raw.githubusercontent.com/uga961/StayActive/main/Images/1.jpg " for github images
-author: "Alex"
+author: "Ugandhar"
 published: true
 ---
 <!--
