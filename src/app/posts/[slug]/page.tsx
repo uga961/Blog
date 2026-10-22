@@ -53,6 +53,58 @@ interface PageProps {
   // };
 // }
 
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug, true);
+
+  if (!post) {
+    return {
+      title: "Article Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const postUrl = `${siteConfig.url}/posts/${post.slug}`;
+  const description =
+    post.excerpt || `${post.title} — Written by ${siteConfig.name}`;
+
+  const ogImages = post.coverImage
+    ? [{ url: post.coverImage, alt: post.title }]
+    : [];
+
+  return {
+    title: post.title,
+    description,
+
+    alternates: {
+      canonical: postUrl,
+    },
+
+    openGraph: {
+      title: post.title,
+      description,
+      url: postUrl,
+      type: "article",
+      publishedTime: post.date || undefined,
+      images: ogImages,
+    },
+
+    twitter: {
+      card: post.coverImage ? "summary_large_image" : "summary",
+      title: post.title,
+      description,
+      images: post.coverImage ? [post.coverImage] : [],
+    },
+  };
+}
+
+
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug, true);
