@@ -235,6 +235,7 @@ export function ActivityShowcase() {
                   height="152"
                   frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
                   loading="lazy"
                   title="Spotify Embed"
                 />
