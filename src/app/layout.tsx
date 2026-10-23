@@ -24,12 +24,18 @@ export const metadata: Metadata = {
   title: "UGANDHAR VADDI",
   description:
     "Writing on my personal blog about technology, data science, and software engineering.",
+  metadataBase: new URL("https://blog.ugandhar.in"),
+   
+  alternates: {
+     canonical: "/",
+  },
+
 
   openGraph: {
     title: "UGANDHAR VADDI",
     description:
       "Writing about technology, data science, and software engineering.",
-    url: "https://blog.ugandhar.in/",
+    url: "https://blog.ugandhar.in",
     siteName: "Ugandhar's Blog",
     images: [
       {
