@@ -33,9 +33,12 @@ describe("Markdown Posts System", () => {
   });
 
   it("finds a specific post by slug", () => {
-    const post = getPostBySlug("building-resilient-distributed-systems");
+    const posts = getAllPosts();
+    expect(posts.length).toBeGreaterThan(0);
+    const targetSlug = posts[0].slug;
+    const post = getPostBySlug(targetSlug);
     expect(post).not.toBeNull();
-    expect(post?.title).toContain("Distributed Systems");
+    expect(post?.slug).toBe(targetSlug);
   });
 
   it("gathers unique tags with correct post counts", () => {

@@ -21,15 +21,25 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "UGANDHAR VADDI",
+  title: {
+    default: "UGANDHAR VADDI — Personal Blog",
+    template: "%s — Ugandhar Vaddi",
+  },
   description:
     "Writing on my personal blog about technology, data science, and software engineering.",
   metadataBase: new URL("https://blog.ugandhar.in"),
-   
+
   alternates: {
-     canonical: "/",
+    canonical: "/",
   },
 
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/Logo.png", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
 
   openGraph: {
     title: "UGANDHAR VADDI",
@@ -46,6 +56,7 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "en_US",
   },
 
   twitter: {
@@ -62,8 +73,57 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
+
+  verification: {
+    // Add your Google Search Console verification code here
+    // google: "your-verification-code",
+  },
+
+  other: {
+    "google-site-verification": "",
+  },
+};
+
+// JSON-LD structured data for the site (Person + WebSite)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.ugandhar.in/#website",
+      url: "https://blog.ugandhar.in",
+      name: "Ugandhar's Blog",
+      description:
+        "Writing about technology, data science, and software engineering.",
+      publisher: { "@id": "https://blog.ugandhar.in/#person" },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Person",
+      "@id": "https://blog.ugandhar.in/#person",
+      name: "Ugandhar Vaddi",
+      url: "https://blog.ugandhar.in",
+      image: {
+        "@type": "ImageObject",
+        url: "https://blog.ugandhar.in/ugandhar-profile.jpg",
+        width: 400,
+        height: 400,
+      },
+      sameAs: [
+        "https://github.com/uga961",
+        "https://www.youtube.com/@uga961",
+        "https://www.linkedin.com/in/vaddi-ugandhar/",
+        "https://www.reddit.com/user/uga961",
+      ],
+      jobTitle: "Associate Data Scientist",
+      description:
+        "Associate Data Scientist and open-source enthusiast. Exploring Statistics, Data Analysis, and resilient systems.",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -74,20 +134,24 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        {/* Inline theme script — runs before paint to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var theme = localStorage.getItem('theme');
-                var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (theme === 'dark' || (!theme && supportDark)) {
+                var t = localStorage.getItem('theme');
+                var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (t === 'dark' || (!t && d)) {
                   document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
                 }
               } catch (e) {}
             `,
           }}
+        />
+        {/* JSON-LD structured data for Google rich results */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body

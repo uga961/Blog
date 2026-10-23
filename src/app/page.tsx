@@ -3,15 +3,25 @@ import { format } from "date-fns";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArticleList } from "@/components/blog/ArticleList";
+import { ActivityShowcase } from "@/components/blog/ActivityShowcase";
 import { siteConfig } from "@/lib/config";
-import { getAllPosts, getAllTags, getFeaturedPost } from "@/lib/posts";
-import { Github, Twitter, Linkedin, ArrowRight, Sparkles, Calendar, Clock, BookOpen, Youtube, Rss } from "lucide-react";
+import { getAllPosts, getFeaturedPost } from "@/lib/posts";
+import {
+  Github,
+  Linkedin,
+  ArrowRight,
+  Sparkles,
+  Calendar,
+  Clock,
+  BookOpen,
+  Youtube,
+  Rss,
+} from "lucide-react";
 import { FaRedditAlien } from "react-icons/fa";
 import Image from "next/image";
 
 export default function HomePage() {
   const posts = getAllPosts(false);
-  const allTags = getAllTags();
   const featured = getFeaturedPost();
 
   return (
@@ -73,7 +83,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
                 >
-                  <FaRedditAlien  className="h-3.5 w-3.5" />
+                  <FaRedditAlien className="h-3.5 w-3.5" />
                   <span>Reddit</span>
                 </a>
               )}
@@ -104,7 +114,6 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 {featured.coverImage && (
                   <div className="md:col-span-5 overflow-hidden rounded-2xl border border-outline-variant/20 shadow-xs">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}       
                     <Image
                       src={featured.coverImage}
                       alt={featured.title}
@@ -119,7 +128,9 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <div className={`${featured.coverImage ? "md:col-span-7" : "md:col-span-12"} space-y-3`}>
+                <div
+                  className={`${featured.coverImage ? "md:col-span-7" : "md:col-span-12"} space-y-3`}
+                >
                   {/* Chips row */}
                   <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 font-medium">
@@ -136,7 +147,10 @@ export default function HomePage() {
 
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">
                     <Link href={`/posts/${featured.slug}`}>
-                      <span className="absolute inset-0" aria-hidden="true" />
+                      <span
+                        className="absolute inset-0"
+                        aria-hidden="true"
+                      />
                       {featured.title}
                     </Link>
                   </h2>
@@ -155,6 +169,9 @@ export default function HomePage() {
           </section>
         )}
 
+        {/* GitHub & Spotify Live Activity */}
+        <ActivityShowcase />
+
         {/* All Articles Section */}
         <section className="space-y-6 pt-2">
           <div className="flex items-center justify-between border-b border-outline-variant/25 pb-4">
@@ -169,7 +186,7 @@ export default function HomePage() {
             </span>
           </div>
 
-          <ArticleList posts={posts} allTags={allTags} postsPerPage={6} />
+          <ArticleList posts={posts} postsPerPage={6} />
         </section>
       </main>
 

@@ -13,7 +13,6 @@ export async function GET() {
     .map((post) => {
       const postUrl = `${siteUrl}/posts/${post.slug}`;
       const pubDate = new Date(post.date).toUTCString();
-      const description = `<![CDATA[${post.excerpt || post.title}]]>`;
 
       return `
     <item>
@@ -21,7 +20,8 @@ export async function GET() {
       <link>${postUrl}</link>
       <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${pubDate}</pubDate>
-      <description>${description}</description>
+      <description><![CDATA[${post.excerpt || post.title}]]></description>
+      ${post.tags.map((t) => `<category>${t}</category>`).join("\n      ")}
     </item>`;
     })
     .join("");
@@ -35,6 +35,11 @@ export async function GET() {
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>${siteUrl}/Logo.png</url>
+      <title>${siteConfig.name}</title>
+      <link>${siteUrl}</link>
+    </image>
     ${itemsXml}
   </channel>
 </rss>`;

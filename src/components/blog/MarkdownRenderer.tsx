@@ -1,11 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { Check, Copy } from "lucide-react";
+
+/**
+ * Recursively extracts plain text from a React node tree.
+ * When syntax highlighting (rehype-highlight) runs, code blocks are
+ * represented as an array of React element spans instead of a raw string.
+ * This ensures the copy button copies clean, uncorrupted code.
+ */
+function extractPlainText(node: React.ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") {
+    return "";
+  }
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+  if (Array.isArray(node)) {
+    return node.map(extractPlainText).join("");
+  }
+  if (React.isValidElement(node)) {
+    return extractPlainText((node.props as { children?: React.ReactNode }).children);
+  }
+  return "";
+}
 
 
 /**
@@ -53,13 +75,15 @@ interface CodeBlockProps {
 
 function CodeBlock({ children, className }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const codeRef = useRef<HTMLElement>(null);
   const match = /language-(\w+)/.exec(className || "");
   const language = match ? match[1] : "";
-  const codeContent = String(children).replace(/\n$/, "");
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(codeContent);
+      const domText = codeRef.current?.innerText ?? codeRef.current?.textContent;
+      const textToCopy = (domText || extractPlainText(children)).replace(/\n$/, "");
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -92,7 +116,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
         </button>
       </div>
       <div className="overflow-x-auto p-4 leading-relaxed">
-        <code className={className}>{children}</code>
+        <code ref={codeRef} className={className}>{children}</code>
       </div>
     </div>
   );

@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { format } from "date-fns";
-import { Badge } from "@/components/ui/Badge";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { Post } from "@/lib/posts";
 
 export interface ArticleCardProps {
   post: Post;
-  onTagClick?: (tag: string) => void;
 }
 
-export function ArticleCard({ post, onTagClick }: ArticleCardProps) {
+export function ArticleCard({ post }: ArticleCardProps) {
   const formattedDate = post.date
     ? format(new Date(post.date), "MMM d, yyyy")
     : "Recent";
@@ -49,31 +47,6 @@ export function ArticleCard({ post, onTagClick }: ArticleCardProps) {
           </p>
         )}
       </div>
-
-      {/* Tags */}
-      {post.tags && post.tags.length > 0 && (
-        <div className="relative z-10 flex flex-wrap gap-1.5 pt-5">
-          {post.tags.map((tag) => (
-            <button
-              key={tag}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onTagClick?.(tag);
-              }}
-              className="focus:outline-none"
-            >
-              <Badge
-                variant="outline"
-                size="sm"
-                className="hover:border-primary hover:bg-primary-container hover:text-primary-on-container cursor-pointer"
-              >
-                #{tag}
-              </Badge>
-            </button>
-          ))}
-        </div>
-      )}
     </article>
   );
 }

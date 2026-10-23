@@ -1,39 +1,46 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Sun, Moon } from "lucide-react";
 
+/**
+ * Returns the current theme from localStorage or system preference.
+ * Runs only on the client.
+ */
+function getStoredTheme(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  const stored = localStorage.getItem("theme");
+  if (stored === "dark" || stored === "light") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
+  // Use undefined initial state — we don't guess until mounted
+  const [theme, setTheme] = useState<"light" | "dark" | undefined>(undefined);
 
   useEffect(() => {
+    const resolved = getStoredTheme();
+    setTheme(resolved);
+    // Sync DOM class (in case it drifted)
+    document.documentElement.classList.toggle("dark", resolved === "dark");
     setMounted(true);
-    const stored = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (stored === "dark" || (!stored && systemPrefersDark)) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
   }, []);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "light" ? "dark" : "light";
-    setTheme(nextTheme);
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", next === "dark");
+      localStorage.setItem("theme", next);
+      return next;
+    });
+  }, []);
 
-    if (nextTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
-
+  // Render a skeleton placeholder until client-side JS mounts.
+  // This avoids hydration mismatches because the server and first
+  // client render both produce the same inert placeholder.
   if (!mounted) {
     return (
       <div

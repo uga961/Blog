@@ -13,46 +13,17 @@ import { ShareButtons } from "@/components/blog/ShareButtons";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
+
+const SITE_URL = "https://blog.ugandhar.in";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-//export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // const { slug } = await params;
-  // const post = getPostBySlug(slug);
-
-  // if (!post) {
-  //   return { title: "Article Not Found" };
-  // }
-
-  // const postUrl = `${siteConfig.url}/posts/${slug}`;
-  // const ogImages = post.coverImage ? [{ url: post.coverImage }] : [];
-
-  // return {
-  //   title: post.title,
-  //   description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
-  //   alternates: {
-  //     canonical: postUrl,
-  //   },
-  //   openGraph: {
-  //     title: post.title,
-  //     description: post.excerpt || `${post.title} — Written by ${siteConfig.name}`,
-  //     url: postUrl,
-  //     type: "article",
-  //     publishedTime: post.date,
-  //     images: ogImages,
-  //   },
-  //   twitter: {
-  //     card: post.coverImage ? "summary_large_image" : "summary",
-  //     title: post.title,
-  //     description: post.excerpt || post.title,
-  //     images: post.coverImage ? [post.coverImage] : [],
-  //   },
-  // };
-// }
-
+export async function generateStaticParams() {
+  const posts = getAllPosts(false);
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({
   params,
@@ -63,47 +34,49 @@ export async function generateMetadata({
   if (!post) {
     return {
       title: "Article Not Found",
-      robots: {
-        index: false,
-        follow: false,
-      },
+      robots: { index: false, follow: false },
     };
   }
 
-  const postUrl = new URL(`/posts/${post.slug}`,siteConfig.url).toString(); // `${siteConfig.url}/posts/${post.slug}`;
+  const postUrl = `${SITE_URL}/posts/${post.slug}`;
   const description =
     post.excerpt || `${post.title} — Written by ${siteConfig.name}`;
 
   const ogImages = post.coverImage
-    ? [{ url: post.coverImage, alt: post.title }]
-    : [];
+    ? [{ url: post.coverImage, alt: post.title, width: 1200, height: 630 }]
+    : [
+        {
+          url: `${SITE_URL}/ugandhar-profile.jpg`,
+          alt: "Ugandhar Vaddi",
+          width: 1200,
+          height: 630,
+        },
+      ];
 
   return {
     title: post.title,
     description,
-
     alternates: {
       canonical: postUrl,
     },
-
     openGraph: {
       title: post.title,
       description,
       url: postUrl,
       type: "article",
       publishedTime: post.date || undefined,
+      authors: [siteConfig.name],
       images: ogImages,
+      siteName: "Ugandhar's Blog",
     },
-
     twitter: {
-      card: post.coverImage ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title: post.title,
       description,
-      images: post.coverImage ? [post.coverImage] : [],
+      images: ogImages.map((img) => img.url),
     },
   };
 }
-
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
@@ -118,7 +91,7 @@ export default async function PostPage({ params }: PageProps) {
     : "Recent";
 
   const tocItems = extractTableOfContents(post.content);
-  const articleUrl = `${siteConfig.url}/posts/${post.slug}`;
+  const articleUrl = `${SITE_URL}/posts/${post.slug}`;
 
   // Find related articles (matching tags or other recent posts)
   const allPosts = getAllPosts(false);
@@ -131,10 +104,50 @@ export default async function PostPage({ params }: PageProps) {
     })
     .slice(0, 2);
 
+  // JSON-LD Article structured data
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt || post.title,
+    url: articleUrl,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: "Ugandhar Vaddi",
+      url: SITE_URL,
+      image: `${SITE_URL}/ugandhar-profile.jpg`,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Ugandhar Vaddi",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/Logo.png`,
+      },
+    },
+    image: post.coverImage || `${SITE_URL}/ugandhar-profile.jpg`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    keywords: post.tags.join(", "),
+    wordCount: post.content.split(/\s+/).length,
+    articleSection: post.tags[0] || "Technology",
+    inLanguage: "en-US",
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <ReadingProgressBar />
       <Header />
+
+      {/* Article JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
 
       <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10 sm:px-6">
         {/* Floating Back Navigation Button */}
@@ -190,15 +203,11 @@ export default async function PostPage({ params }: PageProps) {
         {post.coverImage && (
           <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/30 shadow-md">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                // width={640}
-                // height={400}
-                // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 310px"
-                //quality={75}
-                className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105 max-h-[480px]"
-              />
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105 max-h-[480px]"
+            />
           </div>
         )}
 
@@ -214,7 +223,10 @@ export default async function PostPage({ params }: PageProps) {
         <section className="space-y-8 border-t border-outline-variant/30 pt-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <span className="text-xs text-on-surface-variant">
-              Published on <strong className="text-on-surface font-semibold">{formattedDate}</strong>
+              Published on{" "}
+              <strong className="text-on-surface font-semibold">
+                {formattedDate}
+              </strong>
             </span>
             <ShareButtons title={post.title} url={articleUrl} />
           </div>
@@ -252,7 +264,8 @@ export default async function PostPage({ params }: PageProps) {
                   >
                     <div>
                       <span className="text-[11px] font-medium text-on-surface-variant">
-                        {r.date} • {r.readingTime} min read
+                        {format(new Date(r.date), "MMM d, yyyy")} •{" "}
+                        {r.readingTime} min read
                       </span>
                       <h4 className="mt-1 font-serif text-base font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
                         {r.title}

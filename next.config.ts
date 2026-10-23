@@ -2,20 +2,35 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // Disable persistent filesystem pack caching in dev on Windows to prevent
+      // NTFS file locking / ENOENT .pack.gz corruption and missing chunk errors
+      config.cache = false;
+    }
+    return config;
+  },
   images: {
     qualities: [65, 75, 85, 90, 95, 100],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
+        hostname: "i.imgur.com",
+        pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "i.imgur.com",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
         pathname: "/**",
       },
     ],
@@ -44,6 +59,10 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
         ],
       },
