@@ -21,7 +21,7 @@ import { FaRedditAlien } from "react-icons/fa";
 import Image from "next/image";
 
 export default function HomePage() {
-  const posts = getAllPosts(false);
+  const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
   const featured = getFeaturedPost();
 
   return (
@@ -119,10 +119,9 @@ export default function HomePage() {
                       alt={featured.title}
                       width={640}
                       height={400}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 310px"
-                      quality={65}
+                      sizes="(max-width: 640px) calc(100vw - 80px), (max-width: 1024px) 380px, 320px"
+                      quality={60}
                       priority
-                      fetchPriority="high"
                       className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { formatDisplayDate } from "@/lib/date";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
-import { Post } from "@/lib/posts";
+import { Post, PostSummary } from "@/lib/posts";
 
 export interface ArticleCardProps {
-  post: Post;
+  post: Post | PostSummary;
 }
 
 export function ArticleCard({ post }: ArticleCardProps) {

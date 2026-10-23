@@ -2,11 +2,11 @@
 
 import React, { useState, useMemo } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { Post } from "@/lib/posts";
+import { Post, PostSummary } from "@/lib/posts";
 import { Search, X, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 
 interface ArticleListProps {
-  posts: Post[];
+  posts: (Post | PostSummary)[];
   postsPerPage?: number;
 }
 
@@ -25,7 +25,7 @@ export function ArticleList({
       (post) =>
         post.title.toLowerCase().includes(q) ||
         (post.excerpt && post.excerpt.toLowerCase().includes(q)) ||
-        post.content.toLowerCase().includes(q),
+        post.tags.some((t) => t.toLowerCase().includes(q)),
     );
   }, [posts, searchQuery]);
 

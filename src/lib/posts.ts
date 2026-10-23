@@ -18,6 +18,8 @@ export interface Post {
   published: boolean;
 }
 
+export type PostSummary = Omit<Post, "content">;
+
 const POSTS_DIRECTORY = path.join(process.cwd(), "posts");
 
 /**
