@@ -10,6 +10,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://blog.ugandhar.in/sitemap.xml",
-    host: "https://blog.ugandhar.in",
   };
 }

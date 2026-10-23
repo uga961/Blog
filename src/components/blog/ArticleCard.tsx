@@ -30,7 +30,11 @@ export function ArticleCard({ post }: ArticleCardProps) {
         {/* Title */}
         <div className="flex items-start justify-between gap-3">
           <h2 className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-on-surface transition-colors group-hover:text-primary">
-            <Link href={`/posts/${post.slug}`} className="focus:outline-none">
+            <Link
+              href={`/posts/${post.slug}`}
+              prefetch={false}
+              className="focus:outline-none"
+            >
               <span className="absolute inset-0" aria-hidden="true" />
               {post.title}
             </Link>

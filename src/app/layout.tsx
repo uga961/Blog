@@ -23,7 +23,7 @@ const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -140,20 +140,6 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        {/* Preconnect to external image CDNs to accelerate LCP on mobile */}
-        <link
-          rel="preconnect"
-          href="https://raw.githubusercontent.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
-        <link
-          rel="preconnect"
-          href="https://i.imgur.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://i.imgur.com" />
-
         {/* Inline theme script — runs before paint to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{

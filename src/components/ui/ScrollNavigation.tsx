@@ -9,7 +9,9 @@ export function ScrollNavigation() {
   const [isScrollable, setIsScrollable] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateScrollMetrics = () => {
       const scrollY = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = window.innerHeight;
@@ -23,13 +25,32 @@ export function ScrollNavigation() {
 
       // Show "Go to Bottom" if not already near the bottom (more than 200px from bottom)
       setShowBottom(scrollY < maxScroll - 200);
+      ticking = false;
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollMetrics);
+        ticking = true;
+      }
+    };
+
+    // Defer initial layout measurement until after initial paint & idle time
+    // to prevent synchronous forced reflow during page load
+    const idleId =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(updateScrollMetrics, { timeout: 1500 })
+        : setTimeout(updateScrollMetrics, 600);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
 
     return () => {
+      if (typeof window.cancelIdleCallback === "function" && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId as NodeJS.Timeout);
+      }
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };

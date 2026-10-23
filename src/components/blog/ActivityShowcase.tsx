@@ -50,10 +50,12 @@ export function ActivityShowcase() {
       }
     };
 
-    fetchNowPlaying();
+    // Defer initial Spotify fetch so it doesn't compete with page load & TBT
+    const initialTimer = setTimeout(fetchNowPlaying, 1000);
     const interval = setInterval(fetchNowPlaying, 30000); // refresh every 30s
     return () => {
       mounted = false;
+      clearTimeout(initialTimer);
       clearInterval(interval);
     };
   }, []);

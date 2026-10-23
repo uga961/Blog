@@ -146,7 +146,7 @@ export default function HomePage() {
                   </div>
 
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">
-                    <Link href={`/posts/${featured.slug}`}>
+                    <Link href={`/posts/${featured.slug}`} prefetch={false}>
                       <span
                         className="absolute inset-0"
                         aria-hidden="true"
