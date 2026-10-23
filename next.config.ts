@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ["lucide-react", "date-fns", "react-icons"],
+  },
   webpack: (config, { dev }) => {
     if (dev) {
       // Disable persistent filesystem pack caching in dev on Windows to prevent
@@ -11,6 +14,9 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     qualities: [65, 75, 85, 90, 95, 100],
     remotePatterns: [
       {

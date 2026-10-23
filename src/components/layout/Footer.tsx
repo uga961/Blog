@@ -9,7 +9,9 @@ export function Footer() {
     <footer className="w-full border-t border-outline-variant/30 bg-surface-container-low/50 py-12 text-xs text-on-surface-variant transition-colors">
       <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6">
         <div className="flex flex-col items-center gap-1 sm:items-start text-center sm:text-left">
-          <p className="font-medium text-on-surface">© {currentYear} {siteConfig.name}</p>
+          <p className="font-medium text-on-surface" suppressHydrationWarning>
+            © {currentYear} {siteConfig.name}
+          </p>
           <p className="text-[12px] text-on-surface-variant/80">
             Thoughts, engineering essays & creative notes.
           </p>

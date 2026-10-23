@@ -8,17 +8,22 @@ import { ScrollNavigation } from "@/components/ui/ScrollNavigation";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -135,6 +140,20 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        {/* Preconnect to external image CDNs to accelerate LCP on mobile */}
+        <link
+          rel="preconnect"
+          href="https://raw.githubusercontent.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+        <link
+          rel="preconnect"
+          href="https://i.imgur.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://i.imgur.com" />
+
         {/* Inline theme script — runs before paint to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{
@@ -156,6 +175,7 @@ export default function RootLayout({
         />
       </head>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} font-sans min-h-screen flex flex-col justify-between`}
       >
         {children}

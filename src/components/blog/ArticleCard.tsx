@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { format } from "date-fns";
+import { formatDisplayDate } from "@/lib/date";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { Post } from "@/lib/posts";
 
@@ -8,9 +8,7 @@ export interface ArticleCardProps {
 }
 
 export function ArticleCard({ post }: ArticleCardProps) {
-  const formattedDate = post.date
-    ? format(new Date(post.date), "MMM d, yyyy")
-    : "Recent";
+  const formattedDate = formatDisplayDate(post.date, "short");
 
   return (
     <article className="group relative flex flex-col justify-between rounded-3xl border border-outline-variant/30 bg-surface-container-low p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:bg-surface-container hover:shadow-md">
@@ -19,7 +17,9 @@ export function ArticleCard({ post }: ArticleCardProps) {
         <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 font-medium">
             <Calendar className="h-3 w-3 text-primary" />
-            <time dateTime={post.date}>{formattedDate}</time>
+            <time dateTime={post.date} suppressHydrationWarning>
+              {formattedDate}
+            </time>
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 font-medium">
             <Clock className="h-3 w-3 text-primary" />

@@ -38,5 +38,10 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
-  }
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "not dead",
+    "not op_mini all"
+  ]
 }

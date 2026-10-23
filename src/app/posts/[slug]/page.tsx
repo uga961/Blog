@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { format } from "date-fns";
+import { formatDisplayDate } from "@/lib/date";
 import { siteConfig } from "@/lib/config";
 import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { extractTableOfContents } from "@/lib/markdown";
@@ -86,9 +86,7 @@ export default async function PostPage({ params }: PageProps) {
     notFound();
   }
 
-  const formattedDate = post.date
-    ? format(new Date(post.date), "MMMM d, yyyy")
-    : "Recent";
+  const formattedDate = formatDisplayDate(post.date, "long");
 
   const tocItems = extractTableOfContents(post.content);
   const articleUrl = `${SITE_URL}/posts/${post.slug}`;
@@ -167,7 +165,9 @@ export default async function PostPage({ params }: PageProps) {
           <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium">
               <Calendar className="h-3.5 w-3.5 text-primary" />
-              <time dateTime={post.date}>{formattedDate}</time>
+              <time dateTime={post.date} suppressHydrationWarning>
+                {formattedDate}
+              </time>
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium">
               <Clock className="h-3.5 w-3.5 text-primary" />
@@ -263,9 +263,11 @@ export default async function PostPage({ params }: PageProps) {
                     className="group flex flex-col justify-between rounded-3xl border border-outline-variant/30 bg-surface-container-low p-5 transition-all hover:border-primary/40 hover:bg-surface-container hover:shadow-md"
                   >
                     <div>
-                      <span className="text-[11px] font-medium text-on-surface-variant">
-                        {format(new Date(r.date), "MMM d, yyyy")} •{" "}
-                        {r.readingTime} min read
+                      <span
+                        className="text-[11px] font-medium text-on-surface-variant"
+                        suppressHydrationWarning
+                      >
+                        {formatDisplayDate(r.date, "short")} • {r.readingTime} min read
                       </span>
                       <h4 className="mt-1 font-serif text-base font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
                         {r.title}

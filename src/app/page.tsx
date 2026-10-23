@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { format } from "date-fns";
+import { formatDisplayDate } from "@/lib/date";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArticleList } from "@/components/blog/ArticleList";
@@ -135,8 +135,8 @@ export default function HomePage() {
                   <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 font-medium">
                       <Calendar className="h-3 w-3 text-primary" />
-                      <time dateTime={featured.date}>
-                        {format(new Date(featured.date), "MMMM d, yyyy")}
+                      <time dateTime={featured.date} suppressHydrationWarning>
+                        {formatDisplayDate(featured.date, "long")}
                       </time>
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 font-medium">
