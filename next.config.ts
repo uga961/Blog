@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source:
-          "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|feed.xml).*)",
+          "/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|Logo.png|sitemap.xml|robots.txt|feed.xml).*)",
         headers: [
           {
             key: "X-Content-Type-Options",
