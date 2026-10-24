@@ -38,18 +38,18 @@ export function ArticleList({
 
   return (
     <div className="w-full space-y-8">
-      {/* Material 3 Search Bar */}
+      {/* Search Bar */}
       <div className="relative">
         <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-on-surface-variant/70" />
         <input
           type="text"
-          placeholder="Search articles, topics, keywords…"
+          placeholder="Search articles by title, topic, or keyword…"
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
             setCurrentPage(1);
           }}
-          className="h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container pl-11 pr-10 text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-outline-variant/80 focus:bg-white dark:focus:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-outline-variant/40 transition-all shadow-xs"
+          className="h-12 w-full rounded-2xl border border-outline-variant/40 bg-surface-container/70 pl-11 pr-10 text-sm text-foreground placeholder:text-on-surface-variant/60 focus:border-foreground/40 focus:bg-white dark:focus:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-outline-variant/30 transition-all shadow-[var(--card-shadow)]"
         />
         {searchQuery && (
           <button
@@ -79,9 +79,7 @@ export function ArticleList({
             No matching articles
           </h3>
           <p className="mt-1 text-xs text-on-surface-variant max-w-sm">
-            {searchQuery
-              ? "We couldn't find any articles matching your search."
-              : "No articles found in /posts. Create one using template.md!"}
+            We couldn&apos;t find any articles matching your search query.
           </p>
           {searchQuery && (
             <button
@@ -89,7 +87,7 @@ export function ArticleList({
                 setSearchQuery("");
                 setCurrentPage(1);
               }}
-              className="mt-4 text-xs font-semibold text-primary hover:underline"
+              className="mt-4 text-xs font-mono font-semibold text-primary hover:underline"
             >
               Clear search
             </button>
@@ -97,9 +95,9 @@ export function ArticleList({
         </div>
       )}
 
-      {/* M3 Pagination */}
+      {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between border-t border-outline-variant/30 pt-6 text-xs text-on-surface-variant">
+        <div className="flex items-center justify-between border-t border-outline-variant/20 pt-6 text-xs font-mono text-on-surface-variant">
           <span>
             Page {currentPage} of {totalPages} ({filteredPosts.length} total)
           </span>
@@ -108,7 +106,7 @@ export function ArticleList({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Previous</span>
@@ -118,7 +116,7 @@ export function ArticleList({
                 setCurrentPage((p) => Math.min(totalPages, p + 1))
               }
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
             >
               <span>Next</span>
               <ChevronRight className="h-4 w-4" />

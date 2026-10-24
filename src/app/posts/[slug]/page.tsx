@@ -11,6 +11,8 @@ import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import { Badge } from "@/components/ui/Badge";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { MagneticDock } from "@/components/ui/MagneticDock";
 import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -46,8 +48,8 @@ export async function generateMetadata({
     ? [{ url: post.coverImage, alt: post.title, width: 1200, height: 630 }]
     : [
         {
-          url: `${SITE_URL}/ugandhar-profile.jpg`,
-          alt: "Ugandhar Vaddi",
+          url: `${SITE_URL}/social/og-image blog.png`,
+          alt: post.title,
           width: 1200,
           height: 630,
         },
@@ -115,17 +117,17 @@ export default async function PostPage({ params }: PageProps) {
       "@type": "Person",
       name: "Ugandhar Vaddi",
       url: SITE_URL,
-      image: `${SITE_URL}/ugandhar-profile.jpg`,
+      image: `${SITE_URL}/avatar/profile.jpg`,
     },
     publisher: {
       "@type": "Person",
       name: "Ugandhar Vaddi",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/Logo.png`,
+        url: `${SITE_URL}/icon.png`,
       },
     },
-    image: post.coverImage || `${SITE_URL}/ugandhar-profile.jpg`,
+    image: post.coverImage || `${SITE_URL}/social/og-image blog.png`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -137,7 +139,7 @@ export default async function PostPage({ params }: PageProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-20 sm:pb-16">
       <ReadingProgressBar />
       <Header />
 
@@ -147,12 +149,12 @@ export default async function PostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10 sm:px-6">
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-24 pb-14">
         {/* Floating Back Navigation Button */}
         <div className="mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
+            className="inline-flex items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2 text-xs font-mono font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to All Articles</span>
@@ -160,23 +162,23 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Article Header Card */}
-        <header className="mb-10 space-y-5 rounded-3xl border border-outline-variant/40 bg-surface-container p-6 sm:p-10 shadow-paper">
+        <SpotlightCard className="mb-10 space-y-5 p-6 sm:p-10">
           {/* Metadata Chips */}
-          <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3.5 py-1 font-medium">
-              <Calendar className="h-3.5 w-3.5 text-foreground" />
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium border border-outline-variant/30">
+              <Calendar className="h-3.5 w-3.5 text-foreground/70" />
               <time dateTime={post.date} suppressHydrationWarning>
                 {formattedDate}
               </time>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3.5 py-1 font-medium">
-              <Clock className="h-3.5 w-3.5 text-foreground" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium border border-outline-variant/30">
+              <Clock className="h-3.5 w-3.5 text-foreground/70" />
               <span>{post.readingTime} min read</span>
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-on-surface leading-[1.2]">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2]">
             {post.title}
           </h1>
 
@@ -197,11 +199,11 @@ export default async function PostPage({ params }: PageProps) {
               ))}
             </div>
           )}
-        </header>
+        </SpotlightCard>
 
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/40 shadow-paper">
+          <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/40 shadow-[var(--card-shadow)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={post.coverImage}
@@ -220,11 +222,11 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Bottom Actions & Author Info */}
-        <section className="space-y-8 border-t border-outline-variant/40 pt-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <span className="text-xs text-on-surface-variant">
+        <section className="space-y-8 border-t border-outline-variant/30 pt-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs">
+            <span className="text-on-surface-variant">
               Published on{" "}
-              <strong className="text-on-surface font-semibold">
+              <strong className="text-foreground font-semibold">
                 {formattedDate}
               </strong>
             </span>
@@ -232,27 +234,27 @@ export default async function PostPage({ params }: PageProps) {
           </div>
 
           {/* Author Card */}
-          <div className="flex items-start gap-5 rounded-3xl border border-outline-variant/40 bg-surface-container p-6 shadow-paper">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-outline-variant/50 bg-surface-container-high text-foreground font-mono text-lg font-bold">
+          <SpotlightCard className="flex items-start gap-5 p-6">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-outline-variant/50 bg-surface-container text-foreground font-mono text-lg font-bold">
               {siteConfig.author.initials}
             </div>
             <div className="space-y-1">
-              <h3 className="text-base font-bold text-on-surface">
+              <h3 className="text-base font-bold text-foreground">
                 {siteConfig.name}
               </h3>
-              <p className="text-xs text-foreground/80 font-medium">
+              <p className="text-xs text-foreground/80 font-mono font-medium">
                 {siteConfig.tagline}
               </p>
-              <p className="text-xs leading-relaxed text-on-surface-variant pt-1">
+              <p className="text-xs leading-relaxed text-on-surface-variant pt-1 font-sans">
                 {siteConfig.bio}
               </p>
             </div>
-          </div>
+          </SpotlightCard>
 
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
             <div className="space-y-4 pt-4">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
                 Continue Reading
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -260,11 +262,11 @@ export default async function PostPage({ params }: PageProps) {
                   <Link
                     key={r.slug}
                     href={`/posts/${r.slug}`}
-                    className="group flex flex-col justify-between rounded-3xl border border-outline-variant/40 bg-surface-container p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-outline-variant/80 hover:shadow-paper"
+                    className="group flex flex-col justify-between rounded-2xl border border-outline-variant/40 bg-surface-container/60 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-[var(--card-hover-shadow)] shadow-[var(--card-shadow)]"
                   >
                     <div>
                       <span
-                        className="text-[11px] font-medium text-on-surface-variant"
+                        className="text-[11px] font-mono font-medium text-on-surface-variant"
                         suppressHydrationWarning
                       >
                         {formatDisplayDate(r.date, "short")} • {r.readingTime} min read
@@ -273,7 +275,7 @@ export default async function PostPage({ params }: PageProps) {
                         {r.title}
                       </h4>
                     </div>
-                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-foreground">
+                    <div className="mt-4 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
                       <span>Read article</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
@@ -286,6 +288,9 @@ export default async function PostPage({ params }: PageProps) {
       </main>
 
       <Footer />
+
+      {/* Floating Magnetic Dock Navigation */}
+      <MagneticDock />
     </div>
   );
 }

@@ -3,13 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ["lucide-react", "date-fns", "react-icons"],
+    optimizePackageImports: ["lucide-react", "date-fns", "react-icons", "framer-motion"],
   },
   webpack: (config, { dev }) => {
     if (dev) {
-      // Disable persistent filesystem pack caching in dev on Windows to prevent
-      // NTFS file locking / ENOENT .pack.gz corruption and missing chunk errors
-      config.cache = false;
+      // Use in-memory cache in dev to keep compilation ultra-fast (1-2s)
+      // while preventing Windows NTFS filesystem pack locking / corruption
+      config.cache = {
+        type: "memory",
+      };
     }
     return config;
   },
@@ -45,7 +47,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source:
-          "/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|Logo.png|sitemap.xml|robots.txt|feed.xml).*)",
+          "/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|Logo.png|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest|llms.txt|ai-catalog.json).*)",
         headers: [
           {
             key: "X-Content-Type-Options",

@@ -34,7 +34,10 @@
     --text-primary: #1a1a17;
     --text-muted: #5e5c54;
     --border-subtle: #cfcbc0;
-    --spotlight-sheen: rgba(255, 255, 255, 0.22);
+    /* Subtle touch-up card spotlight */
+    --spotlight-surface: rgba(255, 255, 255, 0.22);
+    --card-shadow: 0 1px 3px 0 rgba(35, 30, 20, 0.04);
+    --card-hover-shadow: 0 8px 24px -6px rgba(35, 30, 20, 0.08), 0 2px 6px -1px rgba(35, 30, 20, 0.03);
   }
 
   .dark {
@@ -69,6 +72,11 @@
     --text-muted: #a2a095;
     --border-subtle: #3a3935;
     --spotlight-sheen: rgba(255, 255, 255, 0.035);
+
+    /* Subtle touch-up card spotlight */
+    --spotlight-surface: rgba(255, 255, 255, 0.035);
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(222, 219, 200, 0.08);
   }
 
   * {
@@ -77,13 +85,35 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
 
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--on-surface));
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
   }
+
+  ::selection {
+    background: hsl(var(--foreground) / 0.15);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Subtle Technical Grid Overlay */
+.bg-grid-pattern {
+  background-size: 28px 28px;
+  background-image: 
+    linear-gradient(to right, hsl(var(--outline-variant) / 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--outline-variant) / 0.15) 1px, transparent 1px);
+}
+
+.radial-mask {
+  mask-image: radial-gradient(circle at center, black 45%, transparent 92%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 92%);
 }
 
 /* Portfolio Paper Shadow */

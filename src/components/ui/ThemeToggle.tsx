@@ -1,66 +1,50 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
-import { Sun, Moon } from "lucide-react";
-
-/**
- * Returns the current theme from localStorage or system preference.
- * Runs only on the client.
- */
-function getStoredTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem("theme");
-  if (stored === "dark" || stored === "light") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
+import React, { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
+  const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
-  // Use undefined initial state — we don't guess until mounted
-  const [theme, setTheme] = useState<"light" | "dark" | undefined>(undefined);
 
   useEffect(() => {
-    const resolved = getStoredTheme();
-    setTheme(resolved);
-    // Sync DOM class (in case it drifted)
-    document.documentElement.classList.toggle("dark", resolved === "dark");
     setMounted(true);
+    const hasDark = document.documentElement.classList.contains("dark");
+    setIsDark(hasDark);
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-      document.documentElement.classList.toggle("dark", next === "dark");
-      localStorage.setItem("theme", next);
-      return next;
-    });
-  }, []);
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
+    }
+  };
 
-  // Render a skeleton placeholder until client-side JS mounts.
-  // This avoids hydration mismatches because the server and first
-  // client render both produce the same inert placeholder.
   if (!mounted) {
     return (
-      <div
-        className={`h-10 w-10 rounded-full bg-surface-container ${className}`}
-        aria-hidden="true"
-      />
+      <div className={`w-9 h-9 rounded-full bg-surface-container flex items-center justify-center ${className}`}>
+        <div className="w-4 h-4" />
+      </div>
     );
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className={`flex h-10 w-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-high hover:text-on-surface hover:-translate-y-0.5 hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className}`}
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      type="button"
+      aria-label="Toggle theme"
+      title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 text-on-surface hover:text-primary hover:bg-surface-container-high/60 active:scale-95 ${className}`}
     >
-      {theme === "light" ? (
-        <Moon className="h-4 w-4 transition-transform" />
+      {isDark ? (
+        <Sun className="w-4 h-4 transition-transform duration-300 hover:rotate-45" />
       ) : (
-        <Sun className="h-4 w-4 transition-transform" />
+        <Moon className="w-4 h-4 transition-transform duration-300 hover:-rotate-12" />
       )}
     </button>
   );

@@ -1,0 +1,28 @@
+{
+  "specVersion": "1.0",
+  "name": "Ugandhar Vaddi Portfolio",
+  "description": "Personal engineering portfolio and system architectures of Ugandhar Vaddi — Associate Data Scientist at Tredence.",
+  "entries": [
+    {
+      "id": "ugandhar-portfolio",
+      "name": "Ugandhar Vaddi Portfolio",
+      "type": "website",
+      "url": "https://ugandhar.in",
+      "description": "Personal engineering portfolio, credentials, systems projects, and contact."
+    },
+    {
+      "id": "ugandhar-blog",
+      "name": "Personal Blog",
+      "type": "website",
+      "url": "https://blog.ugandhar.in",
+      "description": "Technical essays, software systems architecture, and engineering notes."
+    },
+    {
+      "id": "ugandhar-github",
+      "name": "GitHub Repositories",
+      "type": "code-repository",
+      "url": "https://github.com/uga961",
+      "description": "Open-source repositories for machine learning, desktop tools, and VLSI memory architectures."
+    }
+  ]
+}

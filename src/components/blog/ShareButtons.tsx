@@ -33,17 +33,17 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
     <div className="flex flex-wrap items-center gap-2">
       <button
         onClick={handleCopyLink}
-        className="flex items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
+        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
         title="Copy article link"
       >
         {copied ? (
           <>
             <Check className="h-3.5 w-3.5 text-emerald-500" />
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Link Copied!</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copied!</span>
           </>
         ) : (
           <>
-            <Link2 className="h-3.5 w-3.5" />
+            <Link2 className="h-3.5 w-3.5 text-foreground/70" />
             <span>Copy Link</span>
           </>
         )}
@@ -53,22 +53,22 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
+        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
         title="Share on WhatsApp"
       >
-        <MessageCircle  className="h-3.5 w-3.5" />
-        <span>Post</span>
+        <MessageCircle className="h-3.5 w-3.5 text-foreground/70" />
+        <span>WhatsApp</span>
       </a>
 
       <a
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:text-[#0a66c2] hover:-translate-y-0.5 hover:shadow-xs"
+        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:text-[#0a66c2] hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
         title="Share on LinkedIn"
       >
-        <Linkedin className="h-3.5 w-3.5" />
-        <span>Share</span>
+        <Linkedin className="h-3.5 w-3.5 text-[#0a66c2]" />
+        <span>LinkedIn</span>
       </a>
     </div>
   );

@@ -1,0 +1,18 @@
+# Ugandhar Vaddi
+
+> Personal portfolio, system architectures, enterprise data science, and applied machine learning of Ugandhar Vaddi.
+
+Ugandhar Vaddi is an Associate Data Scientist at Tredence Analytics Solutions, building at the intersection of silicon, software, enterprise data pipelines, and applied machine learning models.
+
+## Core Navigation & Links
+- [Portfolio Homepage](https://ugandhar.in): Central engineering hub, bio, and direct contact.
+- [Personal Blog](https://blog.ugandhar.in): In-depth engineering essays, reflections, and technical notes.
+- [GitHub Profile](https://github.com/uga961): Open-source repositories, VLSI memory models, and native utilities.
+- [LinkedIn Profile](https://www.linkedin.com/in/vaddi-ugandhar-b37877266/): Industry background, roles at Tredence, McKinsey & Company, and Cognizant.
+- [YouTube Channel](https://www.youtube.com/@uga961): Multi-day Python classes, pandas data workshops, and technical tutorials.
+
+## Featured Engineering Projects
+- [StayActive](https://github.com/uga961/StayActive): Native desktop wellness & ergonomics utility with intelligent meeting detection.
+- [Cadence Virtuoso SRAM](https://github.com/uga961): Low-power 6T and 7T CMOS SRAM cell implementations.
+- [Sexual Harassment NLP Classification](https://github.com/uga961/Sexual-Harrasment-Classification): Machine learning text classification pipeline for incident detection.
+- [Draw2Spec](https://ugandhar.in/#projects): Proprietary enterprise AI-assisted engineering schematic digitizer built at McKinsey DtV Lab.
