@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://blog.ugandhar.in"),
 
   alternates: {
-    canonical: "/",
+    canonical: "https://blog.ugandhar.in",
   },
 
   icons: {
@@ -85,12 +85,9 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    // Add your Google Search Console verification code here
-    // google: "your-verification-code",
-  },
-
-  other: {
-    "google-site-verification": "",
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      "d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8",
   },
 };
 

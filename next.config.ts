@@ -44,7 +44,8 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source:
+          "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|feed.xml).*)",
         headers: [
           {
             key: "X-Content-Type-Options",

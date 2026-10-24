@@ -49,7 +49,7 @@ export function ArticleList({
             setSearchQuery(e.target.value);
             setCurrentPage(1);
           }}
-          className="h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container pl-11 pr-10 text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary focus:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-xs"
+          className="h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container pl-11 pr-10 text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-outline-variant/80 focus:bg-white dark:focus:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-outline-variant/40 transition-all shadow-xs"
         />
         {searchQuery && (
           <button
@@ -108,7 +108,7 @@ export function ArticleList({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 rounded-full bg-surface-container px-4 py-2 font-medium text-on-surface transition-colors hover:bg-surface-container-high disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Previous</span>
@@ -118,7 +118,7 @@ export function ArticleList({
                 setCurrentPage((p) => Math.min(totalPages, p + 1))
               }
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 rounded-full bg-surface-container px-4 py-2 font-medium text-on-surface transition-colors hover:bg-surface-container-high disabled:opacity-40 disabled:pointer-events-none"
+              className="flex items-center gap-1 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs disabled:opacity-40 disabled:pointer-events-none"
             >
               <span>Next</span>
               <ChevronRight className="h-4 w-4" />

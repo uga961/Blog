@@ -4,53 +4,75 @@
 
 @layer base {
   :root {
-    --background: 140 18% 98%;
-    --foreground: 150 5% 10%;
+    /* Warm Bone Parchment Theme */
+    --background: 48 20% 93%; /* #f2efe4 - Warm parchment paper canvas */
+    --foreground: 60 8% 10%; /* #1a1a17 - High-contrast editorial carbon */
     
-    --primary: 162 100% 21%;
-    --primary-hover: 162 100% 16%;
-    --primary-foreground: 0 0% 100%;
-    --primary-container: 153 87% 76%;
-    --primary-on-container: 156 100% 7%;
+    --primary: 60 8% 10%; /* Carbon */
+    --primary-hover: 60 8% 22%;
+    --primary-foreground: 48 20% 93%;
+    --primary-container: 47 18% 83%; /* #dedbc8 */
+    --primary-on-container: 60 8% 10%;
     
-    --surface: 140 18% 98%;
-    --surface-container-low: 140 14% 96%;
-    --surface-container: 140 10% 94%;
-    --surface-container-high: 140 8% 92%;
-    --surface-container-highest: 140 6% 89%;
+    --surface: 48 20% 93%;
+    --surface-container-lowest: 0 0% 100%; /* #ffffff - Pure white tactile hover */
+    --surface-container-low: 48 19% 90%; /* #eae7da */
+    --surface-container: 48 18% 87%; /* #e4e1d2 - Primary card backdrop */
+    --surface-container-high: 47 18% 83%; /* #dedbc8 - Elevated element container */
+    --surface-container-highest: 47 15% 78%; /* #d3cfbe - Badges, tags, secondary pills */
     
-    --on-surface: 150 5% 10%;
-    --on-surface-variant: 150 4% 26%;
+    --on-surface: 60 8% 10%;
+    --on-surface-variant: 50 6% 36%; /* #5e5c54 - Metadata, dates, and captions */
     
-    --outline: 150 4% 46%;
-    --outline-variant: 150 8% 77%;
+    --outline: 50 6% 50%;
+    --outline-variant: 48 12% 78%; /* #cfcbc0 - Subtle paper partition lines */
+
+    /* Portfolio Hex Aliases */
+    --bg-canvas: #f2efe4;
+    --bg-card: #e4e1d2;
+    --bg-card-elevated: #dedbc8;
+    --text-primary: #1a1a17;
+    --text-muted: #5e5c54;
+    --border-subtle: #cfcbc0;
+    --spotlight-sheen: rgba(255, 255, 255, 0.22);
   }
 
   .dark {
-    --background: 160 7% 7%;
-    --foreground: 140 5% 88%;
+    /* Obsidian & Warm Bone Theme */
+    --background: 60 5% 6%; /* #10100f - Obsidian carbon canvas */
+    --foreground: 48 22% 85%; /* #dedbc8 - Soft bone typography */
     
-    --primary: 155 60% 65%;
-    --primary-hover: 155 70% 75%;
-    --primary-foreground: 160 100% 11%;
-    --primary-container: 162 100% 16%;
-    --primary-on-container: 153 87% 76%;
+    --primary: 48 22% 85%; /* Soft bone */
+    --primary-hover: 48 20% 93%;
+    --primary-foreground: 60 5% 6%;
+    --primary-container: 60 4% 18%; /* #2f2f2b */
+    --primary-on-container: 48 22% 85%;
     
-    --surface: 160 7% 7%;
-    --surface-container-low: 160 6% 10%;
-    --surface-container: 160 5% 11%;
-    --surface-container-high: 160 4% 15%;
-    --surface-container-highest: 160 3% 20%;
+    --surface: 60 5% 6%;
+    --surface-container-lowest: 60 5% 4%; /* #0b0b0a */
+    --surface-container-low: 60 5% 10%; /* #1a1a18 */
+    --surface-container: 60 4% 14%; /* #242422 - Deep charcoal card backdrop */
+    --surface-container-high: 60 4% 18%; /* #2f2f2b - Elevated element container */
+    --surface-container-highest: 60 4% 22%; /* #3a3935 - Badges, tags, secondary pills */
     
-    --on-surface: 140 5% 88%;
-    --on-surface-variant: 150 7% 77%;
+    --on-surface: 48 22% 85%;
+    --on-surface-variant: 48 8% 62%; /* #a2a095 - Secondary metadata and captions */
     
-    --outline: 150 3% 55%;
-    --outline-variant: 150 4% 26%;
+    --outline: 48 6% 40%;
+    --outline-variant: 60 4% 22%; /* #3a3935 - Subtle dark borders */
+
+    /* Portfolio Hex Aliases */
+    --bg-canvas: #10100f;
+    --bg-card: #242422;
+    --bg-card-elevated: #2f2f2b;
+    --text-primary: #dedbc8;
+    --text-muted: #a2a095;
+    --border-subtle: #3a3935;
+    --spotlight-sheen: rgba(255, 255, 255, 0.035);
   }
 
   * {
-    border-color: hsl(var(--outline-variant) / 0.35);
+    border-color: hsl(var(--outline-variant) / 0.45);
   }
 
   html {
@@ -64,6 +86,14 @@
   }
 }
 
+/* Portfolio Paper Shadow */
+.shadow-paper {
+  box-shadow: 0 8px 24px -6px rgba(35, 30, 20, 0.08), 0 2px 6px -1px rgba(35, 30, 20, 0.03);
+}
+.dark .shadow-paper {
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(222, 219, 200, 0.08);
+}
+
 /* Material 3 custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -73,131 +103,63 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--outline-variant) / 0.4);
+  background: hsl(var(--outline-variant) / 0.6);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--outline-variant) / 0.8);
+  background: hsl(var(--on-surface-variant) / 0.5);
 }
 
-/* Material 3 Code block highlight styling */
+/* Code block highlight styling */
 pre {
-  @apply relative overflow-x-auto rounded-2xl border border-outline-variant/30 bg-surface-container-high p-5 font-mono text-sm;
+  @apply relative overflow-x-auto rounded-2xl border border-outline-variant/40 bg-surface-container p-5 font-mono text-sm;
+  color: hsl(var(--foreground));
+}
+
+code.hljs,
+pre code,
+.not-prose code {
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 code.hljs {
   @apply bg-transparent p-0 font-mono text-sm leading-relaxed;
 }
 
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #006c4c;
-  font-weight: 600;
-}
-.dark .hljs-keyword,
-.dark .hljs-selector-tag,
-.dark .hljs-subst {
-  color: #71dbae;
-  font-weight: 600;
-}
-
-.hljs-string,
-.hljs-title,
-.hljs-section,
-.hljs-attribute,
-.hljs-literal,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type {
-  color: #005088;
-}
-.dark .hljs-string,
-.dark .hljs-title,
-.dark .hljs-section,
-.dark .hljs-attribute,
-.dark .hljs-literal,
-.dark .hljs-template-tag,
-.dark .hljs-template-variable,
-.dark .hljs-type {
-  color: #92ccff;
-}
-
-.hljs-comment,
-.hljs-quote,
-.hljs-deletion {
-  color: #707973;
-  font-style: italic;
-}
-.dark .hljs-comment,
-.dark .hljs-quote,
-.dark .hljs-deletion {
-  color: #8a938c;
-}
-
-.hljs-number,
-.hljs-regexp,
-.hljs-link {
-  color: #a04000;
-}
-.dark .hljs-number,
-.dark .hljs-regexp,
-.dark .hljs-link {
-  color: #ffb68c;
-}
-
-.hljs-built_in,
-.hljs-class .hljs-title {
-  color: #6a3598;
-}
-.dark .hljs-built_in,
-.dark .hljs-class .hljs-title {
-  color: #dcb8ff;
-}
-
-.hljs-variable {
-  color: #ba1a1a;
-}
-.dark .hljs-variable {
-  color: #ffb4ab;
-}
-
-/* Code block base styles */
-code.hljs {
-  background: transparent;
-  color: hsl(var(--on-surface));
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-}
-
-/* Light theme syntax highlighting */
+/* Warm Editorial Syntax Highlighting */
 :root {
-  --code-keyword: #047857;
-  --code-string: #0f766e;
-  --code-title: #075985;
-  --code-number: #c2410c;
-  --code-comment: #737373;
-  --code-variable: #1d4ed8;
+  --code-keyword: #b45309; /* warm amber */
+  --code-string: #15803d; /* warm forest */
+  --code-title: #1d4ed8; /* sapphire */
+  --code-number: #c2410c; /* terracotta */
+  --code-comment: #78716c; /* warm stone */
+  --code-variable: #312e81; /* deep indigo */
+  --code-builtin: #7e22ce; /* purple */
+  --code-attr: #0369a1; /* rich cyan/blue */
 }
 
-/* Dark theme syntax highlighting */
 .dark {
-  --code-keyword: #6ee7b7;
-  --code-string: #a5d6a7;
+  --code-keyword: #fbbf24;
+  --code-string: #86efac;
   --code-title: #93c5fd;
   --code-number: #fdba74;
-  --code-comment: #a3a3a3;
-  --code-variable: #93c5fd;
+  --code-comment: #a8a29e;
+  --code-variable: #c7d2fe;
+  --code-builtin: #d8b4fe;
+  --code-attr: #7dd3fc;
 }
 
-/* Highlight.js token colors */
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal {
   color: var(--code-keyword);
+  font-weight: 600;
 }
 
 .hljs-string,
-.hljs-attr {
+.hljs-attr,
+.hljs-attribute {
   color: var(--code-string);
 }
 
@@ -205,20 +167,33 @@ code.hljs {
 .hljs-title.class_,
 .hljs-title.function_ {
   color: var(--code-title);
+  font-weight: 600;
 }
 
-.hljs-number,
-.hljs-literal {
+.hljs-number {
   color: var(--code-number);
 }
 
 .hljs-comment,
-.hljs-quote {
+.hljs-quote,
+.hljs-deletion {
   color: var(--code-comment);
+  font-style: italic;
 }
 
 .hljs-variable,
 .hljs-params,
 .hljs-type {
   color: var(--code-variable);
+}
+
+.hljs-built_in,
+.hljs-symbol,
+.hljs-bullet {
+  color: var(--code-builtin);
+}
+
+.hljs-meta,
+.hljs-subst {
+  color: var(--code-comment);
 }

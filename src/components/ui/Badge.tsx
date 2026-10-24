@@ -21,14 +21,14 @@ export function Badge({
 
   const variantStyles = {
     default: active
-      ? "bg-primary text-primary-foreground font-semibold shadow-xs"
-      : "bg-surface-container text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container-high hover:text-on-surface",
+      ? "bg-foreground text-background font-semibold shadow-xs"
+      : "bg-surface-container-highest text-on-surface-variant border border-outline-variant/40 hover:bg-white dark:hover:bg-surface-container-high hover:text-on-surface",
     primary:
-      "bg-primary text-primary-foreground font-medium shadow-xs",
+      "bg-foreground text-background font-medium shadow-xs",
     tonal:
-      "bg-primary-container text-primary-on-container font-medium",
+      "bg-surface-container-high text-on-surface border border-outline-variant/40 font-medium",
     outline:
-      "border border-outline-variant/50 text-on-surface-variant bg-transparent",
+      "border border-outline-variant/60 text-on-surface-variant bg-transparent",
   };
 
   return (

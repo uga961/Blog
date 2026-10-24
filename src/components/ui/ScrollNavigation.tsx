@@ -80,7 +80,7 @@ export function ScrollNavigation() {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`flex h-10 w-10 items-center justify-center rounded-full border border-outline-variant/35 bg-surface-container/85 text-on-surface-variant backdrop-blur-md shadow-sm transition-all duration-200 hover:scale-105 hover:bg-primary-container hover:text-primary-on-container hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+        className={`flex h-10 w-10 items-center justify-center rounded-full border border-outline-variant/50 bg-surface-container-high/90 text-foreground backdrop-blur-md shadow-paper transition-all duration-200 hover:scale-105 hover:bg-white dark:hover:bg-surface-container-highest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline ${
           showTop
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-2 pointer-events-none"
@@ -94,7 +94,7 @@ export function ScrollNavigation() {
       {/* Scroll to Bottom Button */}
       <button
         onClick={scrollToBottom}
-        className={`flex h-10 w-10 items-center justify-center rounded-full border border-outline-variant/35 bg-surface-container/85 text-on-surface-variant backdrop-blur-md shadow-sm transition-all duration-200 hover:scale-105 hover:bg-primary-container hover:text-primary-on-container hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+        className={`flex h-10 w-10 items-center justify-center rounded-full border border-outline-variant/50 bg-surface-container-high/90 text-foreground backdrop-blur-md shadow-paper transition-all duration-200 hover:scale-105 hover:bg-white dark:hover:bg-surface-container-highest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline ${
           showBottom
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"

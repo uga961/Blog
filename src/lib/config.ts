@@ -19,6 +19,7 @@ export const siteConfig = {
       process.env.NEXT_PUBLIC_SITE_AVATAR ||
       "https://raw.githubusercontent.com/uga961/blog/main/public/Logo.png",
     social: {
+      website: process.env.NEXT_PUBLIC_SITE_WEBSITE || "https://www.ugandhar.in/",
       github: process.env.NEXT_PUBLIC_SITE_GITHUB || "https://github.com/uga961",
       youtube:
         process.env.NEXT_PUBLIC_SITE_YOUTUBE ||

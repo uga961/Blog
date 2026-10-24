@@ -62,25 +62,25 @@ export function ActivityShowcase() {
 
   return (
     <section className="space-y-4">
-      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
-        <Sparkles className="h-4 w-4" />
+      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
         <span>Currently Crafting & Grooving</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Card 1: What I'm Building (GitHub) */}
-        <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-outline-variant/30 bg-surface-container-low p-6 transition-all duration-200 hover:border-primary/40 hover:bg-surface-container hover:shadow-md">
+        <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-outline-variant/40 bg-surface-container p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-outline-variant/80 hover:shadow-paper">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-medium text-on-surface-variant">
-                <Code2 className="h-3.5 w-3.5 text-primary" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 text-xs font-medium text-on-surface-variant">
+                <Code2 className="h-3.5 w-3.5 text-foreground" />
                 <span>Currently Building</span>
               </span>
               <a
                 href={siteConfig.author.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-colors hover:bg-primary-container hover:text-primary-on-container"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-outline-variant/40 bg-surface-container-high text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 aria-label="GitHub Profile"
               >
                 <Github className="h-4 w-4" />
@@ -88,7 +88,7 @@ export function ActivityShowcase() {
             </div>
 
             <div>
-              <h3 className="font-serif text-xl font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">
+              <h3 className="font-serif text-xl font-bold tracking-tight text-on-surface group-hover:text-foreground transition-colors">
                 <a
                   href="https://github.com/uga961/StayActive"
                   target="_blank"
@@ -105,24 +105,24 @@ export function ActivityShowcase() {
             </div>
 
             <div className="flex flex-wrap gap-1.5 pt-1">
-              <span className="rounded-full bg-surface-container px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant">
+              <span className="rounded-full bg-surface-container-highest px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant">
                 Python
               </span>
-              <span className="rounded-full bg-surface-container px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant">
+              <span className="rounded-full bg-surface-container-highest px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant">
                 Windows App
               </span>
-              <span className="rounded-full bg-surface-container px-2.5 py-0.5 text-[11px] font-medium text-primary">
+              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
                 Open Source
               </span>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs">
+          <div className="mt-5 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs">
             <a
               href="https://github.com/uga961/StayActive"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary hover:underline inline-flex items-center gap-1"
+              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1"
             >
               <span>View Repository</span>
               <ExternalLink className="h-3 w-3" />
@@ -139,10 +139,10 @@ export function ActivityShowcase() {
         </div>
 
         {/* Card 2: What I'm Listening To (Spotify Vinyl) */}
-        <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-outline-variant/30 bg-surface-container-low p-6 transition-all duration-200 hover:border-primary/40 hover:bg-surface-container hover:shadow-md">
+        <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-outline-variant/40 bg-surface-container p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-outline-variant/80 hover:shadow-paper">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-medium text-on-surface-variant">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 text-xs font-medium text-on-surface-variant">
                 <Music className="h-3.5 w-3.5 text-[#1DB954]" />
                 <span>
                   {spotify.isPlaying ? "Listening Now on Spotify" : "Spotify On Rotation"}
@@ -150,7 +150,7 @@ export function ActivityShowcase() {
               </span>
               <button
                 onClick={() => setIsPlaying((p) => !p)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-outline-variant/40 bg-surface-container-high text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 aria-label={isPlaying ? "Pause vinyl" : "Spin vinyl"}
                 title={isPlaying ? "Pause vinyl" : "Spin vinyl"}
               >
@@ -199,7 +199,7 @@ export function ActivityShowcase() {
                         href={spotify.songUrl || spotify.profileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
+                        className="hover:text-foreground transition-colors"
                       >
                         {spotify.title}
                       </a>
@@ -245,12 +245,12 @@ export function ActivityShowcase() {
             ) : null}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs">
+          <div className="mt-5 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs">
             <a
               href="https://open.spotify.com/user/31ajvsvptg6aygrakjcsm7xnm5am"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary hover:underline inline-flex items-center gap-1"
+              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1"
             >
               <span>View Profile on Spotify</span>
               <ExternalLink className="h-3 w-3" />

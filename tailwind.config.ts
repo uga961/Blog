@@ -37,6 +37,10 @@ const config: Config = {
         "m3-lg": "16px",
         "m3-xl": "28px",
       },
+      boxShadow: {
+        paper: "0 8px 24px -6px rgba(35, 30, 20, 0.08), 0 2px 6px -1px rgba(35, 30, 20, 0.03)",
+        "paper-dark": "0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(222, 219, 200, 0.08)",
+      },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "Roboto", "-apple-system", "sans-serif"],
         serif: ["var(--font-newsreader)", "Charter", "Georgia", "serif"],

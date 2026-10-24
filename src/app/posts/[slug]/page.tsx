@@ -152,7 +152,7 @@ export default async function PostPage({ params }: PageProps) {
         <div className="mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-semibold text-on-surface transition-colors hover:bg-surface-container-high hover:text-primary shadow-xs"
+            className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to All Articles</span>
@@ -160,17 +160,17 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Article Header Card */}
-        <header className="mb-10 space-y-5 rounded-3xl border border-outline-variant/30 bg-surface-container-low p-6 sm:p-10 shadow-xs">
+        <header className="mb-10 space-y-5 rounded-3xl border border-outline-variant/40 bg-surface-container p-6 sm:p-10 shadow-paper">
           {/* Metadata Chips */}
           <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium">
-              <Calendar className="h-3.5 w-3.5 text-primary" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3.5 py-1 font-medium">
+              <Calendar className="h-3.5 w-3.5 text-foreground" />
               <time dateTime={post.date} suppressHydrationWarning>
                 {formattedDate}
               </time>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium">
-              <Clock className="h-3.5 w-3.5 text-primary" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3.5 py-1 font-medium">
+              <Clock className="h-3.5 w-3.5 text-foreground" />
               <span>{post.readingTime} min read</span>
             </span>
           </div>
@@ -201,7 +201,7 @@ export default async function PostPage({ params }: PageProps) {
 
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/30 shadow-md">
+          <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/40 shadow-paper">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={post.coverImage}
@@ -220,7 +220,7 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Bottom Actions & Author Info */}
-        <section className="space-y-8 border-t border-outline-variant/30 pt-8">
+        <section className="space-y-8 border-t border-outline-variant/40 pt-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <span className="text-xs text-on-surface-variant">
               Published on{" "}
@@ -232,15 +232,15 @@ export default async function PostPage({ params }: PageProps) {
           </div>
 
           {/* Author Card */}
-          <div className="flex items-start gap-5 rounded-3xl border border-outline-variant/30 bg-surface-container p-6 shadow-xs">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-container text-primary-on-container font-mono text-lg font-bold">
+          <div className="flex items-start gap-5 rounded-3xl border border-outline-variant/40 bg-surface-container p-6 shadow-paper">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-outline-variant/50 bg-surface-container-high text-foreground font-mono text-lg font-bold">
               {siteConfig.author.initials}
             </div>
             <div className="space-y-1">
               <h3 className="text-base font-bold text-on-surface">
                 {siteConfig.name}
               </h3>
-              <p className="text-xs text-primary font-medium">
+              <p className="text-xs text-foreground/80 font-medium">
                 {siteConfig.tagline}
               </p>
               <p className="text-xs leading-relaxed text-on-surface-variant pt-1">
@@ -260,7 +260,7 @@ export default async function PostPage({ params }: PageProps) {
                   <Link
                     key={r.slug}
                     href={`/posts/${r.slug}`}
-                    className="group flex flex-col justify-between rounded-3xl border border-outline-variant/30 bg-surface-container-low p-5 transition-all hover:border-primary/40 hover:bg-surface-container hover:shadow-md"
+                    className="group flex flex-col justify-between rounded-3xl border border-outline-variant/40 bg-surface-container p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-outline-variant/80 hover:shadow-paper"
                   >
                     <div>
                       <span
@@ -269,11 +269,11 @@ export default async function PostPage({ params }: PageProps) {
                       >
                         {formatDisplayDate(r.date, "short")} • {r.readingTime} min read
                       </span>
-                      <h4 className="mt-1 font-serif text-base font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+                      <h4 className="mt-1 font-serif text-base font-bold text-on-surface group-hover:text-foreground transition-colors line-clamp-2">
                         {r.title}
                       </h4>
                     </div>
-                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary">
+                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-foreground">
                       <span>Read article</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>

@@ -16,6 +16,8 @@ import {
   BookOpen,
   Youtube,
   Rss,
+  Globe,
+  ArrowUpRight,
 } from "lucide-react";
 import { FaRedditAlien } from "react-icons/fa";
 import Image from "next/image";
@@ -30,11 +32,11 @@ export default function HomePage() {
 
       <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10 sm:px-6 space-y-14">
         {/* Author Intro Hero Banner */}
-        <section className="relative overflow-hidden rounded-3xl border border-outline-variant/30 bg-surface-container-low p-6 sm:p-10 shadow-xs">
+        <section className="relative overflow-hidden rounded-3xl border border-outline-variant/40 bg-surface-container p-6 sm:p-10 shadow-paper">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-5">
-              {/* Material 3 Tonal Avatar */}
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-primary-container text-primary-on-container font-mono text-xl font-bold shadow-xs">
+              {/* Tonal Warm Bone / Carbon Avatar */}
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-outline-variant/60 bg-surface-container-high text-foreground font-mono text-xl font-bold shadow-xs">
                 {siteConfig.author.initials}
               </div>
               <div className="space-y-1.5">
@@ -43,7 +45,7 @@ export default function HomePage() {
                     {siteConfig.name}
                   </h1>
                 </div>
-                <p className="text-sm font-medium text-primary">
+                <p className="text-sm font-medium text-foreground/90">
                   {siteConfig.tagline}
                 </p>
                 <p className="text-xs sm:text-sm text-on-surface-variant max-w-xl leading-relaxed pt-1">
@@ -52,16 +54,28 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Social Link Chips */}
+            {/* Social Link Chips - Tactile Elevation */}
             <div className="flex flex-wrap items-center gap-2 pt-2 sm:pt-0 sm:flex-col sm:items-end">
+              {siteConfig.author.social.website && (
+                <a
+                  href={siteConfig.author.social.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
+                >
+                  <Globe className="h-3.5 w-3.5 text-foreground" />
+                  <span>Portfolio</span>
+                  <ArrowUpRight className="h-3 w-3 text-on-surface-variant/70" />
+                </a>
+              )}
               {siteConfig.author.social.github && (
                 <a
                   href={siteConfig.author.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 >
-                  <Github className="h-3.5 w-3.5" />
+                  <Github className="h-3.5 w-3.5 text-foreground" />
                   <span>GitHub</span>
                 </a>
               )}
@@ -70,9 +84,9 @@ export default function HomePage() {
                   href={siteConfig.author.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 >
-                  <Youtube className="h-3.5 w-3.5" />
+                  <Youtube className="h-3.5 w-3.5 text-[#ef4444]" />
                   <span>YouTube</span>
                 </a>
               )}
@@ -81,9 +95,9 @@ export default function HomePage() {
                   href={siteConfig.author.social.reddit}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 >
-                  <FaRedditAlien className="h-3.5 w-3.5" />
+                  <FaRedditAlien className="h-3.5 w-3.5 text-[#ff4500]" />
                   <span>Reddit</span>
                 </a>
               )}
@@ -92,9 +106,9 @@ export default function HomePage() {
                   href={siteConfig.author.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-surface-container px-4 py-2 text-xs font-medium text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-4 py-2 text-xs font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
                 >
-                  <Linkedin className="h-3.5 w-3.5" />
+                  <Linkedin className="h-3.5 w-3.5 text-[#0a66c2]" />
                   <span>LinkedIn</span>
                 </a>
               )}
@@ -105,15 +119,15 @@ export default function HomePage() {
         {/* Sneak Peek: Featured / Latest Article Card */}
         {featured && (
           <section className="space-y-4">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
-              <Sparkles className="h-4 w-4" />
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Latest Story Preview</span>
             </div>
 
-            <div className="group relative overflow-hidden rounded-3xl border border-outline-variant/35 bg-surface-container p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:bg-surface-container-high hover:shadow-lg">
+            <div className="group relative overflow-hidden rounded-3xl border border-outline-variant/40 bg-surface-container p-6 sm:p-8 transition-all duration-200 hover:-translate-y-0.5 hover:border-outline-variant/80 hover:shadow-paper">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 {featured.coverImage && (
-                  <div className="md:col-span-5 overflow-hidden rounded-2xl border border-outline-variant/20 shadow-xs">
+                  <div className="md:col-span-5 overflow-hidden rounded-2xl border border-outline-variant/30 shadow-xs">
                     <Image
                       src={featured.coverImage}
                       alt={featured.title}
@@ -133,18 +147,18 @@ export default function HomePage() {
                   {/* Chips row */}
                   <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 font-medium">
-                      <Calendar className="h-3 w-3 text-primary" />
+                      <Calendar className="h-3 w-3 text-foreground" />
                       <time dateTime={featured.date} suppressHydrationWarning>
                         {formatDisplayDate(featured.date, "long")}
                       </time>
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-highest px-3 py-1 font-medium">
-                      <Clock className="h-3 w-3 text-primary" />
+                      <Clock className="h-3 w-3 text-foreground" />
                       <span>{featured.readingTime} min read</span>
                     </span>
                   </div>
 
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-on-surface group-hover:text-foreground transition-colors">
                     <Link href={`/posts/${featured.slug}`} prefetch={false}>
                       <span
                         className="absolute inset-0"
@@ -158,7 +172,7 @@ export default function HomePage() {
                     {featured.excerpt}
                   </p>
 
-                  <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-primary">
+                  <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-foreground">
                     <span>Read full article</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
@@ -173,14 +187,14 @@ export default function HomePage() {
 
         {/* All Articles Section */}
         <section className="space-y-6 pt-2">
-          <div className="flex items-center justify-between border-b border-outline-variant/25 pb-4">
+          <div className="flex items-center justify-between border-b border-outline-variant/30 pb-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4 text-primary" />
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
               <h2 className="text-sm font-bold uppercase tracking-wider text-on-surface">
                 All Articles
               </h2>
             </div>
-            <span className="rounded-full bg-surface-container px-3 py-1 text-xs font-semibold text-on-surface-variant">
+            <span className="rounded-full bg-surface-container-highest px-3 py-1 text-xs font-semibold text-on-surface-variant">
               {posts.length} {posts.length === 1 ? "article" : "articles"}
             </span>
           </div>
