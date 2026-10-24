@@ -21,10 +21,10 @@ export default function HomePage() {
   const featured = getFeaturedPost();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-20 sm:pb-16">
+    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-24 sm:pb-20">
       <Header />
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 pt-24 pb-14 space-y-16">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-14 space-y-12 sm:space-y-16">
         {/* Author Intro Hero Banner (Client Component for Confetti & Copy Interaction) */}
         <HeroBanner totalPosts={posts.length} />
 

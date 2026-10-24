@@ -84,8 +84,16 @@
   }
 
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 5rem;
+  }
+
+  /* Only enable smooth scrolling for desktop pointer devices; keep native hardware momentum on touch/mobile */
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -95,6 +103,8 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   ::selection {

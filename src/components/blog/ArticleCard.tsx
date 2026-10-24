@@ -12,7 +12,7 @@ export function ArticleCard({ post }: ArticleCardProps) {
   const formattedDate = formatDisplayDate(post.date, "short");
 
   return (
-    <SpotlightCard className="group relative flex flex-col justify-between p-6 sm:p-7">
+    <SpotlightCard className="group relative flex flex-col justify-between p-5 sm:p-7">
       <div className="space-y-4">
         {/* Metadata Chips */}
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">

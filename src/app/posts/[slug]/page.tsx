@@ -139,7 +139,7 @@ export default async function PostPage({ params }: PageProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-20 sm:pb-16">
+    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-24 sm:pb-20">
       <ReadingProgressBar />
       <Header />
 
@@ -149,20 +149,20 @@ export default async function PostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-24 pb-14">
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-20 sm:pt-24 pb-14">
         {/* Floating Back Navigation Button */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2 text-xs font-mono font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs"
+            className="inline-flex items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-2 text-xs font-mono font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to All Articles</span>
           </Link>
         </div>
 
-        {/* Article Header Card */}
-        <SpotlightCard className="mb-10 space-y-5 p-6 sm:p-10">
+        {/* Article Header - Clean, unboxed editorial typography directly on canvas */}
+        <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
           {/* Metadata Chips */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium border border-outline-variant/30">
@@ -191,7 +191,7 @@ export default async function PostPage({ params }: PageProps) {
 
           {/* Tag Chips */}
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               {post.tags.map((tag) => (
                 <Badge key={tag} variant="tonal" size="sm">
                   #{tag}
@@ -199,16 +199,16 @@ export default async function PostPage({ params }: PageProps) {
               ))}
             </div>
           )}
-        </SpotlightCard>
+        </header>
 
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="mb-10 overflow-hidden rounded-3xl border border-outline-variant/40 shadow-[var(--card-shadow)]">
+          <div className="mb-10 overflow-hidden rounded-2xl sm:rounded-3xl border border-outline-variant/40 shadow-[var(--card-shadow)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={post.coverImage}
               alt={post.title}
-              className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105 max-h-[480px]"
+              className="h-auto w-full object-cover max-h-[480px]"
             />
           </div>
         )}

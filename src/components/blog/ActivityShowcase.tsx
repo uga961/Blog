@@ -69,7 +69,7 @@ export function ActivityShowcase() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Card 1: What I'm Building (GitHub) */}
-        <SpotlightCard className="group relative flex flex-col justify-between p-6">
+        <SpotlightCard className="group relative flex flex-col justify-between p-5 sm:p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-mono font-medium text-foreground border border-outline-variant/30">
@@ -139,7 +139,7 @@ export function ActivityShowcase() {
         </SpotlightCard>
 
         {/* Card 2: What I'm Listening To (Spotify Vinyl) */}
-        <SpotlightCard className="group relative flex flex-col justify-between p-6">
+        <SpotlightCard className="group relative flex flex-col justify-between p-5 sm:p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-mono font-medium text-foreground border border-outline-variant/30">
