@@ -4,107 +4,111 @@
 
 @layer base {
   :root {
-    /* Warm Bone Parchment Theme */
-    --background: 48 20% 93%; /* #f2efe4 - Warm parchment paper canvas */
-    --foreground: 60 8% 10%; /* #1a1a17 - High-contrast editorial carbon */
-    
-    --primary: 60 8% 10%; /* Carbon */
-    --primary-hover: 60 8% 22%;
-    --primary-foreground: 48 20% 93%;
-    --primary-container: 47 18% 83%; /* #dedbc8 */
-    --primary-on-container: 60 8% 10%;
-    
-    --surface: 48 20% 93%;
-    --surface-container-lowest: 0 0% 100%; /* #ffffff - Pure white tactile hover */
-    --surface-container-low: 48 19% 90%; /* #eae7da */
-    --surface-container: 48 18% 87%; /* #e4e1d2 - Primary card backdrop */
-    --surface-container-high: 47 18% 83%; /* #dedbc8 - Elevated element container */
-    --surface-container-highest: 47 15% 78%; /* #d3cfbe - Badges, tags, secondary pills */
-    
-    --on-surface: 60 8% 10%;
-    --on-surface-variant: 50 6% 36%; /* #5e5c54 - Metadata, dates, and captions */
-    
-    --outline: 50 6% 50%;
-    --outline-variant: 48 12% 78%; /* #cfcbc0 - Subtle paper partition lines */
+    /* Editorial Light Mode — Warm Bone Parchment & Deep Charcoal Ink */
+    --background: 45 20% 96.5%;     /* #F8F7F4 warm bone off-white */
+    --foreground: 0 0% 9%;          /* #161616 near-black text */
 
-    /* Portfolio Hex Aliases */
-    --bg-canvas: #f2efe4;
-    --bg-card: #e4e1d2;
-    --bg-card-elevated: #dedbc8;
-    --text-primary: #1a1a17;
-    --text-muted: #5e5c54;
-    --border-subtle: #cfcbc0;
-    /* Subtle touch-up card spotlight */
-    --spotlight-surface: rgba(255, 255, 255, 0.22);
-    --card-shadow: 0 1px 3px 0 rgba(35, 30, 20, 0.04);
-    --card-hover-shadow: 0 8px 24px -6px rgba(35, 30, 20, 0.08), 0 2px 6px -1px rgba(35, 30, 20, 0.03);
+    --primary: 0 0% 9%;
+    --primary-foreground: 45 20% 96.5%;
+    --primary-hover: 0 0% 20%;
+
+    --accent: 0 0% 9%;              /* Crisp charcoal monochrome accent */
+    --accent-hover: 0 0% 25%;
+    --accent-foreground: 45 20% 96.5%;
+    --accent-muted: 45 15% 90%;
+
+    --surface: 0 0% 100%;           /* #FFFFFF pure clean surface */
+    --surface-subtle: 45 15% 94%;   /* #F2F0EB */
+    --surface-container: 45 12% 91%;/* #EBE8E1 */
+    --surface-container-high: 42 12% 86%;
+
+    --on-surface: 0 0% 9%;
+    --on-surface-variant: 60 2% 40%;/* #666663 neutral slate gray */
+
+    --border: 40 14% 87.6%;         /* #E4E1DB hairline border */
+    --border-subtle: 40 14% 92%;
+    --outline: 40 14% 75%;
+    --outline-variant: 40 14% 87.6%;
   }
 
   .dark {
-    /* Obsidian & Warm Bone Theme */
-    --background: 60 5% 6%; /* #10100f - Obsidian carbon canvas */
-    --foreground: 48 22% 85%; /* #dedbc8 - Soft bone typography */
-    
-    --primary: 48 22% 85%; /* Soft bone */
-    --primary-hover: 48 20% 93%;
-    --primary-foreground: 60 5% 6%;
-    --primary-container: 60 4% 18%; /* #2f2f2b */
-    --primary-on-container: 48 22% 85%;
-    
-    --surface: 60 5% 6%;
-    --surface-container-lowest: 60 5% 4%; /* #0b0b0a */
-    --surface-container-low: 60 5% 10%; /* #1a1a18 */
-    --surface-container: 60 4% 14%; /* #242422 - Deep charcoal card backdrop */
-    --surface-container-high: 60 4% 18%; /* #2f2f2b - Elevated element container */
-    --surface-container-highest: 60 4% 22%; /* #3a3935 - Badges, tags, secondary pills */
-    
-    --on-surface: 48 22% 85%;
-    --on-surface-variant: 48 8% 62%; /* #a2a095 - Secondary metadata and captions */
-    
-    --outline: 48 6% 40%;
-    --outline-variant: 60 4% 22%; /* #3a3935 - Subtle dark borders */
+    /* Editorial Dark Mode — Deep Carbon & Warm Bone Ink */
+    --background: 60 3% 6.9%;       /* #121211 deep carbon canvas */
+    --foreground: 47 16% 89.2%;     /* #E8E6DF warm bone text */
 
-    /* Portfolio Hex Aliases */
-    --bg-canvas: #10100f;
-    --bg-card: #242422;
-    --bg-card-elevated: #2f2f2b;
-    --text-primary: #dedbc8;
-    --text-muted: #a2a095;
-    --border-subtle: #3a3935;
-    --spotlight-sheen: rgba(255, 255, 255, 0.035);
+    --primary: 47 16% 89.2%;
+    --primary-foreground: 60 3% 6.9%;
+    --primary-hover: 47 25% 96%;
 
-    /* Subtle touch-up card spotlight */
-    --spotlight-surface: rgba(255, 255, 255, 0.035);
-    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-    --card-hover-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(222, 219, 200, 0.08);
+    --accent: 47 16% 89.2%;         /* Warm bone / crisp monochrome contrast */
+    --accent-hover: 47 25% 96%;
+    --accent-foreground: 60 3% 6.9%;
+    --accent-muted: 60 3% 16%;
+
+    --surface: 60 4% 9.8%;          /* #1A1A18 deep surface */
+    --surface-subtle: 60 3% 12%;    /* #20201E */
+    --surface-container: 60 3% 14.5%;/* #262624 */
+    --surface-container-high: 60 3% 18%;
+
+    --on-surface: 47 16% 89.2%;
+    --on-surface-variant: 48 4% 53.7%;/* #8E8C84 warm gray */
+
+    --border: 60 3% 16%;            /* #2A2A27 carbon hairline */
+    --border-subtle: 60 3% 12%;
+    --outline: 60 3% 30%;
+    --outline-variant: 60 3% 16%;
   }
 
   * {
-    border-color: hsl(var(--outline-variant) / 0.45);
+    border-color: hsl(var(--border));
   }
 
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     scroll-padding-top: 5rem;
+    overflow-x: hidden;
   }
 
-  /* Only enable smooth scrolling for desktop pointer devices; keep native hardware momentum on touch/mobile */
+  /* Hardware-accelerated smooth scrolling only on fine pointer desktop devices */
   @media (hover: hover) and (pointer: fine) {
     html {
       scroll-behavior: smooth;
     }
   }
 
+  /* Respect reduced motion preferences for accessibility and performance */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--on-surface));
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
+  }
+
+  h1, h2, h3 {
+    text-rendering: optimizeLegibility;
+  }
+
+  button, a, input, select {
+    touch-action: manipulation;
   }
 
   ::selection {
@@ -113,46 +117,44 @@
   }
 }
 
-/* Subtle Technical Grid Overlay */
-.bg-grid-pattern {
-  background-size: 28px 28px;
-  background-image: 
-    linear-gradient(to right, hsl(var(--outline-variant) / 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--outline-variant) / 0.15) 1px, transparent 1px);
-}
-
-.radial-mask {
-  mask-image: radial-gradient(circle at center, black 45%, transparent 92%);
-  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 92%);
-}
-
-/* Portfolio Paper Shadow */
-.shadow-paper {
-  box-shadow: 0 8px 24px -6px rgba(35, 30, 20, 0.08), 0 2px 6px -1px rgba(35, 30, 20, 0.03);
-}
-.dark .shadow-paper {
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(222, 219, 200, 0.08);
-}
-
-/* Material 3 custom scrollbar */
+/* Minimal Editorial Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
 }
+
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: hsl(var(--background));
 }
+
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--outline-variant) / 0.6);
-  border-radius: 9999px;
+  background: hsl(var(--border));
+  border-radius: 2px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--on-surface-variant) / 0.5);
 }
 
-/* Code block highlight styling */
+/* Hidden Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* GPU compositor layer promotion for Gecko/Firefox and mobile WebKit */
+.gpu-layer {
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Clean Editorial Code Blocks */
 pre {
-  @apply relative overflow-x-auto rounded-2xl border border-outline-variant/40 bg-surface-container p-5 font-mono text-sm;
+  @apply relative overflow-x-auto rounded-[4px] border border-border/80 bg-surface/70 p-4 font-mono text-xs sm:text-sm;
   color: hsl(var(--foreground));
 }
 
@@ -164,19 +166,19 @@ pre code,
 }
 
 code.hljs {
-  @apply bg-transparent p-0 font-mono text-sm leading-relaxed;
+  @apply bg-transparent p-0 font-mono text-xs sm:text-sm leading-relaxed;
 }
 
 /* Warm Editorial Syntax Highlighting */
 :root {
-  --code-keyword: #b45309; /* warm amber */
-  --code-string: #15803d; /* warm forest */
-  --code-title: #1d4ed8; /* sapphire */
-  --code-number: #c2410c; /* terracotta */
-  --code-comment: #78716c; /* warm stone */
-  --code-variable: #312e81; /* deep indigo */
-  --code-builtin: #7e22ce; /* purple */
-  --code-attr: #0369a1; /* rich cyan/blue */
+  --code-keyword: #a14008;
+  --code-string: #15803d;
+  --code-title: #1d4ed8;
+  --code-number: #b45309;
+  --code-comment: #78716c;
+  --code-variable: #312e81;
+  --code-builtin: #7e22ce;
+  --code-attr: #0369a1;
 }
 
 .dark {
@@ -184,7 +186,7 @@ code.hljs {
   --code-string: #86efac;
   --code-title: #93c5fd;
   --code-number: #fdba74;
-  --code-comment: #a8a29e;
+  --code-comment: #8e8c84;
   --code-variable: #c7d2fe;
   --code-builtin: #d8b4fe;
   --code-attr: #7dd3fc;

@@ -11,7 +11,6 @@ import {
   Pause,
 } from "lucide-react";
 import { siteConfig } from "@/lib/config";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 interface SpotifyState {
   isPlaying: boolean;
@@ -50,9 +49,8 @@ export function ActivityShowcase() {
       }
     };
 
-    // Defer initial Spotify fetch so it doesn't compete with page load & TBT
     const initialTimer = setTimeout(fetchNowPlaying, 1000);
-    const interval = setInterval(fetchNowPlaying, 30000); // refresh every 30s
+    const interval = setInterval(fetchNowPlaying, 30000);
     return () => {
       mounted = false;
       clearTimeout(initialTimer);
@@ -61,124 +59,113 @@ export function ActivityShowcase() {
   }, []);
 
   return (
-    <section id="activity" className="scroll-mt-28 space-y-4">
-      <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
-        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span>Currently Crafting & Grooving</span>
+    <section id="activity" className="scroll-mt-28 space-y-6 pt-4">
+      {/* Editorial Header */}
+      <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
+        <div className="flex items-center gap-2 sm:gap-3 truncate">
+          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 003</span>
+          <span className="text-border flex-shrink-0">/</span>
+          <span className="truncate">LIVE TELEMETRY &amp; WORKSPACE</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
+          <span>REALTIME SIGNALS</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Card 1: What I'm Building (GitHub) */}
-        <SpotlightCard className="group relative flex flex-col justify-between p-5 sm:p-6">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-mono font-medium text-foreground border border-outline-variant/30">
-                <Code2 className="h-3.5 w-3.5 text-foreground/70" />
-                <span>Currently Building</span>
+        <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex flex-col justify-between space-y-5 transition-colors hover:border-foreground/30">
+          <div className="space-y-3.5">
+            <div className="flex items-center justify-between text-xs font-mono text-on-surface-variant">
+              <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-foreground">
+                <Code2 className="h-3.5 w-3.5 text-on-surface-variant" />
+                <span>Open Source Tooling</span>
               </span>
               <a
                 href={siteConfig.author.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-outline-variant/40 bg-surface-container text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
+                className="flex h-7 w-7 items-center justify-center rounded-[3px] border border-border/80 bg-surface text-foreground transition-colors hover:border-foreground touch-manipulation"
                 aria-label="GitHub Profile"
               >
-                <Github className="h-4 w-4" />
+                <Github className="h-3.5 w-3.5" />
               </a>
             </div>
 
             <div>
-              <h3 className="font-serif text-xl font-bold tracking-tight text-on-surface group-hover:text-foreground transition-colors">
+              <h3 className="font-serif text-xl font-bold tracking-tight text-foreground">
                 <a
                   href="https://github.com/uga961/StayActive"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5"
+                  className="inline-flex items-center gap-1.5 hover:underline"
                 >
                   StayActive
-                  <ExternalLink className="h-4 w-4 opacity-70 group-hover:opacity-100" />
+                  <ExternalLink className="h-3.5 w-3.5 opacity-60" />
                 </a>
               </h3>
-              <p className="mt-1.5 text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                A lightweight Windows desktop companion for mindful breaks, hydration reminders, and physical posture while working.
+              <p className="mt-1.5 text-xs sm:text-sm text-on-surface-variant leading-relaxed font-sans">
+                A lightweight Windows desktop companion for mindful work intervals, hydration reminders, and postural recovery.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 pt-1 font-mono">
-              <span className="rounded-md bg-surface-container px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant border border-outline-variant/30">
-                C# & WPF
-              </span>
-              <span className="rounded-md bg-surface-container px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant border border-outline-variant/30">
-                .NET
-              </span>
-              <span className="rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-                Open Source
-              </span>
+            <div className="pt-1 text-xs font-mono text-on-surface-variant break-words">
+              <span>C# · .NET 8 · WPF · Windows API</span>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs font-mono">
+          <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-mono">
             <a
               href="https://github.com/uga961/StayActive"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1"
+              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1 touch-manipulation"
             >
               <span>View Repository</span>
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
-            <a
-              href={siteConfig.author.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-on-surface-variant hover:text-on-surface"
-            >
+            <span className="text-on-surface-variant">
               @uga961 on GitHub
-            </a>
+            </span>
           </div>
-        </SpotlightCard>
+        </div>
 
         {/* Card 2: What I'm Listening To (Spotify Vinyl) */}
-        <SpotlightCard className="group relative flex flex-col justify-between p-5 sm:p-6">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-xs font-mono font-medium text-foreground border border-outline-variant/30">
-                <Music className="h-3.5 w-3.5 text-[#1DB954]" />
-                <span>
-                  {spotify.isPlaying ? "Listening Now on Spotify" : "Spotify On Rotation"}
-                </span>
+        <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex flex-col justify-between space-y-5 transition-colors hover:border-foreground/30">
+          <div className="space-y-3.5">
+            <div className="flex items-center justify-between text-xs font-mono text-on-surface-variant">
+              <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-foreground">
+                <Music className="h-3.5 w-3.5 text-on-surface-variant" />
+                <span>Audio Stream</span>
               </span>
               <button
                 onClick={() => setIsPlaying((p) => !p)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-outline-variant/40 bg-surface-container text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-sm"
-                aria-label={isPlaying ? "Pause vinyl" : "Spin vinyl"}
-                title={isPlaying ? "Pause vinyl" : "Spin vinyl"}
+                className="flex h-7 w-7 items-center justify-center rounded-[3px] border border-border/80 bg-surface text-foreground transition-colors hover:border-foreground cursor-pointer touch-manipulation"
+                aria-label={isPlaying ? "Pause turntable" : "Spin turntable"}
+                title={isPlaying ? "Pause turntable" : "Spin turntable"}
               >
                 {isPlaying ? (
-                  <Pause className="h-3.5 w-3.5" />
+                  <Pause className="h-3 w-3" />
                 ) : (
-                  <Play className="h-3.5 w-3.5" />
+                  <Play className="h-3 w-3" />
                 )}
               </button>
             </div>
 
             {/* Vinyl Record Display */}
             <div className="flex items-center gap-4">
-              {/* Spinning Vinyl Disc - Black & Spotify Green Design */}
-              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-neutral-950 shadow-md ring-2 ring-neutral-800">
+              <div className="relative flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-full bg-neutral-900 border border-border/80 shadow-subtle">
                 <div
                   className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${
                     isPlaying ? "animate-spin" : ""
                   }`}
-                  style={{ animationDuration: "6s" }}
+                  style={{ animationDuration: "7s" }}
                 >
-                  <div className="h-16 w-16 rounded-full border border-neutral-800/80 flex items-center justify-center">
-                    <div className="h-12 w-12 rounded-full border border-neutral-700/50 flex items-center justify-center">
-                      {/* Center Green & Black Label */}
-                      <div className="relative flex h-7 w-7 items-center justify-center rounded-full bg-[#1DB954] text-neutral-950 shadow-inner ring-1 ring-[#1DB954]/60">
-                        <Disc3 className="h-4 w-4" />
-                        <span className="absolute h-1.5 w-1.5 rounded-full bg-neutral-950" />
-                      </div>
+                  <div className="h-12 w-12 rounded-full border border-neutral-700/60 flex items-center justify-center">
+                    <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-neutral-800 text-neutral-300">
+                      <Disc3 className="h-3.5 w-3.5" />
+                      <span className="absolute h-1 w-1 rounded-full bg-neutral-950" />
                     </div>
                   </div>
                 </div>
@@ -186,52 +173,32 @@ export function ActivityShowcase() {
 
               {/* Music Details */}
               <div className="space-y-1 min-w-0">
-                {spotify.title ? (
-                  <>
-                    <div className="flex items-center gap-1.5">
-                      <span className="flex h-2 w-2 rounded-full bg-[#1DB954] animate-pulse" />
-                      <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-on-surface-variant">
-                        {spotify.isPlaying ? "Live on Spotify" : "Recently Played"}
-                      </span>
-                    </div>
-                    <h4 className="font-serif text-base font-bold text-on-surface truncate">
-                      <a
-                        href={spotify.songUrl || spotify.profileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-foreground transition-colors"
-                      >
-                        {spotify.title}
-                      </a>
-                    </h4>
-                    <p className="text-xs text-on-surface-variant truncate font-mono">
-                      {spotify.artist}
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-1.5">
-                      <span className="flex h-2 w-2 rounded-full bg-[#1DB954] animate-pulse" />
-                      <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-on-surface-variant">
-                        Ugandhar&apos;s Spotify
-                      </span>
-                    </div>
-                    <h4 className="font-serif text-base font-bold text-on-surface">
-                      Hot Hits Telugu & Daily Rotation
-                    </h4>
-                    <p className="text-xs text-on-surface-variant line-clamp-1 font-mono">
-                      Tollywood hits, energetic rhythms & Telugu favorites.
-                    </p>
-                  </>
-                )}
+                <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/60" />
+                  <span>
+                    {spotify.isPlaying ? "Streaming on Spotify" : "Daily Rotation"}
+                  </span>
+                </div>
+                <h4 className="font-serif text-base font-bold text-foreground truncate">
+                  <a
+                    href={spotify.songUrl || spotify.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    {spotify.title || "Hot Hits Telugu & Rhythm"}
+                  </a>
+                </h4>
+                <p className="text-xs text-on-surface-variant truncate font-mono">
+                  {spotify.artist || "Tollywood energy & daily focus tracks"}
+                </p>
               </div>
             </div>
 
-            {/* Optional Spotify Mini-Player Embed Toggle */}
-            {showEmbed ? (
+            {showEmbed && (
               <div className="pt-2">
                 <iframe
-                  style={{ borderRadius: "16px" }}
+                  style={{ borderRadius: "4px" }}
                   src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6XE7HRLM75P?utm_source=generator&theme=0"
                   width="100%"
                   height="152"
@@ -242,27 +209,27 @@ export function ActivityShowcase() {
                   title="Spotify Embed"
                 />
               </div>
-            ) : null}
+            )}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs font-mono">
+          <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-mono">
             <a
               href="https://open.spotify.com/user/31ajvsvptg6aygrakjcsm7xnm5am"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1"
+              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1 touch-manipulation"
             >
-              <span>View Profile on Spotify</span>
-              <ExternalLink className="h-3 w-3" />
+              <span>View Profile</span>
+              <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
             <button
               onClick={() => setShowEmbed((s) => !s)}
-              className="text-on-surface-variant hover:text-on-surface text-[11px] underline"
+              className="text-on-surface-variant hover:text-foreground underline cursor-pointer touch-manipulation text-[11px]"
             >
               {showEmbed ? "Hide Player" : "Mini Player"}
             </button>
           </div>
-        </SpotlightCard>
+        </div>
       </div>
     </section>
   );

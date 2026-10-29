@@ -27,8 +27,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   if (!mounted) {
     return (
-      <div className={`w-9 h-9 rounded-full bg-surface-container flex items-center justify-center ${className}`}>
-        <div className="w-4 h-4" />
+      <div
+        className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 flex items-center justify-center ${className}`}
+      >
+        <div className="w-3.5 h-3.5" />
       </div>
     );
   }
@@ -37,14 +39,14 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     <button
       onClick={toggleTheme}
       type="button"
-      aria-label="Toggle theme"
+      aria-label="Toggle color theme"
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 text-on-surface hover:text-primary hover:bg-surface-container-high/60 active:scale-95 ${className}`}
+      className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 hover:bg-surface hover:border-foreground/40 flex items-center justify-center transition-colors text-foreground touch-manipulation cursor-pointer ${className}`}
     >
       {isDark ? (
-        <Sun className="w-4 h-4 transition-transform duration-300 hover:rotate-45" />
+        <Sun className="w-3.5 h-3.5 text-on-surface-variant hover:text-foreground transition-colors" />
       ) : (
-        <Moon className="w-4 h-4 transition-transform duration-300 hover:-rotate-12" />
+        <Moon className="w-3.5 h-3.5 text-on-surface-variant hover:text-foreground transition-colors" />
       )}
     </button>
   );

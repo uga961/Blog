@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Link2, Check, Twitter, Linkedin, MessageCircle } from "lucide-react";
+import { Link2, Check, MessageCircle } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa6";
 
 interface ShareButtonsProps {
   title: string;
@@ -33,17 +34,17 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
     <div className="flex flex-wrap items-center gap-2">
       <button
         onClick={handleCopyLink}
-        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
+        className="flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground cursor-pointer touch-manipulation"
         title="Copy article link"
       >
         {copied ? (
           <>
-            <Check className="h-3.5 w-3.5 text-emerald-500" />
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copied!</span>
+            <Check className="h-3.5 w-3.5 text-foreground" />
+            <span className="font-semibold text-foreground">Copied</span>
           </>
         ) : (
           <>
-            <Link2 className="h-3.5 w-3.5 text-foreground/70" />
+            <Link2 className="h-3.5 w-3.5 text-on-surface-variant" />
             <span>Copy Link</span>
           </>
         )}
@@ -53,10 +54,10 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
+        className="flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
         title="Share on WhatsApp"
       >
-        <MessageCircle className="h-3.5 w-3.5 text-foreground/70" />
+        <MessageCircle className="h-3.5 w-3.5 text-on-surface-variant" />
         <span>WhatsApp</span>
       </a>
 
@@ -64,10 +65,10 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:text-[#0a66c2] hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
+        className="flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
         title="Share on LinkedIn"
       >
-        <Linkedin className="h-3.5 w-3.5 text-[#0a66c2]" />
+        <FaLinkedin className="h-3.5 w-3.5 text-on-surface-variant" />
         <span>LinkedIn</span>
       </a>
     </div>

@@ -1,164 +1,148 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
+import { ArrowDown, ArrowUpRight, Copy, Check, Globe } from "lucide-react";
 import { siteConfig } from "@/lib/config";
-import { SocialIcon } from "@/components/ui/SocialIcons";
-import confetti from "canvas-confetti";
-import {
-  MapPin,
-  GraduationCap,
-  BookOpen,
-  Copy,
-  Check,
-} from "lucide-react";
 
 export function HeroBanner({ totalPosts }: { totalPosts: number }) {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(siteConfig.email);
-    setCopied(true);
-    confetti({
-      particleCount: 50,
-      spread: 70,
-      origin: { y: 0.7 },
-      colors: ["#dedbc8", "#e1e0cc", "#a2a095"],
-    });
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(siteConfig.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (_) {}
   };
+
+  const socials = [
+    { name: "Portfolio", url: "https://www.ugandhar.in" },
+    { name: "GitHub", url: siteConfig.author.social.github },
+    { name: "LinkedIn", url: siteConfig.author.social.linkedin },
+    { name: "YouTube", url: siteConfig.author.social.youtube },
+    { name: "Reddit", url: siteConfig.author.social.reddit },
+    { name: "RSS", url: "/feed.xml" },
+  ];
 
   return (
     <section
       id="hero"
-      className="relative scroll-mt-28 pt-2 sm:pt-6 pb-2 space-y-6 max-w-4xl"
+      className="pt-24 sm:pt-36 pb-16 sm:pb-20 max-w-5xl mx-auto overflow-hidden"
     >
-      {/* Subtle Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 radial-mask pointer-events-none -z-10" />
+      {/* Top Editorial Index & Category Bar */}
+      <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
+        <div className="flex items-center gap-2 sm:gap-3 truncate">
+          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 001</span>
+          <span className="text-border flex-shrink-0">/</span>
+          <span className="truncate">TECHNICAL JOURNAL &amp; ESSAYS</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
+          <span>{totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} ARCHIVED · IST (UTC+5:30)</span>
+        </div>
+      </div>
 
-      <div className="space-y-6">
-        {/* Metadata Badges Row */}
-        <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/40">
-            <MapPin className="w-3.5 h-3.5 text-foreground/70" />
-            <span>{siteConfig.location}</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/40">
-            <GraduationCap className="w-3.5 h-3.5 text-foreground/70" />
-            <span>B.E. ECE (9.2 CGPA)</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/40">
-            <BookOpen className="w-3.5 h-3.5 text-foreground/70" />
-            <span>{totalPosts} {totalPosts === 1 ? "Essay" : "Essays"} Published</span>
-          </span>
+      {/* Main Grid: Editorial Typography & Architectural Photographic Frame */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 pt-8 sm:pt-12 items-start">
+        {/* Left Column: Title, Headline, Narrative, Actions */}
+        <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          <div>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground font-sans uppercase break-words">
+              {siteConfig.name}
+            </h1>
+            <p className="mt-2.5 sm:mt-3 text-lg sm:text-2xl font-serif italic text-foreground/80 leading-snug">
+              Silicon, Systems &amp; Applied Machine Learning.
+            </p>
+          </div>
+
+          <div className="space-y-3 text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans max-w-xl">
+            <p>
+              Associate Data Scientist at <span className="text-foreground font-medium">Tredence</span> (Analytics &amp; Applied AI) and graduate in Electronics &amp; Communication from Sathyabama Institute of Science and Technology.
+            </p>
+            <p>
+              This journal documents first-principles observations, post-mortems, and technical notes spanning transistor-level SRAM stability in Cadence Virtuoso, enterprise data pipelines, and native software tooling.
+            </p>
+          </div>
+
+          {/* Direct, Purposeful Actions */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
+            <a
+              href="#articles"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-[4px] bg-foreground text-background font-medium text-xs font-mono uppercase tracking-wider hover:bg-foreground/90 transition-colors touch-manipulation min-h-[40px]"
+            >
+              <span>Read Essays</span>
+              <ArrowDown className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href="https://www.ugandhar.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] border border-border/90 bg-surface/80 text-foreground font-mono text-xs hover:border-foreground transition-colors touch-manipulation min-h-[40px]"
+            >
+              <Globe className="w-3.5 h-3.5 text-on-surface-variant" />
+              <span>Portfolio</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-on-surface-variant" />
+            </a>
+
+            <button
+              onClick={handleCopyEmail}
+              title="Copy direct email address"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] border border-border/90 bg-surface/80 text-foreground font-mono text-xs hover:border-foreground transition-colors touch-manipulation min-h-[40px] cursor-pointer"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-foreground" />
+                  <span className="text-foreground font-semibold">Email Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-on-surface-variant" />
+                  <span>{siteConfig.email}</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Clean slash-separated text links */}
+          <div className="pt-4 border-t border-border/60 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs font-mono text-on-surface-variant">
+            {socials.map((link, idx) => (
+              <React.Fragment key={link.name}>
+                <a
+                  href={link.url}
+                  target={link.url.startsWith("http") ? "_blank" : undefined}
+                  rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="hover:text-foreground hover:underline transition-colors flex items-center gap-1 touch-manipulation"
+                >
+                  <span>{link.name}</span>
+                  {link.url.startsWith("http") && <ArrowUpRight className="w-3 h-3 opacity-60" />}
+                </a>
+                {idx < socials.length - 1 && (
+                  <span className="text-border select-none">/</span>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
 
-        {/* Name & Headline */}
-        <div className="space-y-2">
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-foreground font-sans">
-            {siteConfig.name}
-            <span className="text-foreground/40 font-serif ml-1">*</span>
-          </h1>
-          <p className="text-base sm:text-xl font-medium text-foreground/90 font-mono">
-            {siteConfig.tagline}
-          </p>
-        </div>
-
-        {/* Bio */}
-        <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed max-w-2xl font-sans">
-          {siteConfig.bio}
-        </p>
-
-        {/* Action Buttons & Socials */}
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          <a
-            href="#articles"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-semibold text-xs shadow-xs hover:shadow-md hover:-translate-y-0.5 hover:bg-foreground/90 transition-all duration-200 active:scale-95"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Read Articles</span>
-          </a>
-
-          <a
-            href={siteConfig.author.social.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container border border-outline-variant/40 text-foreground text-xs font-mono shadow-xs hover:bg-white dark:hover:bg-surface-container-highest hover:border-foreground/50 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
-          >
-            <SocialIcon name="portfolio" className="w-3.5 h-3.5" />
-            <span>Portfolio</span>
-            <span className="text-[10px] opacity-70">↗</span>
-          </a>
-
-          <button
-            onClick={handleCopyEmail}
-            type="button"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container border border-outline-variant/40 text-foreground text-xs font-mono shadow-xs hover:bg-white dark:hover:bg-surface-container-highest hover:border-foreground/50 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
-            title="Copy email to clipboard"
-          >
-            {copied ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                  Copied!
-                </span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5 text-foreground/70" />
-                <span>Copy Email</span>
-              </>
-            )}
-          </button>
-
-          <div className="flex items-center gap-2 pl-1">
-            {siteConfig.author.social.github && (
-              <a
-                href={siteConfig.author.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl border border-outline-variant/40 bg-surface-container text-on-surface-variant hover:text-foreground hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 hover:-translate-y-0.5"
-                aria-label="GitHub Profile"
-                title="GitHub Profile"
-              >
-                <SocialIcon name="github" className="w-4 h-4" />
-              </a>
-            )}
-            {siteConfig.author.social.linkedin && (
-              <a
-                href={siteConfig.author.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl border border-outline-variant/40 bg-surface-container text-on-surface-variant hover:text-[#0a66c2] hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 hover:-translate-y-0.5"
-                aria-label="LinkedIn Profile"
-                title="LinkedIn Profile"
-              >
-                <SocialIcon name="linkedin" className="w-4 h-4" />
-              </a>
-            )}
-            {siteConfig.author.social.youtube && (
-              <a
-                href={siteConfig.author.social.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl border border-outline-variant/40 bg-surface-container text-on-surface-variant hover:text-[#ef4444] hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 hover:-translate-y-0.5"
-                aria-label="YouTube Channel"
-                title="YouTube Channel"
-              >
-                <SocialIcon name="youtube" className="w-4 h-4" />
-              </a>
-            )}
-            {siteConfig.author.social.reddit && (
-              <a
-                href={siteConfig.author.social.reddit}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl border border-outline-variant/40 bg-surface-container text-on-surface-variant hover:text-[#ff4500] hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 hover:-translate-y-0.5"
-                aria-label="Reddit Profile"
-                title="Reddit Profile"
-              >
-                <SocialIcon name="reddit" className="w-4 h-4" />
-              </a>
-            )}
+        {/* Right Column: Architectural Photograph Frame */}
+        <div className="lg:col-span-5 flex flex-col items-center lg:items-end w-full">
+          <div className="w-full max-w-[280px] sm:max-w-sm border border-border bg-surface p-2.5 sm:p-3 rounded-[4px] shadow-subtle">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-container rounded-[2px]">
+              <Image
+                src="/avatar/profile.jpg"
+                alt="Portrait of Ugandhar Vaddi"
+                fill
+                priority
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 50vw, 380px"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+              />
+            </div>
+            <div className="mt-2.5 sm:mt-3 pt-2 border-t border-border/60 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-on-surface-variant">
+              <span>FIG. 01 — AUTHOR &amp; RESEARCHER</span>
+              <span className="text-foreground/90 font-medium">CHENNAI · VISAKHAPATNAM</span>
+            </div>
           </div>
         </div>
       </div>

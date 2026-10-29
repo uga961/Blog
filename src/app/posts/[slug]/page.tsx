@@ -10,10 +10,8 @@ import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
 import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ShareButtons } from "@/components/blog/ShareButtons";
-import { Badge } from "@/components/ui/Badge";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { MagneticDock } from "@/components/ui/MagneticDock";
-import { ArrowLeft, Clock, Calendar, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 
 const SITE_URL = "https://blog.ugandhar.in";
@@ -69,7 +67,7 @@ export async function generateMetadata({
       publishedTime: post.date || undefined,
       authors: [siteConfig.name],
       images: ogImages,
-      siteName: "Ugandhar's Blog",
+      siteName: "Ugandhar's Journal",
     },
     twitter: {
       card: "summary_large_image",
@@ -89,7 +87,6 @@ export default async function PostPage({ params }: PageProps) {
   }
 
   const formattedDate = formatDisplayDate(post.date, "long");
-
   const tocItems = extractTableOfContents(post.content);
   const articleUrl = `${SITE_URL}/posts/${post.slug}`;
 
@@ -116,15 +113,15 @@ export default async function PostPage({ params }: PageProps) {
     author: {
       "@type": "Person",
       name: "Ugandhar Vaddi",
-      url: SITE_URL,
-      image: `${SITE_URL}/avatar/profile.jpg`,
+      url: "https://www.ugandhar.in",
+      image: "https://www.ugandhar.in/avatar/profile.jpg",
     },
     publisher: {
       "@type": "Person",
       name: "Ugandhar Vaddi",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/icon.png`,
+        url: "https://www.ugandhar.in/icon.png",
       },
     },
     image: post.coverImage || `${SITE_URL}/social/og-image blog.png`,
@@ -134,12 +131,12 @@ export default async function PostPage({ params }: PageProps) {
     },
     keywords: post.tags.join(", "),
     wordCount: post.content.split(/\s+/).length,
-    articleSection: post.tags[0] || "Technology",
+    articleSection: post.tags[0] || "Engineering",
     inLanguage: "en-US",
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-24 sm:pb-20">
+    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 selection:text-foreground pb-24 sm:pb-28">
       <ReadingProgressBar />
       <Header />
 
@@ -149,53 +146,59 @@ export default async function PostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-20 sm:pt-24 pb-14">
-        {/* Floating Back Navigation Button */}
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-14">
+        {/* Back Navigation Button */}
         <div className="mb-6 sm:mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container px-3.5 py-2 text-xs font-mono font-semibold text-foreground transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:-translate-y-0.5 hover:shadow-xs active:scale-95"
+            className="inline-flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Back to All Articles</span>
+            <span>Back to All Essays</span>
           </Link>
         </div>
 
-        {/* Article Header - Clean, unboxed editorial typography directly on canvas */}
-        <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-          {/* Metadata Chips */}
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium border border-outline-variant/30">
-              <Calendar className="h-3.5 w-3.5 text-foreground/70" />
+        {/* Article Header — Unboxed Editorial Typography */}
+        <header className="mb-8 sm:mb-10 space-y-4 sm:space-y-5">
+          {/* Metadata Row */}
+          <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+            <span className="text-foreground font-semibold">
               <time dateTime={post.date} suppressHydrationWarning>
                 {formattedDate}
               </time>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3.5 py-1 font-medium border border-outline-variant/30">
-              <Clock className="h-3.5 w-3.5 text-foreground/70" />
-              <span>{post.readingTime} min read</span>
-            </span>
+            <span className="text-border">·</span>
+            <span>{post.readingTime} min read</span>
+            {post.tags && post.tags.length > 0 && (
+              <>
+                <span className="text-border">·</span>
+                <span className="text-on-surface-variant/80">{post.tags[0]}</span>
+              </>
+            )}
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2]">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] break-words">
             {post.title}
           </h1>
 
-          {/* Subtitle / Excerpt */}
+          {/* Excerpt */}
           {post.excerpt && (
-            <p className="text-base sm:text-lg leading-relaxed text-on-surface-variant font-normal">
+            <p className="text-base sm:text-lg leading-relaxed text-on-surface-variant font-sans">
               {post.excerpt}
             </p>
           )}
 
           {/* Tag Chips */}
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-1">
+            <div className="flex flex-wrap gap-1.5 pt-1">
               {post.tags.map((tag) => (
-                <Badge key={tag} variant="tonal" size="sm">
+                <span
+                  key={tag}
+                  className="rounded-[3px] border border-border/80 bg-surface/50 px-2 py-0.5 text-[11px] font-mono text-on-surface-variant"
+                >
                   #{tag}
-                </Badge>
+                </span>
               ))}
             </div>
           )}
@@ -203,7 +206,7 @@ export default async function PostPage({ params }: PageProps) {
 
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="mb-10 overflow-hidden rounded-2xl sm:rounded-3xl border border-outline-variant/40 shadow-[var(--card-shadow)]">
+          <div className="mb-10 overflow-hidden rounded-[4px] border border-border/80 bg-surface-container shadow-subtle">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={post.coverImage}
@@ -222,10 +225,10 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Bottom Actions & Author Info */}
-        <section className="space-y-8 border-t border-outline-variant/30 pt-8">
+        <section className="space-y-8 border-t border-border/80 pt-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs">
             <span className="text-on-surface-variant">
-              Published on{" "}
+              Archived on{" "}
               <strong className="text-foreground font-semibold">
                 {formattedDate}
               </strong>
@@ -234,26 +237,26 @@ export default async function PostPage({ params }: PageProps) {
           </div>
 
           {/* Author Card */}
-          <SpotlightCard className="flex items-start gap-5 p-6">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-outline-variant/50 bg-surface-container text-foreground font-mono text-lg font-bold">
+          <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex items-start gap-4 sm:gap-5">
+            <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-[3px] border border-border/80 bg-surface text-foreground font-mono text-base sm:text-lg font-bold">
               {siteConfig.author.initials}
             </div>
             <div className="space-y-1">
-              <h3 className="text-base font-bold text-foreground">
+              <h3 className="text-base font-bold text-foreground font-sans">
                 {siteConfig.name}
               </h3>
-              <p className="text-xs text-foreground/80 font-mono font-medium">
+              <p className="text-xs text-foreground/80 font-mono">
                 {siteConfig.tagline}
               </p>
               <p className="text-xs leading-relaxed text-on-surface-variant pt-1 font-sans">
                 {siteConfig.bio}
               </p>
             </div>
-          </SpotlightCard>
+          </div>
 
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
-            <div className="space-y-4 pt-4">
+            <div className="space-y-3 pt-2">
               <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
                 Continue Reading
               </h3>
@@ -262,21 +265,21 @@ export default async function PostPage({ params }: PageProps) {
                   <Link
                     key={r.slug}
                     href={`/posts/${r.slug}`}
-                    className="group flex flex-col justify-between rounded-2xl border border-outline-variant/40 bg-surface-container/60 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-[var(--card-hover-shadow)] shadow-[var(--card-shadow)]"
+                    className="group flex flex-col justify-between rounded-[4px] border border-border/80 bg-surface/40 p-4 sm:p-5 transition-colors hover:border-foreground/30 hover:bg-surface/70"
                   >
-                    <div>
+                    <div className="space-y-1.5">
                       <span
-                        className="text-[11px] font-mono font-medium text-on-surface-variant"
+                        className="text-[11px] font-mono text-on-surface-variant"
                         suppressHydrationWarning
                       >
-                        {formatDisplayDate(r.date, "short")} • {r.readingTime} min read
+                        {formatDisplayDate(r.date, "short")} · {r.readingTime} min read
                       </span>
-                      <h4 className="mt-1 font-serif text-base font-bold text-on-surface group-hover:text-foreground transition-colors line-clamp-2">
+                      <h4 className="font-serif text-base font-bold text-foreground group-hover:underline transition-colors line-clamp-2 leading-snug">
                         {r.title}
                       </h4>
                     </div>
-                    <div className="mt-4 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
-                      <span>Read article</span>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
+                      <span>Read essay</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
                   </Link>
@@ -289,7 +292,7 @@ export default async function PostPage({ params }: PageProps) {
 
       <Footer />
 
-      {/* Floating Magnetic Dock Navigation */}
+      {/* Floating Quick Navigation Dock */}
       <MagneticDock />
     </div>
   );

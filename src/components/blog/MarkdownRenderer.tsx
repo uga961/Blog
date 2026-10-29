@@ -29,7 +29,6 @@ function extractPlainText(node: React.ReactNode): string {
   return "";
 }
 
-
 /**
  * ReactMarkdown normally wraps standalone Markdown images in <p>.
  * Our custom image renderer returns <figure>, which cannot be nested in <p>.
@@ -92,31 +91,31 @@ function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="not-prose relative my-7 overflow-hidden rounded-2xl border border-outline-variant/40 bg-surface-container font-mono text-sm shadow-paper group">
-      <div className="flex items-center justify-between border-b border-outline-variant/30 bg-surface-container-high px-4 py-2.5 text-xs text-on-surface-variant">
-        <span className="font-semibold tracking-wider uppercase text-[11px] text-on-surface-variant">
+    <div className="not-prose relative my-7 overflow-hidden rounded-[4px] border border-border/80 bg-surface/70 font-mono text-xs sm:text-sm shadow-subtle group">
+      <div className="flex items-center justify-between border-b border-border/60 bg-surface px-4 py-2 text-xs text-on-surface-variant">
+        <span className="font-semibold tracking-wider uppercase text-[11px] text-on-surface-variant font-mono">
           {language || "code"}
         </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container px-3 py-1 transition-all duration-200 hover:bg-white dark:hover:bg-surface-container-highest hover:text-foreground hover:-translate-y-0.5 hover:shadow-xs focus-visible:outline-none"
+          className="flex items-center gap-1.5 rounded-[2px] border border-border/80 bg-surface/80 px-2.5 py-0.5 text-[11px] font-mono text-on-surface-variant transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none cursor-pointer touch-manipulation"
           title="Copy code"
         >
           {copied ? (
             <>
-              <Check className="h-3.5 w-3.5 text-emerald-500" />
-              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Copied!</span>
+              <Check className="h-3 w-3 text-foreground" />
+              <span className="text-foreground font-semibold">Copied</span>
             </>
           ) : (
             <>
-              <Copy className="h-3.5 w-3.5" />
-              <span className="text-[11px]">Copy</span>
+              <Copy className="h-3 w-3 text-on-surface-variant" />
+              <span>Copy</span>
             </>
           )}
         </button>
       </div>
       <div className="overflow-x-auto p-4 leading-relaxed text-foreground">
-        <code ref={codeRef} className={`${className || ""} block text-foreground font-mono text-sm leading-relaxed`}>{children}</code>
+        <code ref={codeRef} className={`${className || ""} block text-foreground font-mono text-xs sm:text-sm leading-relaxed`}>{children}</code>
       </div>
     </div>
   );
@@ -134,7 +133,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
             if (isInline) {
               return (
                 <code
-                  className="rounded-md bg-surface-container-high px-1.5 py-0.5 font-mono text-[0.875em] text-foreground font-medium border border-outline-variant/30"
+                  className="rounded-[3px] bg-surface-subtle px-1.5 py-0.5 font-mono text-[0.875em] text-foreground font-medium border border-border/80"
                   {...props}
                 >
                   {children}
@@ -151,11 +150,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
                 <img
                   src={src}
                   alt={alt || ""}
-                  className="w-full rounded-3xl border border-outline-variant/40 object-cover shadow-paper transition-transform"
+                  className="w-full rounded-[4px] border border-border/80 object-cover shadow-subtle transition-transform"
                   loading="lazy"
                 />
                 {alt && (
-                  <figcaption className="mt-2.5 text-center text-xs text-on-surface-variant italic">
+                  <figcaption className="mt-2 text-center text-xs text-on-surface-variant italic font-sans">
                     {alt}
                   </figcaption>
                 )}
@@ -164,7 +163,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           table({ children }) {
             return (
-              <div className="my-6 w-full overflow-x-auto rounded-2xl border border-outline-variant/40 bg-surface-container/30">
+              <div className="my-6 w-full overflow-x-auto rounded-[4px] border border-border/80 bg-surface/30">
                 <table className="w-full text-left text-sm border-collapse">
                   {children}
                 </table>
@@ -173,21 +172,21 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           th({ children }) {
             return (
-              <th className="border-b border-outline-variant/40 bg-surface-container-high px-4 py-3 font-semibold text-on-surface">
+              <th className="border-b border-border/80 bg-surface/80 px-4 py-2.5 font-semibold text-foreground text-xs font-mono uppercase tracking-wider">
                 {children}
               </th>
             );
           },
           td({ children }) {
             return (
-              <td className="border-b border-outline-variant/30 px-4 py-3 text-on-surface-variant">
+              <td className="border-b border-border/60 px-4 py-2.5 text-on-surface-variant text-sm font-sans">
                 {children}
               </td>
             );
           },
           blockquote({ children }) {
             return (
-              <blockquote className="my-6 border-l-4 border-foreground/60 bg-surface-container/50 px-5 py-4 italic text-on-surface-variant rounded-r-2xl">
+              <blockquote className="my-6 border-l-2 border-foreground/60 bg-surface/40 px-4 py-3 italic text-on-surface-variant rounded-r-[3px]">
                 {children}
               </blockquote>
             );

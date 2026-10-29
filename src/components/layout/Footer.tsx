@@ -1,21 +1,26 @@
 "use client";
 
-import React from "react";
-import { Mail, ArrowUp, Globe, Clock, Sparkles } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa6";
+import React, { useState } from "react";
+import { ArrowUp, ArrowUpRight, Copy, Check, Globe } from "lucide-react";
 import { siteConfig } from "@/lib/config";
-import { SocialIcon } from "@/components/ui/SocialIcons";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [copied, setCopied] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(siteConfig.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (_) {}
+  };
+
   const socials = [
-    { name: "Portfolio", url: siteConfig.author.social.website },
+    { name: "Portfolio", url: "https://www.ugandhar.in" },
     { name: "GitHub", url: siteConfig.author.social.github },
     { name: "LinkedIn", url: siteConfig.author.social.linkedin },
     { name: "YouTube", url: siteConfig.author.social.youtube },
@@ -24,83 +29,128 @@ export function Footer() {
   ];
 
   return (
-    <footer id="contact" className="scroll-mt-28 pt-20 pb-28 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-16">
-      <SpotlightCard className="p-8 sm:p-12 text-center space-y-6 border-outline-variant/40">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/40 text-xs font-mono text-foreground font-semibold">
-          <Mail className="w-3.5 h-3.5 text-foreground/70" />
-          <span>Get in Touch</span>
-        </div>
-
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-foreground max-w-xl mx-auto">
-          Let&apos;s build something solid.
-        </h2>
-
-        <p className="text-sm sm:text-base text-on-surface-variant max-w-lg mx-auto leading-relaxed">
-          Whether you want to discuss technology, research insights, data science, resilient systems, or collaborative opportunities — my inbox is always open.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-semibold text-sm shadow-xs hover:shadow-lg hover:-translate-y-0.5 hover:bg-foreground/90 transition-all duration-200 active:scale-95 active:translate-y-0"
-          >
-            <Mail className="w-4 h-4" />
-            <span>Send an Email</span>
-          </a>
-
-          {siteConfig.author.social.linkedin && (
-            <a
-              href={siteConfig.author.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface-container border border-outline-variant/40 text-foreground text-sm font-mono shadow-xs hover:bg-white dark:hover:bg-surface-container-highest hover:border-foreground/50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 active:scale-95 active:translate-y-0"
-            >
-              <FaLinkedin className="w-4 h-4 text-[#0a66c2]" aria-hidden="true" />
-              <span>Connect on LinkedIn</span>
-            </a>
-          )}
-        </div>
-
-        <div className="pt-8 border-t border-outline-variant/20 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-on-surface-variant">
-          <span className="flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-foreground/70" />
-            {siteConfig.location}
-          </span>
-          <span>•</span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-foreground/70" />
-            Indian Standard Time (UTC+5:30)
+    <footer id="contact" className="pt-20 pb-28 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-16 overflow-hidden">
+      {/* Editorial Contact Block */}
+      <div className="border-t border-border/80 pt-8 sm:pt-10 space-y-8">
+        <div className="border-b border-border/80 pb-4 text-xs font-mono text-on-surface-variant flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3 truncate">
+            <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 005</span>
+            <span className="text-border flex-shrink-0">/</span>
+            <span className="truncate">CORRESPONDENCE &amp; CONTACT</span>
+          </div>
+          <span className="font-mono text-[11px] text-on-surface-variant flex-shrink-0">
+            UTC+5:30 · IST
           </span>
         </div>
-      </SpotlightCard>
 
-      {/* Bottom bar with socials and copyright */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-outline-variant/20 text-xs font-mono text-on-surface-variant">
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4">
-          {socials.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target={link.name === "RSS" ? undefined : "_blank"}
-              rel={link.name === "RSS" ? undefined : "noopener noreferrer"}
-              className="hover:text-foreground transition-colors flex items-center gap-1.5"
-            >
-              <SocialIcon name={link.name} className="w-3.5 h-3.5" />
-              <span>{link.name}</span>
-            </a>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="md:col-span-7 space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground font-sans uppercase break-words">
+              Let&apos;s build something solid.
+            </h2>
+            <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans max-w-lg">
+              Whether you want to discuss VLSI hardware, SRAM stability, enterprise data intelligence pipelines, open-source desktop tooling, or collaborative research &mdash; my inbox is always open.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-[4px] bg-foreground text-background font-medium text-xs font-mono uppercase tracking-wider hover:bg-foreground/90 transition-colors touch-manipulation min-h-[40px]"
+              >
+                <span>Write Email</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+
+              <button
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] border border-border/90 bg-surface/80 text-foreground font-mono text-xs hover:border-foreground transition-colors cursor-pointer touch-manipulation min-h-[40px]"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-foreground" />
+                    <span className="text-foreground font-semibold">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-on-surface-variant" />
+                    <span>Copy Address</span>
+                  </>
+                )}
+              </button>
+
+              <a
+                href="https://www.ugandhar.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] border border-border/90 bg-surface/80 text-foreground font-mono text-xs hover:border-foreground transition-colors touch-manipulation min-h-[40px]"
+              >
+                <Globe className="w-3.5 h-3.5 text-on-surface-variant" />
+                <span>Portfolio</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-on-surface-variant" />
+              </a>
+
+              {siteConfig.author.social.linkedin && (
+                <a
+                  href={siteConfig.author.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] border border-border/90 bg-surface/80 text-foreground font-mono text-xs hover:border-foreground transition-colors touch-manipulation min-h-[40px]"
+                >
+                  <span>LinkedIn</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-on-surface-variant" />
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div className="md:col-span-5 space-y-3 text-xs font-mono text-on-surface-variant border-l-0 md:border-l md:border-border/60 md:pl-8">
+            <div className="space-y-1">
+              <span className="text-[10px] uppercase tracking-wider text-foreground/70 font-semibold block">
+                Primary Coordinates
+              </span>
+              <div className="text-foreground break-words">{siteConfig.email}</div>
+              <div className="break-words">{siteConfig.location}</div>
+            </div>
+
+            <div className="pt-2 space-y-1">
+              <span className="text-[10px] uppercase tracking-wider text-foreground/70 font-semibold block">
+                Availability
+              </span>
+              <div className="break-words">Associate Data Scientist at Tredence (Nov 2026)</div>
+              <div className="break-words">Open for technical discourse &amp; research dialogues</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quiet Bottom Bar */}
+      <div className="pt-6 border-t border-border/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-on-surface-variant">
+        <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1">
+          {socials.map((link, idx) => (
+            <React.Fragment key={link.name}>
+              <a
+                href={link.url}
+                target={link.url.startsWith("http") ? "_blank" : undefined}
+                rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="hover:text-foreground hover:underline transition-colors touch-manipulation"
+              >
+                {link.name}
+              </a>
+              {idx < socials.length - 1 && (
+                <span className="text-border select-none">/</span>
+              )}
+            </React.Fragment>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <span suppressHydrationWarning>
-            &copy; {currentYear} Ugandhar Vaddi. Build, Ship and Sleep.
-          </span>
+          <span>&copy; {new Date().getFullYear()} Ugandhar Vaddi.</span>
           <button
             onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface hover:text-foreground transition-colors border border-outline-variant/30"
+            aria-label="Back to top"
+            className="p-1.5 rounded-[2px] border border-border/80 hover:border-foreground text-on-surface-variant hover:text-foreground transition-colors cursor-pointer touch-manipulation"
           >
-            <ArrowUp className="w-4 h-4" />
+            <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>

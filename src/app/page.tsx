@@ -8,47 +8,47 @@ import { ArticleList } from "@/components/blog/ArticleList";
 import { ActivityShowcase } from "@/components/blog/ActivityShowcase";
 import { HeroBanner } from "@/components/blog/HeroBanner";
 import { getAllPosts, getFeaturedPost } from "@/lib/posts";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { MagneticDock } from "@/components/ui/MagneticDock";
-import {
-  Calendar,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export default function HomePage() {
   const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
   const featured = getFeaturedPost();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 pb-24 sm:pb-20">
+    <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 selection:text-foreground pb-24 sm:pb-28">
       <Header />
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-14 space-y-12 sm:space-y-16">
-        {/* Author Intro Hero Banner (Client Component for Confetti & Copy Interaction) */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
+        {/* Author Intro Hero Banner */}
         <HeroBanner totalPosts={posts.length} />
 
         {/* Featured Story / Latest Release Preview */}
         {featured && (
-          <section id="featured" className="scroll-mt-28 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Latest Story Preview</span>
+          <section id="featured" className="scroll-mt-28 space-y-6">
+            <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
+              <div className="flex items-center gap-2 sm:gap-3 truncate">
+                <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 002</span>
+                <span className="text-border flex-shrink-0">/</span>
+                <span className="truncate">LATEST ESSAY RELEASE</span>
+              </div>
+              <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
+                <span>FEATURED DISPATCH</span>
+              </div>
             </div>
 
-            <SpotlightCard className="p-6 sm:p-8">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-7 transition-colors hover:border-foreground/30 group">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
                 {featured.coverImage && (
-                  <div className="md:col-span-5 overflow-hidden rounded-2xl border border-outline-variant/30 shadow-xs">
+                  <div className="md:col-span-5 overflow-hidden rounded-[3px] border border-border/80 bg-surface-container aspect-[16/10] relative">
                     <Image
                       src={featured.coverImage}
                       alt={featured.title}
-                      width={640}
-                      height={400}
-                      sizes="(max-width: 640px) calc(100vw - 80px), (max-width: 1024px) 380px, 320px"
-                      quality={60}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 380px, 340px"
                       priority
-                      className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
                     />
                   </div>
                 )}
@@ -56,55 +56,61 @@ export default function HomePage() {
                 <div
                   className={`${featured.coverImage ? "md:col-span-7" : "md:col-span-12"} space-y-3.5`}
                 >
-                  {/* Chips row */}
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 font-medium border border-outline-variant/30">
-                      <Calendar className="h-3 w-3 text-foreground/70" />
+                  {/* Metadata Row */}
+                  <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+                    <span className="text-foreground font-semibold">
                       <time dateTime={featured.date} suppressHydrationWarning>
                         {formatDisplayDate(featured.date, "long")}
                       </time>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 font-medium border border-outline-variant/30">
-                      <Clock className="h-3 w-3 text-foreground/70" />
-                      <span>{featured.readingTime} min read</span>
-                    </span>
+                    <span className="text-border">·</span>
+                    <span>{featured.readingTime} min read</span>
+                    {featured.tags && featured.tags.length > 0 && (
+                      <>
+                        <span className="text-border">·</span>
+                        <span className="text-on-surface-variant/80">{featured.tags[0]}</span>
+                      </>
+                    )}
                   </div>
 
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-on-surface group-hover:text-foreground transition-colors">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-foreground group-hover:underline transition-colors leading-snug">
                     <Link href={`/posts/${featured.slug}`} prefetch={false}>
-                      <span className="absolute inset-0" aria-hidden="true" />
                       {featured.title}
                     </Link>
                   </h2>
 
-                  <p className="line-clamp-3 text-sm leading-relaxed text-on-surface-variant font-normal">
+                  <p className="line-clamp-3 text-sm leading-relaxed text-on-surface-variant font-sans">
                     {featured.excerpt}
                   </p>
 
-                  <div className="pt-2 flex items-center gap-2 text-xs font-mono font-semibold text-foreground">
-                    <span>Read full article</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <div className="pt-2">
+                    <Link
+                      href={`/posts/${featured.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-foreground uppercase tracking-wider hover:underline touch-manipulation"
+                    >
+                      <span>Read Full Essay</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </div>
                 </div>
               </div>
-            </SpotlightCard>
+            </div>
           </section>
         )}
 
-        {/* Live Spotify Vinyl & GitHub Showcase */}
+        {/* Live Spotify Turntable & GitHub Showcase */}
         <ActivityShowcase />
 
         {/* All Articles Section */}
-        <section id="articles" className="scroll-mt-28 space-y-6 pt-2">
-          <div className="flex items-center justify-between border-b border-outline-variant/20 pb-4">
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-on-surface">
-                All Articles
-              </h2>
+        <section id="articles" className="scroll-mt-28 space-y-6 pt-4">
+          <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
+            <div className="flex items-center gap-2 sm:gap-3 truncate">
+              <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 004</span>
+              <span className="text-border flex-shrink-0">/</span>
+              <span className="truncate">ALL ESSAYS &amp; TECHNICAL NOTES</span>
             </div>
-            <span className="rounded-full bg-surface-container px-3 py-1 text-xs font-mono font-semibold text-on-surface-variant border border-outline-variant/30">
-              {posts.length} {posts.length === 1 ? "article" : "articles"}
+            <span className="font-mono text-[11px] text-foreground font-semibold flex-shrink-0">
+              {posts.length} {posts.length === 1 ? "DOCUMENT" : "DOCUMENTS"}
             </span>
           </div>
 
@@ -114,7 +120,7 @@ export default function HomePage() {
 
       <Footer />
 
-      {/* Floating Magnetic Dock Navigation */}
+      {/* Floating Quick Navigation Dock */}
       <MagneticDock />
     </div>
   );

@@ -15,25 +15,25 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const sizeStyles = {
-    sm: "px-3 py-1 text-xs",
-    md: "px-3.5 py-1.5 text-xs font-medium",
+    sm: "px-2.5 py-0.5 text-[11px]",
+    md: "px-3 py-1 text-xs",
   };
 
   const variantStyles = {
     default: active
-      ? "bg-foreground text-background font-semibold shadow-xs"
-      : "bg-surface-container-highest text-on-surface-variant border border-outline-variant/40 hover:bg-white dark:hover:bg-surface-container-high hover:text-on-surface",
+      ? "bg-foreground text-background font-semibold"
+      : "bg-surface-subtle text-on-surface-variant border border-border/80 hover:border-foreground/40 hover:text-foreground",
     primary:
-      "bg-foreground text-background font-medium shadow-xs",
+      "bg-foreground text-background font-medium",
     tonal:
-      "bg-surface-container-high text-on-surface border border-outline-variant/40 font-medium",
+      "bg-surface-container text-foreground border border-border/80 font-medium",
     outline:
-      "border border-outline-variant/60 text-on-surface-variant bg-transparent",
+      "border border-border/80 text-on-surface-variant bg-transparent hover:border-foreground/40 hover:text-foreground",
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full transition-all duration-150 select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-[3px] font-mono transition-colors select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {children}
