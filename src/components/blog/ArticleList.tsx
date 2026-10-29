@@ -15,33 +15,21 @@ export function ArticleList({
   postsPerPage = 6,
 }: ArticleListProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Extract unique tags across all posts
-  const allTags = useMemo(() => {
-    const tagsSet = new Set<string>();
-    posts.forEach((post) => {
-      post.tags.forEach((t) => tagsSet.add(t));
-    });
-    return Array.from(tagsSet).sort();
-  }, [posts]);
-
-  // Filter posts based on search query and selected tag
+  // Filter posts based on search query
   const filteredPosts = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return posts;
+
     return posts.filter((post) => {
-      const q = searchQuery.toLowerCase().trim();
-      const matchesSearch =
-        q === "" ||
+      return (
         post.title.toLowerCase().includes(q) ||
         (post.excerpt && post.excerpt.toLowerCase().includes(q)) ||
-        post.tags.some((t) => t.toLowerCase().includes(q));
-
-      const matchesTag = !selectedTag || post.tags.includes(selectedTag);
-
-      return matchesSearch && matchesTag;
+        post.tags.some((t) => t.toLowerCase().includes(q))
+      );
     });
-  }, [posts, searchQuery, selectedTag]);
+  }, [posts, searchQuery]);
 
   // Pagination calculation
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage) || 1;
@@ -52,67 +40,30 @@ export function ArticleList({
 
   return (
     <div className="w-full space-y-6">
-      {/* Search Bar & Tag Filters */}
-      <div className="space-y-3.5">
-        <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-on-surface-variant/70" />
-          <input
-            type="text"
-            placeholder="Search articles by title, topic, or keyword…"
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
+      {/* Search Bar */}
+      <div className="relative">
+        <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-on-surface-variant/70" />
+        <input
+          type="text"
+          placeholder="Search articles by title, topic, or keyword…"
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="h-10 w-full rounded-[4px] border border-border/80 bg-surface/80 pl-9 pr-9 text-xs font-mono text-foreground placeholder:text-on-surface-variant/60 focus:border-foreground focus:outline-none transition-colors"
+        />
+        {searchQuery && (
+          <button
+            onClick={() => {
+              setSearchQuery("");
               setCurrentPage(1);
             }}
-            className="h-10 w-full rounded-[4px] border border-border/80 bg-surface/80 pl-9 pr-9 text-xs font-mono text-foreground placeholder:text-on-surface-variant/60 focus:border-foreground focus:outline-none transition-colors"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => {
-                setSearchQuery("");
-                setCurrentPage(1);
-              }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-foreground cursor-pointer"
-              aria-label="Clear search"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          )}
-        </div>
-
-        {/* Filter Tags Row */}
-        {allTags.length > 0 && (
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs font-mono">
-            <button
-              onClick={() => {
-                setSelectedTag(null);
-                setCurrentPage(1);
-              }}
-              className={`px-2.5 py-1 rounded-[3px] transition-colors cursor-pointer touch-manipulation whitespace-nowrap text-[11px] ${
-                selectedTag === null
-                  ? "bg-foreground text-background font-semibold"
-                  : "border border-border/80 bg-surface/50 text-on-surface-variant hover:border-foreground/40 hover:text-foreground"
-              }`}
-            >
-              All Topics ({posts.length})
-            </button>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => {
-                  setSelectedTag(selectedTag === tag ? null : tag);
-                  setCurrentPage(1);
-                }}
-                className={`px-2.5 py-1 rounded-[3px] transition-colors cursor-pointer touch-manipulation whitespace-nowrap text-[11px] ${
-                  selectedTag === tag
-                    ? "bg-foreground text-background font-semibold"
-                    : "border border-border/80 bg-surface/50 text-on-surface-variant hover:border-foreground/40 hover:text-foreground"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-foreground cursor-pointer"
+            aria-label="Clear search"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
         )}
       </div>
 
@@ -130,18 +81,17 @@ export function ArticleList({
             No matching entries found
           </h3>
           <p className="text-xs text-on-surface-variant font-sans max-w-sm">
-            No articles match the current query or filter criteria.
+            No articles match the current search query.
           </p>
-          {(searchQuery || selectedTag) && (
+          {searchQuery && (
             <button
               onClick={() => {
                 setSearchQuery("");
-                setSelectedTag(null);
                 setCurrentPage(1);
               }}
               className="mt-2 text-xs font-mono underline text-foreground hover:opacity-80 cursor-pointer"
             >
-              Reset filters
+              Clear search
             </button>
           )}
         </div>
