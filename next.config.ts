@@ -43,8 +43,58 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap",
+        destination: "/sitemap.xml",
+      },
+      {
+        source: "/rss",
+        destination: "/feed.xml",
+      },
+      {
+        source: "/feed",
+        destination: "/feed.xml",
+      },
+      {
+        source: "/rss.xml",
+        destination: "/feed.xml",
+      },
+    ];
+  },
   async headers() {
     return [
+      {
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/xml; charset=utf-8",
+          },
+          {
+            key: "X-Robots-Tag",
+            value: "all",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/robots.txt",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/plain; charset=utf-8",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
       {
         source:
           "/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|Logo.png|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest|llms.txt|ai-catalog.json).*)",

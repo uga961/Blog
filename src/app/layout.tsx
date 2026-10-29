@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://blog.ugandhar.in"),
   title: {
     default: "Ugandhar Vaddi — Personal Blog",
-    template: "%s — Ugandhar Vaddi",
+    template: "%s by Ugandhar Vaddi",
   },
   description:
     "Writing on my personal blog about technology, data science, and software engineering.",
@@ -62,6 +62,9 @@ export const metadata: Metadata = {
   publisher: "Ugandhar Vaddi",
   alternates: {
     canonical: "https://blog.ugandhar.in",
+    types: {
+      "application/rss+xml": "https://blog.ugandhar.in/feed.xml",
+    },
   },
   verification: {
     google:
@@ -88,10 +91,10 @@ export const metadata: Metadata = {
     siteName: "Ugandhar's Blog",
     title: "Ugandhar Vaddi — Personal Blog",
     description:
-      "Writing about technology, data science, and software engineering.",
+      "Writing on my personal blog about technology, data science, and software engineering.",
     images: [
       {
-        url: "/social/og-image blog.png",
+        url: "https://blog.ugandhar.in/social/og-image.png",
         width: 1200,
         height: 630,
         alt: "Ugandhar Vaddi — Personal Blog",
@@ -101,8 +104,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ugandhar Vaddi — Personal Blog",
-    description: "Writing about technology, data science, and software engineering.",
-    images: ["/social/og-image blog.png"],
+    description: "Writing on my personal blog about technology, data science, and software engineering.",
+    images: ["https://blog.ugandhar.in/social/og-image.png"],
     creator: "@uga961",
     site: "@uga961",
   },
@@ -127,11 +130,17 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://blog.ugandhar.in/#website",
       url: "https://blog.ugandhar.in",
-      name: "Ugandhar's Journal",
+      name: "Ugandhar's Blog",
+      alternateName: ["Ugandhar Vaddi Blog", "Ugandhar Vaddi"],
       description:
-        "Long-form essays on systems engineering, silicon architectures, applied machine learning, and data pipelines.",
+        "Writing on my personal blog about technology, data science, and software engineering.",
       publisher: { "@id": "https://www.ugandhar.in/#person" },
       inLanguage: "en-US",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://blog.ugandhar.in/?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
     },
     {
       "@type": "Person",
@@ -154,7 +163,7 @@ const jsonLd = {
         url: "https://www.tredence.com",
       },
       description:
-        "Associate Data Scientist at Tredence. Building enterprise data intelligence, automated pipelines, and applied machine learning models while exploring low-level silicon architectures.",
+        "Associate Data Scientist at Tredence. Writing about technology, data science, and software engineering.",
     },
   ],
 };

@@ -39,41 +39,75 @@ export async function generateMetadata({
   }
 
   const postUrl = `${SITE_URL}/posts/${post.slug}`;
+  const authorName = "Ugandhar Vaddi";
+  const seoTitle = `${post.title} by ${authorName}`;
   const description =
-    post.excerpt || `${post.title} — Written by ${siteConfig.name}`;
+    post.excerpt || `${post.title} — Written by ${authorName}`;
 
-  const ogImages = post.coverImage
-    ? [{ url: post.coverImage, alt: post.title, width: 1200, height: 630 }]
-    : [
-        {
-          url: `${SITE_URL}/social/og-image blog.png`,
-          alt: post.title,
-          width: 1200,
-          height: 630,
-        },
-      ];
+  const cleanOgImage =
+    post.coverImage && post.coverImage.trim() !== ""
+      ? post.coverImage
+      : `${SITE_URL}/social/og-image.png`;
+
+  const ogImages = [
+    {
+      url: cleanOgImage,
+      alt: seoTitle,
+      width: 1200,
+      height: 630,
+    },
+  ];
 
   return {
-    title: post.title,
+    title: {
+      absolute: seoTitle,
+    },
     description,
+    authors: [{ name: siteConfig.name, url: "https://www.ugandhar.in" }],
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
     alternates: {
       canonical: postUrl,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
-      title: post.title,
+      title: seoTitle,
       description,
       url: postUrl,
       type: "article",
-      publishedTime: post.date || undefined,
+      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
+      modifiedTime: post.date ? new Date(post.date).toISOString() : undefined,
       authors: [siteConfig.name],
+      tags: post.tags,
       images: ogImages,
-      siteName: "Ugandhar's Journal",
+      siteName: `${siteConfig.name}'s Blog`,
+      locale: "en_US",
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
+      title: seoTitle,
       description,
-      images: ogImages.map((img) => img.url),
+      images: [cleanOgImage],
+      creator: "@uga961",
+      site: "@uga961",
+    },
+    other: {
+      "dc.creator": siteConfig.name,
+      "dc.title": seoTitle,
+      "dc.description": description,
+      "article:published_time": post.date ? new Date(post.date).toISOString() : "",
+      "article:author": siteConfig.name,
+      "article:tag": post.tags.join(", "),
     },
   };
 }
@@ -101,38 +135,93 @@ export default async function PostPage({ params }: PageProps) {
     })
     .slice(0, 2);
 
-  // JSON-LD Article structured data
+  const cleanOgImage =
+    post.coverImage && post.coverImage.trim() !== ""
+      ? post.coverImage
+      : `${SITE_URL}/social/og-image.png`;
+
+  const isoDate = post.date ? new Date(post.date).toISOString() : new Date().toISOString();
+  const authorName = "Ugandhar Vaddi";
+  const seoTitle = `${post.title} by ${authorName}`;
+
+  // Rich JSON-LD structured data for Google Search (BlogPosting + BreadcrumbList)
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt || post.title,
-    url: articleUrl,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      "@type": "Person",
-      name: "Ugandhar Vaddi",
-      url: "https://www.ugandhar.in",
-      image: "https://www.ugandhar.in/avatar/profile.jpg",
-    },
-    publisher: {
-      "@type": "Person",
-      name: "Ugandhar Vaddi",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.ugandhar.in/icon.png",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${articleUrl}#article`,
+        isPartOf: {
+          "@type": "Blog",
+          "@id": `${SITE_URL}/#blog`,
+          name: "Ugandhar Vaddi — Personal Blog",
+          url: SITE_URL,
+        },
+        headline: seoTitle,
+        name: seoTitle,
+        description: post.excerpt || post.title,
+        url: articleUrl,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": articleUrl,
+        },
+        datePublished: isoDate,
+        dateModified: isoDate,
+        author: {
+          "@type": "Person",
+          "@id": "https://www.ugandhar.in/#person",
+          name: siteConfig.name,
+          url: "https://www.ugandhar.in",
+          image: "https://www.ugandhar.in/avatar/profile.jpg",
+          sameAs: [
+            "https://github.com/uga961",
+            "https://www.linkedin.com/in/vaddi-ugandhar-b37877266/",
+            "https://www.youtube.com/@uga961",
+            "https://blog.ugandhar.in",
+            "https://www.reddit.com/user/uga961/",
+          ],
+        },
+        publisher: {
+          "@type": "Person",
+          "@id": "https://www.ugandhar.in/#person",
+          name: siteConfig.name,
+          url: "https://www.ugandhar.in",
+          logo: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}/icon.png`,
+          },
+        },
+        image: [cleanOgImage],
+        keywords: post.tags.join(", "),
+        wordCount: post.content.split(/\s+/).length,
+        articleSection: post.tags[0] || "Engineering",
+        inLanguage: "en-US",
       },
-    },
-    image: post.coverImage || `${SITE_URL}/social/og-image blog.png`,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": articleUrl,
-    },
-    keywords: post.tags.join(", "),
-    wordCount: post.content.split(/\s+/).length,
-    articleSection: post.tags[0] || "Engineering",
-    inLanguage: "en-US",
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${articleUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Articles",
+            item: `${SITE_URL}/#articles`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: articleUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (

@@ -15,9 +15,37 @@ export default function HomePage() {
   const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
   const featured = getFeaturedPost();
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://blog.ugandhar.in/#blog",
+    name: "Ugandhar Vaddi — Personal Blog",
+    url: "https://blog.ugandhar.in",
+    description: "Writing about technology, data science, and software engineering.",
+    publisher: {
+      "@type": "Person",
+      name: "Ugandhar Vaddi",
+      url: "https://www.ugandhar.in",
+    },
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      "@id": `https://blog.ugandhar.in/posts/${post.slug}#article`,
+      headline: `${post.title} by Ugandhar Vaddi`,
+      name: `${post.title} by Ugandhar Vaddi`,
+      url: `https://blog.ugandhar.in/posts/${post.slug}`,
+      datePublished: post.date ? new Date(post.date).toISOString() : undefined,
+      description: post.excerpt,
+    })),
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-on-surface relative selection:bg-foreground/15 selection:text-foreground pb-24 sm:pb-28">
       <Header />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
         {/* Author Intro Hero Banner */}

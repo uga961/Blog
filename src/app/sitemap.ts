@@ -8,20 +8,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const postDate = new Date(post.date);
+    const validDate = !isNaN(postDate.getTime()) ? postDate : new Date();
+    const cleanCover =
+      post.coverImage && post.coverImage.trim() !== ""
+        ? [post.coverImage]
+        : [`${SITE_URL}/social/og-image.png`];
+
     return {
       url: `${SITE_URL}/posts/${post.slug}`,
-      lastModified: !isNaN(postDate.getTime()) ? postDate : new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
+      lastModified: validDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+      images: cleanCover,
     };
   });
+
+  const latestPostDate =
+    posts.length > 0 && !isNaN(new Date(posts[0].date).getTime())
+      ? new Date(posts[0].date)
+      : new Date();
 
   return [
     {
       url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      lastModified: latestPostDate,
+      changeFrequency: "daily" as const,
+      priority: 1.0,
+      images: [`${SITE_URL}/social/og-image.png`],
     },
     ...postEntries,
   ];
