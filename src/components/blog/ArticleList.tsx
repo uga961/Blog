@@ -58,7 +58,7 @@ export function ArticleList({
           <Search className="absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-on-surface-variant/70" />
           <input
             type="text"
-            placeholder="Search essays by title, topic, or keyword…"
+            placeholder="Search articles by title, topic, or keyword…"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -130,7 +130,7 @@ export function ArticleList({
             No matching entries found
           </h3>
           <p className="text-xs text-on-surface-variant font-sans max-w-sm">
-            No technical essays match the current query or filter criteria.
+            No articles match the current query or filter criteria.
           </p>
           {(searchQuery || selectedTag) && (
             <button

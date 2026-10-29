@@ -65,11 +65,11 @@ export function ActivityShowcase() {
         <div className="flex items-center gap-2 sm:gap-3 truncate">
           <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 003</span>
           <span className="text-border flex-shrink-0">/</span>
-          <span className="truncate">LIVE TELEMETRY &amp; WORKSPACE</span>
+          <span className="truncate">CURRENTLY CRAFTING &amp; GROOVING</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
-          <span>REALTIME SIGNALS</span>
+          <span className="inline-block w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
+          <span>LIVE TELEMETRY</span>
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export function ActivityShowcase() {
             <div className="flex items-center justify-between text-xs font-mono text-on-surface-variant">
               <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-foreground">
                 <Code2 className="h-3.5 w-3.5 text-on-surface-variant" />
-                <span>Open Source Tooling</span>
+                <span>Currently Building</span>
               </span>
               <a
                 href={siteConfig.author.social.github}
@@ -106,12 +106,12 @@ export function ActivityShowcase() {
                 </a>
               </h3>
               <p className="mt-1.5 text-xs sm:text-sm text-on-surface-variant leading-relaxed font-sans">
-                A lightweight Windows desktop companion for mindful work intervals, hydration reminders, and postural recovery.
+                A lightweight Windows desktop companion for mindful breaks, hydration reminders, and physical posture while working.
               </p>
             </div>
 
             <div className="pt-1 text-xs font-mono text-on-surface-variant break-words">
-              <span>C# · .NET 8 · WPF · Windows API</span>
+              <span>C# · .NET · WPF · Open Source</span>
             </div>
           </div>
 
@@ -136,7 +136,7 @@ export function ActivityShowcase() {
           <div className="space-y-3.5">
             <div className="flex items-center justify-between text-xs font-mono text-on-surface-variant">
               <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-foreground">
-                <Music className="h-3.5 w-3.5 text-on-surface-variant" />
+                <Music className="h-3.5 w-3.5 text-[#1DB954]" />
                 <span>Audio Stream</span>
               </span>
               <button
@@ -153,19 +153,22 @@ export function ActivityShowcase() {
               </button>
             </div>
 
-            {/* Vinyl Record Display */}
+            {/* Vinyl Record Display with Spotify Green Styling */}
             <div className="flex items-center gap-4">
-              <div className="relative flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-full bg-neutral-900 border border-border/80 shadow-subtle">
+              <div className="relative flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-full bg-neutral-950 border border-neutral-800 shadow-md ring-1 ring-neutral-800">
                 <div
                   className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${
                     isPlaying ? "animate-spin" : ""
                   }`}
-                  style={{ animationDuration: "7s" }}
+                  style={{ animationDuration: "6s" }}
                 >
-                  <div className="h-12 w-12 rounded-full border border-neutral-700/60 flex items-center justify-center">
-                    <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-neutral-800 text-neutral-300">
-                      <Disc3 className="h-3.5 w-3.5" />
-                      <span className="absolute h-1 w-1 rounded-full bg-neutral-950" />
+                  <div className="h-13 w-13 sm:h-14 sm:w-14 rounded-full border border-neutral-800/80 flex items-center justify-center">
+                    <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-neutral-700/60 flex items-center justify-center">
+                      {/* Center Spotify Green Label */}
+                      <div className="relative flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-[#1DB954] text-neutral-950 shadow-inner ring-1 ring-[#1DB954]/60">
+                        <Disc3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-neutral-950" />
+                        <span className="absolute h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-neutral-950" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -174,9 +177,9 @@ export function ActivityShowcase() {
               {/* Music Details */}
               <div className="space-y-1 min-w-0">
                 <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/60" />
-                  <span>
-                    {spotify.isPlaying ? "Streaming on Spotify" : "Daily Rotation"}
+                  <span className="inline-block w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
+                  <span className="text-[#1DB954] font-medium">
+                    {spotify.isPlaying ? "Listening Now on Spotify" : "Spotify On Rotation"}
                   </span>
                 </div>
                 <h4 className="font-serif text-base font-bold text-foreground truncate">
@@ -184,7 +187,7 @@ export function ActivityShowcase() {
                     href={spotify.songUrl || spotify.profileUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:underline"
+                    className="hover:underline hover:text-[#1DB954] transition-colors"
                   >
                     {spotify.title || "Hot Hits Telugu & Rhythm"}
                   </a>
@@ -217,7 +220,7 @@ export function ActivityShowcase() {
               href="https://open.spotify.com/user/31ajvsvptg6aygrakjcsm7xnm5am"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-foreground hover:underline inline-flex items-center gap-1 touch-manipulation"
+              className="font-semibold text-foreground hover:underline hover:text-[#1DB954] inline-flex items-center gap-1 touch-manipulation transition-colors"
             >
               <span>View Profile</span>
               <ExternalLink className="h-3 w-3 opacity-60" />

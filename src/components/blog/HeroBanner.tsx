@@ -30,48 +30,45 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
       id="hero"
       className="pt-24 sm:pt-36 pb-16 sm:pb-20 max-w-5xl mx-auto overflow-hidden"
     >
-      {/* Top Editorial Index & Category Bar */}
+      {/* Top Editorial Index Bar */}
       <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
         <div className="flex items-center gap-2 sm:gap-3 truncate">
           <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 001</span>
           <span className="text-border flex-shrink-0">/</span>
-          <span className="truncate">TECHNICAL JOURNAL &amp; ESSAYS</span>
+          <span className="truncate">PERSONAL BLOG &amp; NOTES</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
-          <span>{totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} ARCHIVED · IST (UTC+5:30)</span>
+          <span>B.E. ECE · {totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} PUBLISHED</span>
         </div>
       </div>
 
-      {/* Main Grid: Editorial Typography & Architectural Photographic Frame */}
+      {/* Main Grid: Typography & Author Portrait */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 pt-8 sm:pt-12 items-start">
-        {/* Left Column: Title, Headline, Narrative, Actions */}
-        <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+        {/* Left Column: Title, Tagline, Bio, Actions */}
+        <div className="lg:col-span-7 space-y-6 sm:space-y-7">
           <div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground font-sans uppercase break-words">
               {siteConfig.name}
             </h1>
-            <p className="mt-2.5 sm:mt-3 text-lg sm:text-2xl font-serif italic text-foreground/80 leading-snug">
-              Silicon, Systems &amp; Applied Machine Learning.
+            <p className="mt-2.5 sm:mt-3 text-base sm:text-xl font-serif italic text-foreground/80 leading-snug">
+              {siteConfig.tagline}
             </p>
           </div>
 
           <div className="space-y-3 text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans max-w-xl">
             <p>
-              Associate Data Scientist at <span className="text-foreground font-medium">Tredence</span> (Analytics &amp; Applied AI) and graduate in Electronics &amp; Communication from Sathyabama Institute of Science and Technology.
-            </p>
-            <p>
-              This journal documents first-principles observations, post-mortems, and technical notes spanning transistor-level SRAM stability in Cadence Virtuoso, enterprise data pipelines, and native software tooling.
+              {siteConfig.bio}
             </p>
           </div>
 
-          {/* Direct, Purposeful Actions */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
+          {/* Direct Actions */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
             <a
               href="#articles"
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-[4px] bg-foreground text-background font-medium text-xs font-mono uppercase tracking-wider hover:bg-foreground/90 transition-colors touch-manipulation min-h-[40px]"
             >
-              <span>Read Essays</span>
+              <span>Read Articles</span>
               <ArrowDown className="w-3.5 h-3.5" />
             </a>
 
@@ -99,7 +96,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5 text-on-surface-variant" />
-                  <span>{siteConfig.email}</span>
+                  <span>Copy Email</span>
                 </>
               )}
             </button>
@@ -126,7 +123,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
           </div>
         </div>
 
-        {/* Right Column: Architectural Photograph Frame */}
+        {/* Right Column: Author Portrait */}
         <div className="lg:col-span-5 flex flex-col items-center lg:items-end w-full">
           <div className="w-full max-w-[280px] sm:max-w-sm border border-border bg-surface p-2.5 sm:p-3 rounded-[4px] shadow-subtle">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-container rounded-[2px]">
@@ -140,8 +137,8 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
               />
             </div>
             <div className="mt-2.5 sm:mt-3 pt-2 border-t border-border/60 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-on-surface-variant">
-              <span>FIG. 01 — AUTHOR &amp; RESEARCHER</span>
-              <span className="text-foreground/90 font-medium">CHENNAI · VISAKHAPATNAM</span>
+              <span>FIG. 01 — AUTHOR</span>
+              <span className="text-foreground/90 font-medium">UGANDHAR VADDI</span>
             </div>
           </div>
         </div>

@@ -37,11 +37,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.ugandhar.in"),
   title: {
-    default: "Ugandhar Vaddi — Personal Engineering Journal",
+    default: "Ugandhar Vaddi — Personal Blog",
     template: "%s — Ugandhar Vaddi",
   },
   description:
-    "Technical journal & long-form essays by Ugandhar Vaddi on systems engineering, silicon architectures, applied machine learning, and data pipelines.",
+    "Writing on my personal blog about technology, data science, and software engineering.",
   keywords: [
     "Ugandhar Vaddi",
     "uga961",
@@ -85,23 +85,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://blog.ugandhar.in",
-    siteName: "Ugandhar's Journal",
-    title: "Ugandhar Vaddi — Personal Engineering Journal",
+    siteName: "Ugandhar's Blog",
+    title: "Ugandhar Vaddi — Personal Blog",
     description:
-      "Essays on systems engineering, silicon architectures, applied machine learning, and data pipelines.",
+      "Writing about technology, data science, and software engineering.",
     images: [
       {
         url: "/social/og-image blog.png",
         width: 1200,
         height: 630,
-        alt: "Ugandhar Vaddi — Technical Journal",
+        alt: "Ugandhar Vaddi — Personal Blog",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ugandhar Vaddi — Personal Engineering Journal",
-    description: "Essays on systems engineering, silicon architectures, applied machine learning, and data pipelines.",
+    title: "Ugandhar Vaddi — Personal Blog",
+    description: "Writing about technology, data science, and software engineering.",
     images: ["/social/og-image blog.png"],
     creator: "@uga961",
     site: "@uga961",

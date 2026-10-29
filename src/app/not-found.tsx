@@ -16,15 +16,15 @@ export default function NotFound() {
 
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-on-surface-variant block">
-              ERROR 404 · ENTRY NOT FOUND
+              ERROR 404 · PAGE NOT FOUND
             </span>
             <h1 className="font-serif text-2xl font-bold tracking-tight text-foreground">
-              Document Not Located
+              Page Not Found
             </h1>
           </div>
 
           <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-sans">
-            The essay or section you requested is not present in the publication index.
+            The page or article you are looking for does not exist or has been moved.
           </p>
 
           <div className="pt-2">
@@ -33,7 +33,7 @@ export default function NotFound() {
               className="inline-flex items-center gap-2 rounded-[4px] bg-foreground px-4 py-2.5 text-xs font-mono font-medium uppercase tracking-wider text-background hover:bg-foreground/90 transition-colors touch-manipulation min-h-[40px]"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
-              <span>Return to Index</span>
+              <span>Return to Homepage</span>
             </Link>
           </div>
         </div>

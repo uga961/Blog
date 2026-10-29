@@ -23,8 +23,8 @@ interface DockItem {
 export function MagneticDock({ className }: { className?: string }) {
   const items: DockItem[] = [
     { label: "Top", href: "/#hero", icon: <Home className="w-3.5 h-3.5" /> },
-    { label: "Essays", href: "/#articles", icon: <BookOpen className="w-3.5 h-3.5" /> },
-    { label: "Telemetry", href: "/#activity", icon: <Disc3 className="w-3.5 h-3.5" /> },
+    { label: "Articles", href: "/#articles", icon: <BookOpen className="w-3.5 h-3.5" /> },
+    { label: "Activity", href: "/#activity", icon: <Disc3 className="w-3.5 h-3.5" /> },
     {
       label: "Portfolio",
       href: "https://www.ugandhar.in",
@@ -42,7 +42,7 @@ export function MagneticDock({ className }: { className?: string }) {
       )}
     >
       <nav
-        aria-label="Journal Quick Navigation"
+        aria-label="Blog Quick Navigation"
         className="pointer-events-auto flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-[4px] border border-border/90 bg-background/95 sm:bg-background/90 sm:backdrop-blur-md shadow-subtle text-xs font-mono gpu-layer"
       >
         {items.map((item) =>

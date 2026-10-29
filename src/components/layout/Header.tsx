@@ -32,10 +32,10 @@ export function Header() {
         {/* Desktop Navigation Links */}
         <nav aria-label="Blog Navigation" className="hidden md:flex items-center gap-5 text-xs font-mono text-on-surface-variant">
           <Link href="/#articles" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
-            Essays
+            Articles
           </Link>
           <Link href="/#activity" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
-            Telemetry
+            Activity
           </Link>
           <Link href="/#contact" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
             Contact

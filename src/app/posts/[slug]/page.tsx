@@ -154,7 +154,7 @@ export default async function PostPage({ params }: PageProps) {
             className="inline-flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Back to All Essays</span>
+            <span>Back to All Articles</span>
           </Link>
         </div>
 
@@ -279,7 +279,7 @@ export default async function PostPage({ params }: PageProps) {
                       </h4>
                     </div>
                     <div className="mt-3 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
-                      <span>Read essay</span>
+                      <span>Read article</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
                   </Link>

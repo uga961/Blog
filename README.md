@@ -1,6 +1,6 @@
-# Ugandhar Vaddi — Personal Technical Journal & Engineering Essays
+# Ugandhar Vaddi — Personal Blog
 
-A fast, file-based personal engineering publication built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS**, designed with a **minimal editorial engineering aesthetic**.
+A fast, file-based personal blog built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS**, designed with a **minimal editorial engineering aesthetic**.
 
 Synchronized with the design system of [ugandhar.in](https://www.ugandhar.in) — high-contrast typography, hairline borders, generous whitespace, and pure Markdown content delivery. Zero database overhead, no external CMS.
 

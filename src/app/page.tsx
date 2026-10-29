@@ -9,7 +9,7 @@ import { ActivityShowcase } from "@/components/blog/ActivityShowcase";
 import { HeroBanner } from "@/components/blog/HeroBanner";
 import { getAllPosts, getFeaturedPost } from "@/lib/posts";
 import { MagneticDock } from "@/components/ui/MagneticDock";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function HomePage() {
   const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
@@ -30,11 +30,11 @@ export default function HomePage() {
               <div className="flex items-center gap-2 sm:gap-3 truncate">
                 <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 002</span>
                 <span className="text-border flex-shrink-0">/</span>
-                <span className="truncate">LATEST ESSAY RELEASE</span>
+                <span className="truncate">LATEST STORY PREVIEW</span>
               </div>
               <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
-                <span>FEATURED DISPATCH</span>
+                <span>FEATURED ARTICLE</span>
               </div>
             </div>
 
@@ -88,7 +88,7 @@ export default function HomePage() {
                       href={`/posts/${featured.slug}`}
                       className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-foreground uppercase tracking-wider hover:underline touch-manipulation"
                     >
-                      <span>Read Full Essay</span>
+                      <span>Read Full Article</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -107,10 +107,10 @@ export default function HomePage() {
             <div className="flex items-center gap-2 sm:gap-3 truncate">
               <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 004</span>
               <span className="text-border flex-shrink-0">/</span>
-              <span className="truncate">ALL ESSAYS &amp; TECHNICAL NOTES</span>
+              <span className="truncate">ALL ARTICLES</span>
             </div>
             <span className="font-mono text-[11px] text-foreground font-semibold flex-shrink-0">
-              {posts.length} {posts.length === 1 ? "DOCUMENT" : "DOCUMENTS"}
+              {posts.length} {posts.length === 1 ? "ARTICLE" : "ARTICLES"}
             </span>
           </div>
 
