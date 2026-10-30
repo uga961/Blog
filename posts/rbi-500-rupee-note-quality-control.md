@@ -14,11 +14,9 @@ tags:
 - Currency
 - Quality Control
 - Public Services
-title: "RBI's Quality Control on ₹500 Notes: When a Visible Printing
-  Error Raises Questions"
+title: "RBI's Quality Control on ₹500 Notes: When a Visible Printing Error Raises Questions"
+seoTitle: "RBI ₹500 Note Quality Control by Ugandhar Vaddi"
 ---
-
-# RBI's Quality Control on ₹500 Notes: When a Visible Printing Error Raises Questions
 
 A currency note is something we handle almost every day. We use it to buy groceries, pay for transport, and make small purchases without giving much thought to how it was printed.
 

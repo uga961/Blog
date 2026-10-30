@@ -1,5 +1,6 @@
 ---
 title: "Four Interviews, One Long Day, and a Chapter I’ll Always Remember"
+seoTitle: "McKinsey Interview Day & Results by Ugandhar Vaddi"
 slug: "mckinsey-interview-day-and-results"
 date: "2026-10-26"
 excerpt: "The story of how the McKinsey opportunity began, a long interview day in Chennai, and how I felt then—and how I look back on it now."
@@ -8,8 +9,6 @@ coverImage: ""
 author: "Ugandhar"
 published: true
 ---
-
-# Four Interviews, One Long Day, and a Chapter I’ll Always Remember
 
 *Some experiences feel uncertain while you are going through them. With time, they become stories that help you understand how far you have come.*
 

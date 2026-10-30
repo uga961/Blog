@@ -52,4 +52,14 @@ describe("Markdown Posts System", () => {
     const post = getPostBySlug("non-existent-article-slug-123");
     expect(post).toBeNull();
   });
+
+  it("verifies all post seoTitles are concise and under 70 characters for Bing/Google guidelines", () => {
+    const posts = getAllPosts();
+    for (const post of posts) {
+      if (post.seoTitle) {
+        expect(post.seoTitle.length).toBeLessThanOrEqual(70);
+        expect(post.seoTitle).toContain("Ugandhar Vaddi");
+      }
+    }
+  });
 });

@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
   experimental: {
     optimizePackageImports: ["lucide-react", "date-fns", "react-icons", "framer-motion"],
   },
@@ -92,6 +93,32 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/feed.xml",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/xml; charset=utf-8",
+          },
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, follow",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/favicon.ico",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex",
           },
         ],
       },

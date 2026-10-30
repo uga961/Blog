@@ -128,6 +128,18 @@ export function MarkdownRenderer({ content }: { content: string }) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug, rehypeHighlight, rehypeUnwrapImageParagraphs]}
         components={{
+          h1({ children, ...props }) {
+            // Guarantee exactly one <h1> per page for Bing & Google SEO guidelines.
+            // Markdown top-level headings map to semantic <h2> in the document body.
+            return (
+              <h2
+                className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-8 mb-4 break-words"
+                {...props}
+              >
+                {children}
+              </h2>
+            );
+          },
           code({ className, children, ...props }) {
             const isInline = !className && typeof children === "string" && !children.includes("\n");
             if (isInline) {
@@ -144,12 +156,14 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           img({ src, alt }) {
             if (!src) return null;
+            // Guarantee alt attribute is always populated for screen readers and search bots
+            const safeAlt = alt && String(alt).trim() !== "" ? String(alt).trim() : "Article technical diagram and visualization";
             return (
               <figure className="my-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}
-                  alt={alt || ""}
+                  alt={safeAlt}
                   className="w-full rounded-[4px] border border-border/80 object-cover shadow-subtle transition-transform"
                   loading="lazy"
                 />

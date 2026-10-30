@@ -13,7 +13,7 @@ export async function GET() {
     .map((post) => {
       const postUrl = `${siteUrl}/posts/${post.slug}`;
       const pubDate = new Date(post.date).toUTCString();
-      const articleTitle = `${post.title} by ${siteConfig.name}`;
+      const articleTitle = post.seoTitle || `${post.title} by ${siteConfig.name}`;
 
       return `
     <item>

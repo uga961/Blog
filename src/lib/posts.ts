@@ -8,6 +8,7 @@ export interface Post {
   id: string;
   slug: string;
   title: string;
+  seoTitle?: string;
   date: string;
   excerpt: string;
   content: string;
@@ -76,6 +77,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
       const fileSlug = fileName.replace(/\.md$/, "");
       const slug = data.slug ? generateSlug(data.slug) : fileSlug;
       const title = data.title || fileSlug.replace(/-/g, " ");
+      const seoTitle = data.seoTitle ? String(data.seoTitle).trim() : undefined;
       const date = data.date ? new Date(data.date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10);
       const excerpt = data.excerpt || extractFallbackExcerpt(content);
       const tags = Array.isArray(data.tags)
@@ -91,6 +93,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
         id: fileSlug,
         slug,
         title,
+        seoTitle,
         date,
         excerpt,
         content: content.trim(),

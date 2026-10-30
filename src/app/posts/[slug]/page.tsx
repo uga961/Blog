@@ -40,7 +40,19 @@ export async function generateMetadata({
 
   const postUrl = `${SITE_URL}/posts/${post.slug}`;
   const authorName = "Ugandhar Vaddi";
-  const seoTitle = `${post.title} by ${authorName}`;
+
+  // Format: [Title] by Ugandhar Vaddi (strictly <= 68 chars for Bing & Google search snippets)
+  let seoTitle = post.seoTitle;
+  if (!seoTitle) {
+    const candidate = `${post.title} by ${authorName}`;
+    if (candidate.length <= 68) {
+      seoTitle = candidate;
+    } else {
+      const shortened = post.title.split(":")[0].slice(0, 45).trim();
+      seoTitle = `${shortened} by ${authorName}`;
+    }
+  }
+
   const description =
     post.excerpt || `${post.title} — Written by ${authorName}`;
 
@@ -142,7 +154,17 @@ export default async function PostPage({ params }: PageProps) {
 
   const isoDate = post.date ? new Date(post.date).toISOString() : new Date().toISOString();
   const authorName = "Ugandhar Vaddi";
-  const seoTitle = `${post.title} by ${authorName}`;
+
+  let seoTitle = post.seoTitle;
+  if (!seoTitle) {
+    const candidate = `${post.title} by ${authorName}`;
+    if (candidate.length <= 68) {
+      seoTitle = candidate;
+    } else {
+      const shortened = post.title.split(":")[0].slice(0, 45).trim();
+      seoTitle = `${shortened} by ${authorName}`;
+    }
+  }
 
   // Rich JSON-LD structured data for Google Search (BlogPosting + BreadcrumbList)
   const articleJsonLd = {

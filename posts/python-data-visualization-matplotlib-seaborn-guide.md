@@ -1,5 +1,6 @@
 ---
 title: "Python Data Visualization: A Practical Guide to Matplotlib, Seaborn, and Pandas"
+seoTitle: "Python Data Visualization Guide by Ugandhar Vaddi"
 slug: "python-data-visualization-matplotlib-seaborn-guide"
 date: "2026-10-23"
 excerpt: "Learn practical data visualization in Python, from your first Matplotlib line chart to Seaborn plots, heatmaps, correlation, and pair plots, with examples you can run in Google Colab."
@@ -8,8 +9,6 @@ coverImage: ""
 author: "Ugandhar"
 published: true
 ---
-
-# Python Data Visualization: A Practical Guide to Matplotlib, Seaborn, and Pandas
 
 > **Want to watch the walkthrough on YouTube?**  
 >
@@ -387,7 +386,7 @@ plt.show()
 
 `x="sex"` places the category along the horizontal axis. `data=df` tells Seaborn which DataFrame contains the column. Seaborn counts the observations in each category automatically.
 
-![](https://i.imgur.com/pDEz5Et.png)
+![Seaborn countplot showing the distribution of customer records by sex.](https://i.imgur.com/pDEz5Et.png)
 
 You can place the categories on the y-axis instead:
 
@@ -409,7 +408,7 @@ plt.title("Records by Sex and Smoker Status")
 plt.show()
 ```
 
-![](https://i.imgur.com/jXoFS1J.png)
+![Seaborn countplot comparing smoker and non-smoker records across sex categories with hue.](https://i.imgur.com/jXoFS1J.png)
 
 This lets you compare the smoker categories within each sex category. It is still a count of records; it does not automatically show percentages.
 
@@ -572,7 +571,7 @@ plt.ylabel("Tip")
 plt.show()
 ```
 
-![](https://i.imgur.com/rKKpmcH.png)
+![Seaborn scatter plot illustrating bill totals versus tip amounts categorized by meal time.](https://i.imgur.com/rKKpmcH.png)
 
 Each dot represents one record. A general upward pattern would suggest that larger bills tend to be associated with larger tips in this dataset. This is an association, not proof that one variable causes the other.
 
@@ -589,7 +588,7 @@ plt.title("Total Bill vs Tip by Sex")
 plt.show()
 ```
 
-![](https://i.imgur.com/JfnVCFE.png)
+![Scatter plot showing relationship between total bill and tips with hue markers for gender.](https://i.imgur.com/JfnVCFE.png)
 
 The colour separates points by category. This can help reveal whether the overall pattern looks different between groups, but always check the number of observations and the amount of overlap before making conclusions.
 
@@ -633,7 +632,7 @@ sns.lmplot(
 plt.show()
 ```
 
-![](https://i.imgur.com/PDRnhvi.png)
+![Linear regression plot displaying tip rate trends fitted on total bills separated by gender.](https://i.imgur.com/PDRnhvi.png)
 
 If you want the scatter points without the fitted line, use `fit_reg=False`:
 
@@ -685,7 +684,7 @@ plt.title("Passenger Counts by Year")
 plt.show()
 ```
 
-![](https://i.imgur.com/lmaii58.png)
+![Seaborn line plot depicting monthly airline passenger counts across years.](https://i.imgur.com/lmaii58.png)
 
 To distinguish the months:
 
@@ -722,7 +721,7 @@ sns.jointplot(
 plt.show()
 ```
 
-![](https://i.imgur.com/9E3XV7l.png)
+![Seaborn joint plot showing bivariate scatter distribution alongside univariate marginal histograms.](https://i.imgur.com/9E3XV7l.png)
 
 The centre shows the relationship between `total_bill` and `tip`. The margins show how each variable is distributed on its own.
 
@@ -738,7 +737,7 @@ sns.jointplot(
 plt.show()
 ```
 
-![](https://i.imgur.com/MXqV7Kr.png)
+![Kernel density estimation joint plot displaying high concentration contours between total bill and tips.](https://i.imgur.com/MXqV7Kr.png)
 
 A KDE (kernel density estimate) estimates where values are concentrated. It can be useful when many points overlap, but it is an estimate rather than a direct count of observations.
 
@@ -754,7 +753,7 @@ sns.jointplot(
 plt.show()
 ```
 
-![](https://i.imgur.com/JilT8J3.png)
+![Histogram joint plot using discrete bins to illustrate bivariate distribution.](https://i.imgur.com/JilT8J3.png)
 
 The central area uses bins to show where pairs of values occur. The best choice—scatter, density, or histogram—depends on the number of observations and the question you are trying to answer.
 
@@ -786,7 +785,7 @@ plt.title("Passenger Counts by Month and Year")
 plt.show()
 ```
 
-![](https://i.imgur.com/n6ycN2S.png)
+![Seaborn heatmap displaying passenger density across months and years with color intensity.](https://i.imgur.com/n6ycN2S.png)
 
 You can change the colour map and show the values inside the cells:
 

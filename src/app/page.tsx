@@ -30,8 +30,8 @@ export default function HomePage() {
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
       "@id": `https://blog.ugandhar.in/posts/${post.slug}#article`,
-      headline: `${post.title} by Ugandhar Vaddi`,
-      name: `${post.title} by Ugandhar Vaddi`,
+      headline: post.seoTitle || `${post.title} by Ugandhar Vaddi`,
+      name: post.seoTitle || `${post.title} by Ugandhar Vaddi`,
       url: `https://blog.ugandhar.in/posts/${post.slug}`,
       datePublished: post.date ? new Date(post.date).toISOString() : undefined,
       description: post.excerpt,
