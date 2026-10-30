@@ -14,7 +14,6 @@
 # production
 /build
 
-/Template Posts
 
 # misc
 .DS_Store
@@ -37,3 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local development
+.vscode/
