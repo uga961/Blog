@@ -123,6 +123,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow",
+          },
+        ],
+      },
+      {
         source:
           "/((?!api|_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|Logo.png|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest|llms.txt|ai-catalog.json).*)",
         headers: [

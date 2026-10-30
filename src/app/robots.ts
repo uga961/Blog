@@ -6,17 +6,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/"],
       },
       {
         userAgent: "Bingbot",
         allow: "/",
-        disallow: ["/api/"],
       },
       {
         userAgent: "Googlebot-Image",
@@ -24,6 +21,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://blog.ugandhar.in/sitemap.xml",
-    // host: "https://blog.ugandhar.in",
   };
 }

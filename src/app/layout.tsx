@@ -44,6 +44,9 @@ export const metadata: Metadata = {
     "Writing on my personal blog about technology, data science, and software engineering.",
   keywords: [
     "Ugandhar Vaddi",
+    "Ugandhar",
+    "Ugandhar Vaddi Blog",
+    "Ugandhar Blog",
     "uga961",
     "Data Scientist",
     "Machine Learning",
