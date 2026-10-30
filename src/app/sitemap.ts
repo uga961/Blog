@@ -9,17 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const postDate = new Date(post.date);
     const validDate = !isNaN(postDate.getTime()) ? postDate : new Date();
-    const cleanCover =
-      post.coverImage && post.coverImage.trim() !== ""
-        ? [post.coverImage]
-        : [`${SITE_URL}/social/og-image.png`];
 
     return {
       url: `${SITE_URL}/posts/${post.slug}`,
       lastModified: validDate,
       changeFrequency: "weekly" as const,
       priority: 0.9,
-      images: cleanCover,
     };
   });
 
@@ -30,12 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       lastModified: latestPostDate,
       changeFrequency: "daily" as const,
       priority: 1.0,
-      images: [`${SITE_URL}/social/og-image.png`],
     },
     ...postEntries,
   ];
 }
+

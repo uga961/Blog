@@ -10,6 +10,7 @@ const KEY = "2f8745c1a89b4f99a071de8463990b76";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
 const URLs = [
+  `https://${HOST}/`,
   `https://${HOST}`,
   `https://${HOST}/posts/mckinsey-interview-day-and-results`,
   `https://${HOST}/posts/python-data-visualization-matplotlib-seaborn-guide`,

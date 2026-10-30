@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   creator: "Ugandhar Vaddi",
   publisher: "Ugandhar Vaddi",
   alternates: {
-    canonical: "https://blog.ugandhar.in",
+    canonical: "https://blog.ugandhar.in/",
     types: {
       "application/rss+xml": "https://blog.ugandhar.in/feed.xml",
     },
