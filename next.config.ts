@@ -71,11 +71,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Type",
-            value: "application/xml; charset=utf-8",
-          },
-          {
-            key: "X-Robots-Tag",
-            value: "all",
+            value: "application/xml",
           },
           {
             key: "Cache-Control",
