@@ -96,28 +96,28 @@ export function ActivityShowcase() {
             <div>
               <h3 className="font-serif text-xl font-bold tracking-tight text-foreground">
                 <a
-                  href="https://github.com/uga961/StayActive"
+                  href="https://github.com/uga961/tv-detox"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline"
                 >
-                  StayActive
+                  TV Detox
                   <ExternalLink className="h-3.5 w-3.5 opacity-60" />
                 </a>
               </h3>
               <p className="mt-1.5 text-xs sm:text-sm text-on-surface-variant leading-relaxed font-sans">
-                A lightweight Windows desktop companion for mindful breaks, hydration reminders, and physical posture while working.
+                Ultra-lightweight, clean, and fast minimalist launcher for Android TV.
               </p>
             </div>
 
             <div className="pt-1 text-xs font-mono text-on-surface-variant break-words">
-              <span>C# · .NET · WPF · Open Source</span>
+              <span>Java · ADB · Android SDK · Open Source</span>
             </div>
           </div>
 
           <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-mono">
             <a
-              href="https://github.com/uga961/StayActive"
+              href="https://github.com/uga961/tv-detox"
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-foreground hover:underline inline-flex items-center gap-1 touch-manipulation"
@@ -157,9 +157,8 @@ export function ActivityShowcase() {
             <div className="flex items-center gap-4">
               <div className="relative flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-full bg-neutral-950 border border-neutral-800 shadow-md ring-1 ring-neutral-800">
                 <div
-                  className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${
-                    isPlaying ? "animate-spin" : ""
-                  }`}
+                  className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${isPlaying ? "animate-spin" : ""
+                    }`}
                   style={{ animationDuration: "6s" }}
                 >
                   <div className="h-13 w-13 sm:h-14 sm:w-14 rounded-full border border-neutral-800/80 flex items-center justify-center">
