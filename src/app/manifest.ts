@@ -2,14 +2,14 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Ugandhar Vaddi — Personal Blog",
-    short_name: "Ugandhar's Blog",
+    name: "Ugandhar Vaddi — Blog",
+    short_name: "Ugandhar Blog",
     description:
-      "Writing on technology, data science, resilient systems, and software engineering.",
+      "Writing on my personal blog about technology, data science, and software engineering.",
     start_url: "/",
     display: "standalone",
-    background_color: "#10100f",
-    theme_color: "#10100f",
+    background_color: "#121211",
+    theme_color: "#121211",
     icons: [
       {
         src: "/icon.png",

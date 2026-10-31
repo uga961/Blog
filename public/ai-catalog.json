@@ -1,28 +1,74 @@
 {
   "specVersion": "1.0",
-  "name": "Ugandhar Vaddi Portfolio",
-  "description": "Personal engineering portfolio and system architectures of Ugandhar Vaddi — Associate Data Scientist at Tredence.",
+  "host": {
+    "displayName": "Ugandhar Vaddi",
+    "documentationUrl": "https://ugandhar.in/llms.txt",
+    "logoUrl": "https://ugandhar.in/icon.png"
+  },
   "entries": [
     {
-      "id": "ugandhar-portfolio",
-      "name": "Ugandhar Vaddi Portfolio",
-      "type": "website",
+      "identifier": "urn:air:ugandhar.in:website:portfolio",
+      "displayName": "Ugandhar Vaddi Portfolio",
+      "type": "text/html",
       "url": "https://ugandhar.in",
-      "description": "Personal engineering portfolio, credentials, systems projects, and contact."
+      "description": "Personal engineering portfolio, credentials, systems projects, and contact.",
+      "representativeQueries": [
+        "Ugandhar Vaddi portfolio",
+        "Ugandhar Vaddi projects and experience"
+      ],
+      "tags": [
+        "portfolio",
+        "engineering",
+        "machine-learning"
+      ]
     },
     {
-      "id": "ugandhar-blog",
-      "name": "Personal Blog",
-      "type": "website",
+      "identifier": "urn:air:ugandhar.in:website:blog",
+      "displayName": "Personal Blog",
+      "type": "text/html",
       "url": "https://blog.ugandhar.in",
-      "description": "Technical essays, software systems architecture, and engineering notes."
+      "description": "Technical essays, software systems architecture, and engineering notes.",
+      "representativeQueries": [
+        "Ugandhar Vaddi blog",
+        "Ugandhar Vaddi technical essays"
+      ],
+      "tags": [
+        "blog",
+        "software-engineering",
+        "essays"
+      ]
     },
     {
-      "id": "ugandhar-github",
-      "name": "GitHub Repositories",
-      "type": "code-repository",
+      "identifier": "urn:air:ugandhar.in:code-repository:github",
+      "displayName": "GitHub Repositories",
+      "type": "text/html",
       "url": "https://github.com/uga961",
-      "description": "Open-source repositories for machine learning, desktop tools, and VLSI memory architectures."
+      "description": "Open-source repositories for machine learning, desktop tools, and VLSI memory architectures.",
+      "representativeQueries": [
+        "Ugandhar Vaddi github",
+        "Ugandhar Vaddi open source repositories"
+      ],
+      "tags": [
+        "github",
+        "open-source",
+        "repositories"
+      ]
+    },
+    {
+      "identifier": "urn:air:ugandhar.in:doc:llms-txt",
+      "displayName": "Ugandhar Vaddi LLM Knowledge Base",
+      "type": "text/plain",
+      "url": "https://ugandhar.in/llms.txt",
+      "description": "Concise LLM knowledge documentation and profile context.",
+      "representativeQueries": [
+        "Ugandhar Vaddi resume context",
+        "Ugandhar Vaddi skills summary for AI"
+      ],
+      "tags": [
+        "llms",
+        "documentation",
+        "context"
+      ]
     }
   ]
 }

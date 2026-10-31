@@ -1,0 +1,32 @@
+{
+  "debloat-android-tv-adb-guide.md": {
+    "title": "How I Debloated My Android TV: A Step-by-Step Guide Using ADB",
+    "date": "2026-10-30",
+    "lastUpdated": "2026-10-31"
+  },
+  "i-decided-to-start-this-again.md": {
+    "title": "I Decided to Start This Again",
+    "date": "2026-03-01",
+    "lastUpdated": "2026-10-31"
+  },
+  "mckinsey-interview-day-and-results.md": {
+    "title": "Four Interviews, One Long Day, and a Chapter I’ll Always Remember",
+    "date": "2026-10-26",
+    "lastUpdated": "2026-10-31"
+  },
+  "python-data-visualization-matplotlib-seaborn-guide.md": {
+    "title": "Python Data Visualization: A Practical Guide to Matplotlib, Seaborn, and Pandas",
+    "date": "2026-10-23",
+    "lastUpdated": "2026-10-31"
+  },
+  "rbi-500-rupee-note-quality-control.md": {
+    "title": "RBI's Quality Control on ₹500 Notes: When a Visible Printing Error Raises Questions",
+    "date": "2026-10-22T00:00:00.000Z",
+    "lastUpdated": "2026-10-31"
+  },
+  "why-i-built-stayactive.md": {
+    "title": "Why I Built StayActive: A Small Reminder to Take Care of Myself",
+    "date": "2026-10-21T00:00:00.000Z",
+    "lastUpdated": "2026-10-31"
+  }
+}

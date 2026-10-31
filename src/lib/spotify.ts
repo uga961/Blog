@@ -11,30 +11,34 @@ const NOW_PLAYING_ENDPOINT =
 const RECENTLY_PLAYED_ENDPOINT =
   "https://api.spotify.com/v1/me/player/recently-played?limit=1";
 
-async function getAccessToken() {
+async function getAccessToken(): Promise<{ access_token: string } | null> {
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
     return null;
   }
 
-  const basic = Buffer.from(
-    `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`,
-  ).toString("base64");
+  try {
+    const basic = Buffer.from(
+      `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
+    ).toString("base64");
 
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${basic}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token: SPOTIFY_REFRESH_TOKEN,
-    }),
-    cache: "no-store",
-  });
+    const response = await fetch(TOKEN_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${basic}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: SPOTIFY_REFRESH_TOKEN,
+      }),
+      cache: "no-store",
+    });
 
-  if (!response.ok) return null;
-  return response.json();
+    if (!response.ok) return null;
+    return response.json();
+  } catch {
+    return null;
+  }
 }
 
 export async function getNowPlaying() {
@@ -52,7 +56,7 @@ export async function getNowPlaying() {
     });
 
     if (response.status === 204 || response.status > 400) {
-      // Fallback: check recently played
+      // Fallback: check recently played track
       const recentRes = await fetch(RECENTLY_PLAYED_ENDPOINT, {
         headers: { Authorization: `Bearer ${tokenData.access_token}` },
         cache: "no-store",
@@ -66,7 +70,9 @@ export async function getNowPlaying() {
             isPlaying: false,
             configured: true,
             title: item.name,
-            artist: item.artists.map((_art: { name: string }) => _art.name).join(", "),
+            artist: item.artists
+              .map((_art: { name: string }) => _art.name)
+              .join(", "),
             album: item.album.name,
             albumImageUrl: item.album.images?.[0]?.url,
             songUrl: item.external_urls?.spotify,

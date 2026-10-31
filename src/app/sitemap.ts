@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts(false);
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => {
-    const postDate = new Date(post.date);
+    const postDate = new Date(post.lastUpdated || post.date);
     const validDate = !isNaN(postDate.getTime()) ? postDate : new Date();
 
     return {
@@ -19,8 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const latestPostDate =
-    posts.length > 0 && !isNaN(new Date(posts[0].date).getTime())
-      ? new Date(posts[0].date)
+    posts.length > 0 && !isNaN(new Date(posts[0].lastUpdated || posts[0].date).getTime())
+      ? new Date(posts[0].lastUpdated || posts[0].date)
       : new Date();
 
   return [
@@ -33,4 +33,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...postEntries,
   ];
 }
-

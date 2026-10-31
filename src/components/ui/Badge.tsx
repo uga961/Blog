@@ -1,39 +1,29 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "default" | "primary" | "tonal" | "outline";
-  size?: "sm" | "md";
-  active?: boolean;
+interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  variant?: "default" | "outline" | "accent";
 }
 
 export function Badge({
   children,
-  className = "",
+  className,
   variant = "default",
-  size = "sm",
-  active = false,
   ...props
 }: BadgeProps) {
-  const sizeStyles = {
-    sm: "px-2.5 py-0.5 text-[11px]",
-    md: "px-3 py-1 text-xs",
-  };
-
-  const variantStyles = {
-    default: active
-      ? "bg-foreground text-background font-semibold"
-      : "bg-surface-subtle text-on-surface-variant border border-border/80 hover:border-foreground/40 hover:text-foreground",
-    primary:
-      "bg-foreground text-background font-medium",
-    tonal:
-      "bg-surface-container text-foreground border border-border/80 font-medium",
-    outline:
-      "border border-border/80 text-on-surface-variant bg-transparent hover:border-foreground/40 hover:text-foreground",
+  const variants = {
+    default: "border-border/80 bg-surface/50 text-on-surface-variant",
+    outline: "border-border text-foreground",
+    accent: "border-accent/40 bg-accent/10 text-accent",
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-[3px] font-mono transition-colors select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={cn(
+        "inline-flex items-center rounded-[3px] border px-2 py-0.5 text-[11px] font-mono",
+        variants[variant],
+        className
+      )}
       {...props}
     >
       {children}

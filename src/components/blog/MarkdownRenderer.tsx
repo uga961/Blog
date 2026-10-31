@@ -46,7 +46,7 @@ function rehypeUnwrapImageParagraphs() {
           Array.isArray(child.children)
         ) {
           const meaningfulChildren = child.children.filter(
-            (item: any) => !(item.type === "text" && !item.value.trim()),
+            (item: any) => !(item.type === "text" && !item.value.trim())
           );
 
           if (
@@ -115,7 +115,12 @@ function CodeBlock({ children, className }: CodeBlockProps) {
         </button>
       </div>
       <div className="overflow-x-auto p-4 leading-relaxed text-foreground">
-        <code ref={codeRef} className={`${className || ""} block text-foreground font-mono text-xs sm:text-sm leading-relaxed`}>{children}</code>
+        <code
+          ref={codeRef}
+          className={`${className || ""} block text-foreground font-mono text-xs sm:text-sm leading-relaxed`}
+        >
+          {children}
+        </code>
       </div>
     </div>
   );
@@ -129,8 +134,8 @@ export function MarkdownRenderer({ content }: { content: string }) {
         rehypePlugins={[rehypeSlug, rehypeHighlight, rehypeUnwrapImageParagraphs]}
         components={{
           h1({ children, ...props }) {
-            // Guarantee exactly one <h1> per page for Bing & Google SEO guidelines.
-            // Markdown top-level headings map to semantic <h2> in the document body.
+            // Guarantee exactly one <h1> per page for search engines.
+            // Markdown top-level headings map to semantic <h2> in the article body.
             return (
               <h2
                 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-8 mb-4 break-words"
@@ -156,8 +161,10 @@ export function MarkdownRenderer({ content }: { content: string }) {
           },
           img({ src, alt }) {
             if (!src) return null;
-            // Guarantee alt attribute is always populated for screen readers and search bots
-            const safeAlt = alt && String(alt).trim() !== "" ? String(alt).trim() : "Article technical diagram and visualization";
+            const safeAlt =
+              alt && String(alt).trim() !== ""
+                ? String(alt).trim()
+                : "Article technical diagram and visualization";
             return (
               <figure className="my-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

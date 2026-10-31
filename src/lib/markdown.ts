@@ -1,4 +1,5 @@
 import readingTime from "reading-time";
+import { generateSlug } from "./slug";
 
 export interface TocItem {
   id: string;
@@ -7,56 +8,62 @@ export interface TocItem {
 }
 
 /**
- * Calculates estimated reading time in minutes (minimum 1 minute).
+ * Calculates estimated reading time in integer minutes.
  */
-export function calculateReadingTime(content: string): number {
-  const stats = readingTime(content || "");
-  return Math.max(1, Math.ceil(stats.minutes));
+export function calculateReadingTime(text: string): number {
+  if (!text) return 1;
+  const rt = readingTime(text);
+  return Math.max(1, Math.ceil(rt.minutes));
 }
 
 /**
- * Extracts a concise excerpt from markdown content if none is provided.
+ * Extracts a clean excerpt from markdown text without markdown syntax.
  */
-export function extractExcerpt(content: string, maxLength: number = 180): string {
-  if (!content) return "";
-
-  // Strip headers, images, links, code blocks
-  const plainText = content
+export function extractExcerpt(markdown: string, maxLength: number = 160): string {
+  if (!markdown) return "";
+  const plainText = markdown
     .replace(/```[\s\S]*?```/g, "") // remove code blocks
     .replace(/`([^`]+)`/g, "$1") // inline code
     .replace(/!\[.*?\]\(.*?\)/g, "") // images
-    .replace(/\[(.*?)\]\(.*?\)/g, "$1") // link text only
-    .replace(/^#+\s+(.*)$/gm, "") // headings
+    .replace(/\[(.*?)\]\(.*?\)/g, "$1") // links
+    .replace(/^#+\s+(.*)$/gm, "") // headers
     .replace(/>\s+(.*)$/gm, "$1") // blockquotes
-    .replace(/[*_~]+/g, "") // emphasis markers
+    .replace(/[*_~]+/g, "")
     .replace(/\s+/g, " ")
     .trim();
 
-  if (plainText.length <= maxLength) {
-    return plainText;
-  }
-
+  if (plainText.length <= maxLength) return plainText;
   return plainText.slice(0, maxLength).trim() + "…";
 }
 
 /**
- * Extracts H2 and H3 headings for the Table of Contents.
+ * Extracts h2 and h3 headings from raw markdown for the Table of Contents.
  */
 export function extractTableOfContents(markdown: string): TocItem[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
-  const toc: TocItem[] = [];
-  let match;
+  const items: TocItem[] = [];
+  let match: RegExpExecArray | null;
 
   while ((match = headingRegex.exec(markdown)) !== null) {
     const level = match[1].length;
-    const text = match[2].trim().replace(/[*_`]/g, "");
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-");
+    const rawText = match[2].trim();
 
-    toc.push({ id, text, level });
+    // Remove inline links and formatting
+    const cleanText = rawText
+      .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+      .replace(/[*_`]/g, "")
+      .trim();
+
+    const id = generateSlug(cleanText);
+
+    if (cleanText) {
+      items.push({
+        id,
+        text: cleanText,
+        level,
+      });
+    }
   }
 
-  return toc;
+  return items;
 }

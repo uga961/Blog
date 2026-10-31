@@ -29,7 +29,9 @@ export function ActivityShowcase() {
   const [spotify, setSpotify] = useState<SpotifyState>({
     isPlaying: false,
     configured: false,
-    profileUrl: "https://open.spotify.com/user/31ajvsvptg6aygrakjcsm7xnm5am",
+    title: "Hot Hits Telugu & Rhythm",
+    artist: "Tollywood energy & daily focus tracks",
+    profileUrl: siteConfig.spotify.profileUrl,
   });
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function ActivityShowcase() {
       }
     };
 
-    const initialTimer = setTimeout(fetchNowPlaying, 1000);
+    const initialTimer = setTimeout(fetchNowPlaying, 800);
     const interval = setInterval(fetchNowPlaying, 30000);
     return () => {
       mounted = false;
@@ -63,7 +65,9 @@ export function ActivityShowcase() {
       {/* Editorial Header */}
       <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
         <div className="flex items-center gap-2 sm:gap-3 truncate">
-          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 003</span>
+          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">
+            INDEX 003
+          </span>
           <span className="text-border flex-shrink-0">/</span>
           <span className="truncate">CURRENTLY CRAFTING &amp; GROOVING</span>
         </div>
@@ -96,28 +100,28 @@ export function ActivityShowcase() {
             <div>
               <h3 className="font-serif text-xl font-bold tracking-tight text-foreground">
                 <a
-                  href="https://github.com/uga961/tv-detox"
+                  href={siteConfig.currentCrafting.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline"
                 >
-                  TV Detox
+                  {siteConfig.currentCrafting.title}
                   <ExternalLink className="h-3.5 w-3.5 opacity-60" />
                 </a>
               </h3>
               <p className="mt-1.5 text-xs sm:text-sm text-on-surface-variant leading-relaxed font-sans">
-                Ultra-lightweight, clean, and fast minimalist launcher for Android TV.
+                {siteConfig.currentCrafting.description}
               </p>
             </div>
 
             <div className="pt-1 text-xs font-mono text-on-surface-variant break-words">
-              <span>Java · ADB · Android SDK · Open Source</span>
+              <span>{siteConfig.currentCrafting.tech}</span>
             </div>
           </div>
 
           <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-mono">
             <a
-              href="https://github.com/uga961/tv-detox"
+              href={siteConfig.currentCrafting.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-foreground hover:underline inline-flex items-center gap-1 touch-manipulation"
@@ -125,9 +129,7 @@ export function ActivityShowcase() {
               <span>View Repository</span>
               <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
-            <span className="text-on-surface-variant">
-              @uga961 on GitHub
-            </span>
+            <span className="text-on-surface-variant">@uga961 on GitHub</span>
           </div>
         </div>
 
@@ -157,8 +159,9 @@ export function ActivityShowcase() {
             <div className="flex items-center gap-4">
               <div className="relative flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-full bg-neutral-950 border border-neutral-800 shadow-md ring-1 ring-neutral-800">
                 <div
-                  className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${isPlaying ? "animate-spin" : ""
-                    }`}
+                  className={`flex h-full w-full items-center justify-center rounded-full transition-transform ${
+                    isPlaying ? "animate-spin" : ""
+                  }`}
                   style={{ animationDuration: "6s" }}
                 >
                   <div className="h-13 w-13 sm:h-14 sm:w-14 rounded-full border border-neutral-800/80 flex items-center justify-center">
@@ -178,7 +181,9 @@ export function ActivityShowcase() {
                 <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-on-surface-variant">
                   <span className="inline-block w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
                   <span className="text-[#1DB954] font-medium">
-                    {spotify.isPlaying ? "Listening Now on Spotify" : "Spotify On Rotation"}
+                    {spotify.isPlaying
+                      ? "Listening Now on Spotify"
+                      : "Spotify On Rotation"}
                   </span>
                 </div>
                 <h4 className="font-serif text-base font-bold text-foreground truncate">
@@ -216,7 +221,7 @@ export function ActivityShowcase() {
 
           <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-mono">
             <a
-              href="https://open.spotify.com/user/31ajvsvptg6aygrakjcsm7xnm5am"
+              href={siteConfig.spotify.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-foreground hover:underline hover:text-[#1DB954] inline-flex items-center gap-1 touch-manipulation transition-colors"

@@ -1,26 +1,40 @@
 #!/usr/bin/env node
 
 /**
- * Submits all blog URLs to IndexNow (Bing, Microsoft Copilot, and Yandex).
+ * Submits blog URLs to IndexNow (Bing, Microsoft Copilot, and Yandex).
  * Protocol spec: https://www.indexnow.org/
  */
+
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const HOST = "blog.ugandhar.in";
 const KEY = "2f8745c1a89b4f99a071de8463990b76";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
+const POSTS_DIR = path.join(process.cwd(), "posts");
 
-const URLs = [
-  `https://${HOST}/`,
-  `https://${HOST}`,
-  `https://${HOST}/posts/mckinsey-interview-day-and-results`,
-  `https://${HOST}/posts/python-data-visualization-matplotlib-seaborn-guide`,
-  `https://${HOST}/posts/debloat-android-tv-adb-guide`,
-  `https://${HOST}/posts/rbi-500-rupee-note-quality-control`,
-  `https://${HOST}/posts/why-i-built-stayactive`,
-  `https://${HOST}/posts/i-decided-to-start-this-again`,
-];
+function getPostSlugs() {
+  if (!fs.existsSync(POSTS_DIR)) return [];
+  return fs
+    .readdirSync(POSTS_DIR)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const content = fs.readFileSync(path.join(POSTS_DIR, file), "utf-8");
+      const { data } = matter(content);
+      if (data.published === false) return null;
+      return data.slug || file.replace(/\.md$/, "");
+    })
+    .filter(Boolean);
+}
 
 async function submitIndexNow() {
+  const slugs = getPostSlugs();
+  const URLs = [
+    `https://${HOST}`,
+    ...slugs.map((slug) => `https://${HOST}/posts/${slug}`),
+  ];
+
   console.log(`Submitting ${URLs.length} URLs to IndexNow for Bing and Microsoft Copilot...`);
 
   const payload = {
@@ -42,6 +56,8 @@ async function submitIndexNow() {
     console.log(`IndexNow response status: ${res.status} ${res.statusText}`);
     if (res.ok || res.status === 200 || res.status === 202) {
       console.log("✓ Successfully notified Bing and Microsoft Copilot!");
+      console.log("Submitted URLs:");
+      URLs.forEach((u) => console.log(`  - ${u}`));
     } else {
       console.warn("IndexNow returned non-200 status:", await res.text());
     }

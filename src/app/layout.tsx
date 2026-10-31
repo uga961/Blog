@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { siteConfig } from "@/lib/config";
-import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://blog.ugandhar.in"),
   title: {
     default: "Ugandhar Vaddi — Personal Blog",
-    template: "%s by Ugandhar Vaddi",
+    template: "%s | Ugandhar Vaddi",
   },
   description:
     "Writing on my personal blog about technology, data science, and software engineering.",
@@ -49,20 +50,26 @@ export const metadata: Metadata = {
     "Ugandhar Blog",
     "uga961",
     "Data Scientist",
+    "Associate Data Scientist",
+    "Tredence Analytics Solutions",
     "Machine Learning",
     "Applied AI",
-    "VLSI",
-    "Cadence Virtuoso",
-    "SRAM Architecture",
-    "Python",
     "StayActive",
+    "TV Detox Launcher",
+    "Android TV",
+    "ADB",
+    "Python Data Visualization",
+    "Matplotlib",
+    "Seaborn",
     "Systems Programming",
     "Technical Journal",
+    "Engineering Diaries",
     "Visakhapatnam",
+    "Chennai",
   ],
-  authors: [{ name: "Ugandhar Vaddi", url: "https://www.ugandhar.in" }],
-  creator: "Ugandhar Vaddi",
-  publisher: "Ugandhar Vaddi",
+  authors: [{ name: siteConfig.name, url: "https://www.ugandhar.in" }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   alternates: {
     canonical: "https://blog.ugandhar.in",
     types: {
@@ -91,7 +98,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://blog.ugandhar.in",
-    siteName: "Ugandhar's Blog",
+    siteName: "Ugandhar Vaddi — Blog",
     title: "Ugandhar Vaddi — Personal Blog",
     description:
       "Writing on my personal blog about technology, data science, and software engineering.",
@@ -107,7 +114,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ugandhar Vaddi — Personal Blog",
-    description: "Writing on my personal blog about technology, data science, and software engineering.",
+    description:
+      "Writing on my personal blog about technology, data science, and software engineering.",
     images: ["https://blog.ugandhar.in/social/og-image.png"],
     creator: "@uga961",
     site: "@uga961",
@@ -118,14 +126,12 @@ export const metadata: Metadata = {
       { url: "/icon.png", type: "image/png", sizes: "96x96" },
     ],
     shortcut: "/favicon.ico",
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/manifest.webmanifest",
 };
 
-// JSON-LD structured data for the site (Person + WebSite)
+// JSON-LD structured data for Google Search Console (WebSite + Person)
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -133,8 +139,8 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://blog.ugandhar.in/#website",
       url: "https://blog.ugandhar.in",
-      name: "Ugandhar's Blog",
-      alternateName: ["Ugandhar Vaddi Blog", "Ugandhar Vaddi"],
+      name: "Ugandhar Vaddi — Personal Blog",
+      alternateName: ["Ugandhar's Blog", "Ugandhar Vaddi Blog", "Ugandhar Vaddi"],
       description:
         "Writing on my personal blog about technology, data science, and software engineering.",
       publisher: { "@id": "https://www.ugandhar.in/#person" },
@@ -182,7 +188,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" type="image/png" sizes="96x96" href="/icon.png" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
-        {/* Inline theme script — runs before paint to prevent FOUC */}
+        {/* Inline theme script — prevents flash of light/dark mode */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -197,7 +203,7 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* JSON-LD structured data for Google rich results */}
+        {/* JSON-LD structured data for Google rich search results */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -208,6 +214,7 @@ export default function RootLayout({
       >
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

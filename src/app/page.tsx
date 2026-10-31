@@ -11,6 +11,8 @@ import { getAllPosts, getFeaturedPost } from "@/lib/posts";
 import { MagneticDock } from "@/components/ui/MagneticDock";
 import { ArrowRight } from "lucide-react";
 
+export const dynamic = "force-static";
+
 export default function HomePage() {
   const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
   const featured = getFeaturedPost();
@@ -21,7 +23,8 @@ export default function HomePage() {
     "@id": "https://blog.ugandhar.in/#blog",
     name: "Ugandhar Vaddi — Personal Blog",
     url: "https://blog.ugandhar.in",
-    description: "Writing about technology, data science, and software engineering.",
+    description:
+      "Writing on my personal blog about technology, data science, and software engineering.",
     publisher: {
       "@type": "Person",
       name: "Ugandhar Vaddi",
@@ -34,6 +37,11 @@ export default function HomePage() {
       name: post.seoTitle || `${post.title} by Ugandhar Vaddi`,
       url: `https://blog.ugandhar.in/posts/${post.slug}`,
       datePublished: post.date ? new Date(post.date).toISOString() : undefined,
+      dateModified: post.lastUpdated
+        ? new Date(post.lastUpdated).toISOString()
+        : post.date
+        ? new Date(post.date).toISOString()
+        : undefined,
       description: post.excerpt,
     })),
   };
@@ -51,12 +59,14 @@ export default function HomePage() {
         {/* Author Intro Hero Banner */}
         <HeroBanner totalPosts={posts.length} />
 
-        {/* Featured Story / Latest Release Preview */}
+        {/* Featured Story / Latest Story Preview */}
         {featured && (
           <section id="featured" className="scroll-mt-28 space-y-6">
             <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
               <div className="flex items-center gap-2 sm:gap-3 truncate">
-                <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 002</span>
+                <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">
+                  INDEX 002
+                </span>
                 <span className="text-border flex-shrink-0">/</span>
                 <span className="truncate">LATEST STORY PREVIEW</span>
               </div>
@@ -82,7 +92,9 @@ export default function HomePage() {
                 )}
 
                 <div
-                  className={`${featured.coverImage ? "md:col-span-7" : "md:col-span-12"} space-y-3.5`}
+                  className={`${
+                    featured.coverImage ? "md:col-span-7" : "md:col-span-12"
+                  } space-y-3.5`}
                 >
                   {/* Metadata Row */}
                   <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
@@ -96,7 +108,9 @@ export default function HomePage() {
                     {featured.tags && featured.tags.length > 0 && (
                       <>
                         <span className="text-border">·</span>
-                        <span className="text-on-surface-variant/80">{featured.tags[0]}</span>
+                        <span className="text-on-surface-variant/80">
+                          {featured.tags[0]}
+                        </span>
                       </>
                     )}
                   </div>
@@ -133,7 +147,9 @@ export default function HomePage() {
         <section id="articles" className="scroll-mt-28 space-y-6 pt-4">
           <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
             <div className="flex items-center gap-2 sm:gap-3 truncate">
-              <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 004</span>
+              <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">
+                INDEX 004
+              </span>
               <span className="text-border flex-shrink-0">/</span>
               <span className="truncate">ALL ARTICLES</span>
             </div>

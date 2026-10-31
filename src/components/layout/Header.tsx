@@ -30,14 +30,26 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav aria-label="Blog Navigation" className="hidden md:flex items-center gap-5 text-xs font-mono text-on-surface-variant">
-          <Link href="/#articles" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
+        <nav
+          aria-label="Blog Navigation"
+          className="hidden md:flex items-center gap-5 text-xs font-mono text-on-surface-variant"
+        >
+          <Link
+            href="/#articles"
+            className="hover:text-foreground hover:underline transition-colors touch-manipulation"
+          >
             Articles
           </Link>
-          <Link href="/#activity" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
+          <Link
+            href="/#activity"
+            className="hover:text-foreground hover:underline transition-colors touch-manipulation"
+          >
             Activity
           </Link>
-          <Link href="/#contact" className="hover:text-foreground hover:underline transition-colors touch-manipulation">
+          <Link
+            href="/#contact"
+            className="hover:text-foreground hover:underline transition-colors touch-manipulation"
+          >
             Contact
           </Link>
           <div className="w-[1px] h-3.5 bg-border/80 flex-shrink-0" />

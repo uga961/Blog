@@ -33,13 +33,17 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
       {/* Top Editorial Index Bar */}
       <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
         <div className="flex items-center gap-2 sm:gap-3 truncate">
-          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">INDEX 001</span>
+          <span className="text-foreground font-semibold uppercase tracking-wider flex-shrink-0">
+            INDEX 001
+          </span>
           <span className="text-border flex-shrink-0">/</span>
           <span className="truncate">PERSONAL BLOG &amp; NOTES</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
-          <span>B.E. ECE · {totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} PUBLISHED</span>
+          <span>
+            B.E. ECE · {totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} PUBLISHED
+          </span>
         </div>
       </div>
 
@@ -57,9 +61,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
           </div>
 
           <div className="space-y-3 text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans max-w-xl">
-            <p>
-              {siteConfig.bio}
-            </p>
+            <p>{siteConfig.bio}</p>
           </div>
 
           {/* Direct Actions */}
@@ -113,7 +115,9 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
                   className="hover:text-foreground hover:underline transition-colors flex items-center gap-1 touch-manipulation"
                 >
                   <span>{link.name}</span>
-                  {link.url.startsWith("http") && <ArrowUpRight className="w-3 h-3 opacity-60" />}
+                  {link.url.startsWith("http") && (
+                    <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  )}
                 </a>
                 {idx < socials.length - 1 && (
                   <span className="text-border select-none">/</span>

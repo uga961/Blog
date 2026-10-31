@@ -41,7 +41,6 @@ export async function generateMetadata({
   const postUrl = `${SITE_URL}/posts/${post.slug}`;
   const authorName = "Ugandhar Vaddi";
 
-  // Format: [Title] by Ugandhar Vaddi (strictly <= 68 chars for Bing & Google search snippets)
   let seoTitle = post.seoTitle;
   if (!seoTitle) {
     const candidate = `${post.title} by ${authorName}`;
@@ -70,6 +69,11 @@ export async function generateMetadata({
     },
   ];
 
+  const isoPublished = post.date ? new Date(post.date).toISOString() : undefined;
+  const isoModified = post.lastUpdated
+    ? new Date(post.lastUpdated).toISOString()
+    : isoPublished;
+
   return {
     title: {
       absolute: seoTitle,
@@ -97,8 +101,8 @@ export async function generateMetadata({
       description,
       url: postUrl,
       type: "article",
-      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
-      modifiedTime: post.date ? new Date(post.date).toISOString() : undefined,
+      publishedTime: isoPublished,
+      modifiedTime: isoModified,
       authors: [siteConfig.name],
       tags: post.tags,
       images: ogImages,
@@ -117,7 +121,8 @@ export async function generateMetadata({
       "dc.creator": siteConfig.name,
       "dc.title": seoTitle,
       "dc.description": description,
-      "article:published_time": post.date ? new Date(post.date).toISOString() : "",
+      "article:published_time": isoPublished || "",
+      "article:modified_time": isoModified || "",
       "article:author": siteConfig.name,
       "article:tag": post.tags.join(", "),
     },
@@ -133,6 +138,7 @@ export default async function PostPage({ params }: PageProps) {
   }
 
   const formattedDate = formatDisplayDate(post.date, "long");
+  const formattedUpdated = formatDisplayDate(post.lastUpdated || post.date, "short");
   const tocItems = extractTableOfContents(post.content);
   const articleUrl = `${SITE_URL}/posts/${post.slug}`;
 
@@ -152,17 +158,19 @@ export default async function PostPage({ params }: PageProps) {
       ? post.coverImage
       : `${SITE_URL}/social/og-image.png`;
 
-  const isoDate = post.date ? new Date(post.date).toISOString() : new Date().toISOString();
-  const authorName = "Ugandhar Vaddi";
+  const isoPublished = post.date ? new Date(post.date).toISOString() : new Date().toISOString();
+  const isoModified = post.lastUpdated
+    ? new Date(post.lastUpdated).toISOString()
+    : isoPublished;
 
   let seoTitle = post.seoTitle;
   if (!seoTitle) {
-    const candidate = `${post.title} by ${authorName}`;
+    const candidate = `${post.title} by Ugandhar Vaddi`;
     if (candidate.length <= 68) {
       seoTitle = candidate;
     } else {
       const shortened = post.title.split(":")[0].slice(0, 45).trim();
-      seoTitle = `${shortened} by ${authorName}`;
+      seoTitle = `${shortened} by Ugandhar Vaddi`;
     }
   }
 
@@ -187,8 +195,8 @@ export default async function PostPage({ params }: PageProps) {
           "@type": "WebPage",
           "@id": articleUrl,
         },
-        datePublished: isoDate,
-        dateModified: isoDate,
+        datePublished: isoPublished,
+        dateModified: isoModified,
         author: {
           "@type": "Person",
           "@id": "https://www.ugandhar.in/#person",
@@ -262,7 +270,7 @@ export default async function PostPage({ params }: PageProps) {
         <div className="mb-6 sm:mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
+            className="inline-flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation cursor-pointer"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to All Articles</span>
@@ -272,7 +280,7 @@ export default async function PostPage({ params }: PageProps) {
         {/* Article Header — Unboxed Editorial Typography */}
         <header className="mb-8 sm:mb-10 space-y-4 sm:space-y-5">
           {/* Metadata Row */}
-          <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
             <span className="text-foreground font-semibold">
               <time dateTime={post.date} suppressHydrationWarning>
                 {formattedDate}
@@ -284,6 +292,14 @@ export default async function PostPage({ params }: PageProps) {
               <>
                 <span className="text-border">·</span>
                 <span className="text-on-surface-variant/80">{post.tags[0]}</span>
+              </>
+            )}
+            {post.lastUpdated && post.lastUpdated !== post.date && (
+              <>
+                <span className="text-border">·</span>
+                <span className="rounded-[2px] bg-surface-subtle px-1.5 py-0.5 text-[10px] font-mono text-foreground border border-border/70">
+                  Updated {formattedUpdated}
+                </span>
               </>
             )}
           </div>
@@ -338,12 +354,19 @@ export default async function PostPage({ params }: PageProps) {
         {/* Bottom Actions & Author Info */}
         <section className="space-y-8 border-t border-border/80 pt-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs">
-            <span className="text-on-surface-variant">
-              Archived on{" "}
-              <strong className="text-foreground font-semibold">
-                {formattedDate}
-              </strong>
-            </span>
+            <div className="space-y-1">
+              <span className="text-on-surface-variant block">
+                Archived on{" "}
+                <strong className="text-foreground font-semibold">
+                  {formattedDate}
+                </strong>
+              </span>
+              {post.lastUpdated && (
+                <span className="text-on-surface-variant/80 text-[11px] block">
+                  Last updated {formatDisplayDate(post.lastUpdated, "long")}
+                </span>
+              )}
+            </div>
             <ShareButtons title={post.title} url={articleUrl} />
           </div>
 

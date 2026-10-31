@@ -30,7 +30,7 @@ async function getLastFmNowPlaying(): Promise<MusicTrack | null> {
 
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "PersonalBlog/1.0",
+        "User-Agent": "UgandharBlog/2.0",
       },
       cache: "no-store",
     });
@@ -52,7 +52,7 @@ async function getLastFmNowPlaying(): Promise<MusicTrack | null> {
         ? track.album["#text"] || track.album.name
         : track.album;
 
-    // Get highest resolution image (ignore Last.fm white star placeholder)
+    // Get highest resolution image (ignore Last.fm placeholder star)
     const images = Array.isArray(track.image) ? track.image : [];
     const bestImage =
       images.find((img: { size?: string }) => img.size === "extralarge")?.["#text"] ||
@@ -83,7 +83,7 @@ async function getLastFmNowPlaying(): Promise<MusicTrack | null> {
 /**
  * Master music resolver:
  * 1. Checks Last.fm first (free live scrobbling from Spotify).
- * 2. Checks native Spotify API (requires Premium).
+ * 2. Checks native Spotify API.
  * 3. Falls back to static playlist showcase.
  */
 export async function getLiveMusicTrack(): Promise<MusicTrack> {
@@ -107,6 +107,8 @@ export async function getLiveMusicTrack(): Promise<MusicTrack> {
   return {
     isPlaying: false,
     configured: false,
+    title: "Hot Hits Telugu & Rhythm",
+    artist: "Tollywood energy & daily focus tracks",
     profileUrl: SPOTIFY_PROFILE_URL,
     source: "static",
   };

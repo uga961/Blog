@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link2, Check, MessageCircle } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa6";
+import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 interface ShareButtonsProps {
   title: string;
@@ -29,6 +29,10 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
     url
   )}`;
+
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    title
+  )}&url=${encodeURIComponent(url)}`;
 
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -70,6 +74,17 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
       >
         <FaLinkedin className="h-3.5 w-3.5 text-on-surface-variant" />
         <span>LinkedIn</span>
+      </a>
+
+      <a
+        href={twitterUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 rounded-[3px] border border-border/80 bg-surface/80 px-3 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:border-foreground touch-manipulation"
+        title="Share on X"
+      >
+        <FaXTwitter className="h-3.5 w-3.5 text-on-surface-variant" />
+        <span>Post</span>
       </a>
     </div>
   );

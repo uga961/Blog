@@ -13,18 +13,17 @@ export async function GET() {
     .map((post) => {
       const postUrl = `${siteUrl}/posts/${post.slug}`;
       const pubDate = new Date(post.date).toUTCString();
-      const articleTitle = post.seoTitle || `${post.title} by ${siteConfig.name}`;
 
       return `
     <item>
-      <title><![CDATA[${articleTitle}]]></title>
+      <title><![CDATA[${post.title}]]></title>
       <link>${postUrl}</link>
       <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${pubDate}</pubDate>
       <dc:creator><![CDATA[${siteConfig.name}]]></dc:creator>
       <author><![CDATA[${siteConfig.email} (${siteConfig.name})]]></author>
       <description><![CDATA[${post.excerpt || post.title}]]></description>
-      ${post.tags.map((t) => `<category>${t}</category>`).join("\n      ")}
+      ${post.tags.map((t) => `<category><![CDATA[${t}]]></category>`).join("\n      ")}
     </item>`;
     })
     .join("");

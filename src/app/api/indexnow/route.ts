@@ -1,25 +1,28 @@
 import { NextResponse } from "next/server";
 import { getAllPosts } from "@/lib/posts";
 
-const INDEXNOW_KEY = "2f8745c1a89b4f99a071de8463990b76";
+export const dynamic = "force-dynamic";
+
 const HOST = "blog.ugandhar.in";
+const KEY = "2f8745c1a89b4f99a071de8463990b76";
+const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
-export async function GET() {
-  const posts = getAllPosts(false);
-  const urlList = [
-    `https://${HOST}`,
-    ...posts.map((post) => `https://${HOST}/posts/${post.slug}`),
-  ];
-
-  const payload = {
-    host: HOST,
-    key: INDEXNOW_KEY,
-    keyLocation: `https://${HOST}/${INDEXNOW_KEY}.txt`,
-    urlList,
-  };
-
+export async function POST() {
   try {
-    const response = await fetch("https://api.indexnow.org/indexnow", {
+    const posts = getAllPosts(false);
+    const urls = [
+      `https://${HOST}`,
+      ...posts.map((post) => `https://${HOST}/posts/${post.slug}`),
+    ];
+
+    const payload = {
+      host: HOST,
+      key: KEY,
+      keyLocation: KEY_LOCATION,
+      urlList: urls,
+    };
+
+    const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -28,15 +31,13 @@ export async function GET() {
     });
 
     return NextResponse.json({
-      success: response.ok,
-      status: response.status,
-      submittedUrls: urlList.length,
-      urls: urlList,
+      success: res.ok,
+      status: res.status,
+      urlsSubmitted: urls.length,
     });
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Unknown error";
+  } catch (error) {
     return NextResponse.json(
-      { success: false, error: message },
+      { error: "Failed to submit IndexNow", details: String(error) },
       { status: 500 }
     );
   }

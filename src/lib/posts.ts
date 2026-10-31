@@ -10,6 +10,7 @@ export interface Post {
   title: string;
   seoTitle?: string;
   date: string;
+  lastUpdated: string;
   excerpt: string;
   content: string;
   tags: string[];
@@ -53,6 +54,20 @@ function extractFallbackExcerpt(content: string, maxLength: number = 160): strin
 }
 
 /**
+ * Normalizes date to YYYY-MM-DD string.
+ */
+function normalizeDate(rawDate: unknown): string {
+  if (!rawDate) return new Date().toISOString().slice(0, 10);
+  try {
+    const d = new Date(rawDate as string | number | Date);
+    if (!isNaN(d.getTime())) {
+      return d.toISOString().slice(0, 10);
+    }
+  } catch {}
+  return String(rawDate).slice(0, 10);
+}
+
+/**
  * Fetches all published markdown posts sorted by date (newest first).
  */
 export function getAllPosts(includeDrafts: boolean = false): Post[] {
@@ -65,6 +80,11 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
     if (!fileName.endsWith(".md")) continue;
 
     const filePath = path.join(dir, fileName);
+    let stats: fs.Stats | null = null;
+    try {
+      stats = fs.statSync(filePath);
+    } catch {}
+
     const fileContents = fs.readFileSync(filePath, "utf-8");
 
     try {
@@ -75,16 +95,22 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
       if (!includeDrafts && !published) continue;
 
       const fileSlug = fileName.replace(/\.md$/, "");
-      const slug = data.slug ? generateSlug(data.slug) : fileSlug;
-      const title = data.title || fileSlug.replace(/-/g, " ");
+      const slug = data.slug ? generateSlug(String(data.slug)) : fileSlug;
+      const title = data.title ? String(data.title) : fileSlug.replace(/-/g, " ");
       const seoTitle = data.seoTitle ? String(data.seoTitle).trim() : undefined;
-      const date = data.date ? new Date(data.date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10);
-      const excerpt = data.excerpt || extractFallbackExcerpt(content);
+      const date = normalizeDate(data.date);
+
+      // Automatic last modified time detection:
+      // If specified in frontmatter, use that; otherwise use filesystem stats mtime
+      const autoMtime = stats ? stats.mtime.toISOString().slice(0, 10) : date;
+      const lastUpdated = data.lastUpdated ? normalizeDate(data.lastUpdated) : autoMtime;
+
+      const excerpt = data.excerpt ? String(data.excerpt).trim() : extractFallbackExcerpt(content);
       const tags = Array.isArray(data.tags)
-        ? data.tags.map((t: string) => String(t).trim()).filter(Boolean)
+        ? data.tags.map((t: unknown) => String(t).trim()).filter(Boolean)
         : [];
-      const coverImage = data.coverImage || undefined;
-      const author = data.author || "Ugandhar Vaddi";
+      const coverImage = data.coverImage ? String(data.coverImage).trim() : undefined;
+      const author = data.author ? String(data.author).trim() : "Ugandhar Vaddi";
 
       const rt = readingTime(content);
       const minutes = Math.max(1, Math.ceil(rt.minutes));
@@ -95,6 +121,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
         title,
         seoTitle,
         date,
+        lastUpdated,
         excerpt,
         content: content.trim(),
         tags,
@@ -113,7 +140,7 @@ export function getAllPosts(includeDrafts: boolean = false): Post[] {
 }
 
 /**
- * Fetches a single post by its URL slug.
+ * Fetches a single post by its URL slug or filename id.
  */
 export function getPostBySlug(slug: string, includeDrafts: boolean = false): Post | null {
   const allPosts = getAllPosts(includeDrafts);
@@ -139,7 +166,7 @@ export function getAllTags(): { name: string; count: number }[] {
 }
 
 /**
- * Retrieves the latest / featured article for the hero sneak peek.
+ * Retrieves the latest / featured article for the hero preview.
  */
 export function getFeaturedPost(): Post | null {
   const posts = getAllPosts(false);

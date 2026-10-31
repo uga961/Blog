@@ -27,9 +27,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   if (!mounted) {
     return (
-      <div
-        className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 flex items-center justify-center ${className}`}
-      >
+      <div className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 flex items-center justify-center ${className}`}>
         <div className="w-3.5 h-3.5" />
       </div>
     );

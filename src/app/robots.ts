@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,18 +6,17 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/api/"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
+        disallow: ["/api/"],
       },
       {
         userAgent: "Bingbot",
         allow: "/",
-      },
-      {
-        userAgent: "Googlebot-Image",
-        allow: "/",
+        disallow: ["/api/"],
       },
     ],
     sitemap: "https://blog.ugandhar.in/sitemap.xml",

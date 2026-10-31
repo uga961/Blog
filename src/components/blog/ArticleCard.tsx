@@ -24,9 +24,7 @@ export function ArticleCard({ post }: ArticleCardProps) {
             {formattedDate}
           </time>
         </div>
-        <div>
-          {post.readingTime} min read
-        </div>
+        <div>{post.readingTime} min read</div>
       </div>
 
       {/* Right Column: Title, Excerpt, Tags, Arrow */}

@@ -9,14 +9,14 @@ import {
   SiHackerrank,
 } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
-import { BookOpen, ExternalLink, Globe, Code2, Rss, Mail } from "lucide-react";
+import { BookOpen, ExternalLink, Globe, Code2 } from "lucide-react";
 
 interface SocialIconProps {
   name: string;
   className?: string;
 }
 
-export function SocialIcon({ name, className = "w-4 h-4" }: SocialIconProps) {
+export function SocialIcon({ name, className = "w-5 h-5" }: SocialIconProps) {
   const norm = name.toLowerCase();
 
   const iconProps = {
@@ -39,14 +39,8 @@ export function SocialIcon({ name, className = "w-4 h-4" }: SocialIconProps) {
       return <SiHackerrank {...iconProps} />;
     case "blog":
       return <BookOpen {...iconProps} />;
-    case "rss":
-      return <Rss {...iconProps} />;
-    case "mail":
-    case "email":
-      return <Mail {...iconProps} />;
     case "website":
     case "globe":
-    case "portfolio":
       return <Globe {...iconProps} />;
     case "code":
       return <Code2 {...iconProps} />;

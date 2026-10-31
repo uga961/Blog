@@ -1,7 +1,9 @@
 ---
 title: "Your Post Title Here"
 slug: "your-post-title-here"
-date: "2026-10-21"
+date: "2026-10-31"
+# Optional override for lastUpdated (e.g. "2026-10-31"). If left blank, the system automatically detects the last modified date of this file!
+lastUpdated: ""
 excerpt: "A short 1-2 sentence preview or hook describing what this article covers."
 tags: ["Technology", "Engineering"]
 coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
@@ -10,7 +12,8 @@ author: "Ugandhar"
 published: true
 ---
 <!--
-While adding images from github, use this type of URL : https://raw.githubusercontent.com/username/projectname/main/source_of_the_image
+While adding images from GitHub, use this type of raw URL:
+https://raw.githubusercontent.com/username/projectname/main/source_of_the_image
 -->
 
 <!-- 
@@ -20,6 +23,7 @@ HOW TO USE THIS TEMPLATE:
 3. If slug is left blank or matches filename, the website automatically handles it.
 4. Set published: false if you want to keep it as a private local draft!
 5. Start writing your content below using Markdown.
+6. Last Updated Date & Time is AUTOMATICALLY computed by the system based on file modification or git history.
 -->
 
 ## Introduction
