@@ -221,7 +221,7 @@ Deploying to Vercel takes less than 2 minutes:
 
 1. **Import Project into Vercel**:
    - Go to [vercel.com/new](https://vercel.com/new).
-   - Select your GitHub repository: `uga961/blog`.
+   - Select your GitHub repository: `username/project_name`.
 
 2. **Configure Project Settings**:
    - **Framework Preset**: `Next.js` (detected automatically)
@@ -232,25 +232,25 @@ Deploying to Vercel takes less than 2 minutes:
 
 3. **Set Environment Variables**:
    In the **Environment Variables** section of the Vercel project configuration, add:
-   - `SPOTIFY_CLIENT_ID` = `cf52a672b46643218d7904013ad57a70`
-   - `SPOTIFY_CLIENT_SECRET` = `62eb9bdf24764fd493efb2f0faa0bc2c`
-   - `SPOTIFY_REFRESH_TOKEN` = `AQBcD9FVcqDhOnsihN4wllgSOgfu1KHOECri8D4Lhs4W_Yq8hD-zNRqAqG_yjkpzAlTwOND45KnU6a1TGeHD4Sd5maj-aOmvoLXfzs8RMpOj556t23j5bhRBuGLBF1wZr3c`
-   - `LASTFM_USERNAME` = `uga961`
-   - `LASTFM_API_KEY` = `84e7bb3a7e5455a00069503881b63e5e`
-   - `INDEXNOW_KEY` = `2f8745c1a89b4f99a071de8463990b76`
-   - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` = `d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8`
+   - `SPOTIFY_CLIENT_ID` = `YOUR_KEY`
+   - `SPOTIFY_CLIENT_SECRET` = `YOUR_KEY`
+   - `SPOTIFY_REFRESH_TOKEN` = `YOUR_KEY`
+   - `LASTFM_USERNAME` = `YOUR_USER_NAME`
+   - `LASTFM_API_KEY` = `YOUR_KEY`
+   - `INDEXNOW_KEY` = `YOUR_KEY`
+   - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` = `YOUR_KEY`
 
 4. **Deploy**:
    - Click **Deploy**. Vercel will build the project and output your live deployment preview.
 
-5. **Connect Custom Domain (`blog.ugandhar.in`)**:
+5. **Connect Custom Domain *(Optional)* (`yourdomain.com`)**:
    - In your Vercel Project Dashboard, navigate to **Settings** → **Domains**.
-   - Add `blog.ugandhar.in`.
+   - Add `yourdomain.com`.
    - Vercel will prompt you to add a **CNAME** DNS record at your domain registrar:
      - **Type**: `CNAME`
      - **Name / Host**: `blog`
      - **Value / Target**: `cname.vercel-dns.com`
-   - Within minutes, SSL certificates generate automatically and `https://blog.ugandhar.in` goes live!
+   - Within minutes, SSL certificates generate automatically and site goes live!
 
 ---
 
