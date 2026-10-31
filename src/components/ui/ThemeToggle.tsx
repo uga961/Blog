@@ -1,33 +1,66 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    const hasDark = document.documentElement.classList.contains("dark");
-    setIsDark(hasDark);
+  const syncTheme = useCallback(() => {
+    const isCurrentlyDark = document.documentElement.classList.contains("dark");
+    setIsDark(isCurrentlyDark);
   }, []);
 
+  useEffect(() => {
+    setMounted(true);
+    syncTheme();
+
+    // Observe changes to the <html> element's class attribute so all toggles stay 100% in sync
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          syncTheme();
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Also listen to cross-tab storage events and custom theme-change events
+    window.addEventListener("theme-change", syncTheme);
+    window.addEventListener("storage", syncTheme);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("theme-change", syncTheme);
+      window.removeEventListener("storage", syncTheme);
+    };
+  }, [syncTheme]);
+
   const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDark(false);
-    } else {
+    const nextDark = !document.documentElement.classList.contains("dark");
+    if (nextDark) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
-      setIsDark(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
+    setIsDark(nextDark);
+    window.dispatchEvent(
+      new CustomEvent("theme-change", { detail: { isDark: nextDark } })
+    );
   };
 
   if (!mounted) {
     return (
-      <div className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 flex items-center justify-center ${className}`}>
+      <div
+        className={`w-8 h-8 rounded-[3px] border border-border/80 bg-surface/50 flex items-center justify-center ${className}`}
+      >
         <div className="w-3.5 h-3.5" />
       </div>
     );

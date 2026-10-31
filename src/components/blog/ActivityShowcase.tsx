@@ -72,8 +72,8 @@ export function ActivityShowcase() {
           <span className="truncate">CURRENTLY CRAFTING &amp; GROOVING</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
-          <span className="inline-block w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
-          <span>LIVE TELEMETRY</span>
+          <span className="inline-block w-2 h-2 rounded-full bg-[#1DB954] shadow-[0_0_8px_rgba(29,185,84,0.6)] animate-pulse" />
+          <span className="text-[#1DB954] font-medium">LIVE TELEMETRY</span>
         </div>
       </div>
 
@@ -82,7 +82,8 @@ export function ActivityShowcase() {
         <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex flex-col justify-between space-y-5 transition-colors hover:border-foreground/30">
           <div className="space-y-3.5">
             <div className="flex items-center justify-between text-xs font-mono text-on-surface-variant">
-              <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-foreground">
+              <span className="inline-flex items-center gap-2 font-semibold uppercase tracking-wider text-foreground">
+                <span className="inline-block w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] animate-pulse" />
                 <Code2 className="h-3.5 w-3.5 text-on-surface-variant" />
                 <span>Currently Building</span>
               </span>

@@ -265,7 +265,7 @@ export default async function PostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-14">
+      <main className="mx-auto w-full max-w-5xl lg:max-w-6xl flex-1 px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-14">
         {/* Back Navigation Button */}
         <div className="mb-6 sm:mb-8">
           <Link
@@ -277,151 +277,154 @@ export default async function PostPage({ params }: PageProps) {
           </Link>
         </div>
 
-        {/* Article Header — Unboxed Editorial Typography */}
-        <header className="mb-8 sm:mb-10 space-y-4 sm:space-y-5">
-          {/* Metadata Row */}
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
-            <span className="text-foreground font-semibold">
-              <time dateTime={post.date} suppressHydrationWarning>
-                {formattedDate}
-              </time>
-            </span>
-            <span className="text-border">·</span>
-            <span>{post.readingTime} min read</span>
-            {post.tags && post.tags.length > 0 && (
-              <>
-                <span className="text-border">·</span>
-                <span className="text-on-surface-variant/80">{post.tags[0]}</span>
-              </>
-            )}
-            {post.lastUpdated && post.lastUpdated !== post.date && (
-              <>
-                <span className="text-border">·</span>
-                <span className="rounded-[2px] bg-surface-subtle px-1.5 py-0.5 text-[10px] font-mono text-foreground border border-border/70">
-                  Updated {formattedUpdated}
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] break-words">
-            {post.title}
-          </h1>
-
-          {/* Excerpt */}
-          {post.excerpt && (
-            <p className="text-base sm:text-lg leading-relaxed text-on-surface-variant font-sans">
-              {post.excerpt}
-            </p>
-          )}
-
-          {/* Tag Chips */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-[3px] border border-border/80 bg-surface/50 px-2 py-0.5 text-[11px] font-mono text-on-surface-variant"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-        {/* Cover Image */}
-        {post.coverImage && (
-          <div className="mb-10 overflow-hidden rounded-[4px] border border-border/80 bg-surface-container shadow-subtle">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="h-auto w-full object-cover max-h-[480px]"
-            />
-          </div>
-        )}
-
-        {/* Table of Contents */}
-        {tocItems.length > 1 && <TableOfContents items={tocItems} />}
-
-        {/* Centered Markdown Content Column */}
-        <div className="mx-auto max-w-reading mb-14">
-          <MarkdownRenderer content={post.content} />
-        </div>
-
-        {/* Bottom Actions & Author Info */}
-        <section className="space-y-8 border-t border-border/80 pt-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs">
-            <div className="space-y-1">
-              <span className="text-on-surface-variant block">
-                Archived on{" "}
-                <strong className="text-foreground font-semibold">
+        {/* Article Centered Content Wrapper (flexible & ergonomic reading width) */}
+        <div className="w-full max-w-3xl lg:max-w-[860px] mx-auto">
+          {/* Article Header — Unboxed Editorial Typography */}
+          <header className="mb-8 sm:mb-10 space-y-4 sm:space-y-5">
+            {/* Metadata Row */}
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-on-surface-variant">
+              <span className="text-foreground font-semibold">
+                <time dateTime={post.date} suppressHydrationWarning>
                   {formattedDate}
-                </strong>
+                </time>
               </span>
-              {post.lastUpdated && (
-                <span className="text-on-surface-variant/80 text-[11px] block">
-                  Last updated {formatDisplayDate(post.lastUpdated, "long")}
-                </span>
+              <span className="text-border">·</span>
+              <span>{post.readingTime} min read</span>
+              {post.tags && post.tags.length > 0 && (
+                <>
+                  <span className="text-border">·</span>
+                  <span className="text-on-surface-variant/80">{post.tags[0]}</span>
+                </>
+              )}
+              {post.lastUpdated && post.lastUpdated !== post.date && (
+                <>
+                  <span className="text-border">·</span>
+                  <span className="rounded-[2px] bg-surface-subtle px-1.5 py-0.5 text-[10px] font-mono text-foreground border border-border/70">
+                    Updated {formattedUpdated}
+                  </span>
+                </>
               )}
             </div>
-            <ShareButtons title={post.title} url={articleUrl} />
-          </div>
 
-          {/* Author Card */}
-          <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex items-start gap-4 sm:gap-5">
-            <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-[3px] border border-border/80 bg-surface text-foreground font-mono text-base sm:text-lg font-bold">
-              {siteConfig.author.initials}
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-base font-bold text-foreground font-sans">
-                {siteConfig.name}
-              </h3>
-              <p className="text-xs text-foreground/80 font-mono">
-                {siteConfig.tagline}
-              </p>
-              <p className="text-xs leading-relaxed text-on-surface-variant pt-1 font-sans">
-                {siteConfig.bio}
-              </p>
-            </div>
-          </div>
+            {/* Headline */}
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] break-words">
+              {post.title}
+            </h1>
 
-          {/* Related Articles */}
-          {relatedPosts.length > 0 && (
-            <div className="space-y-3 pt-2">
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
-                Continue Reading
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {relatedPosts.map((r) => (
-                  <Link
-                    key={r.slug}
-                    href={`/posts/${r.slug}`}
-                    className="group flex flex-col justify-between rounded-[4px] border border-border/80 bg-surface/40 p-4 sm:p-5 transition-colors hover:border-foreground/30 hover:bg-surface/70"
+            {/* Excerpt */}
+            {post.excerpt && (
+              <p className="text-base sm:text-lg leading-relaxed text-on-surface-variant font-sans">
+                {post.excerpt}
+              </p>
+            )}
+
+            {/* Tag Chips */}
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-[3px] border border-border/80 bg-surface/50 px-2 py-0.5 text-[11px] font-mono text-on-surface-variant"
                   >
-                    <div className="space-y-1.5">
-                      <span
-                        className="text-[11px] font-mono text-on-surface-variant"
-                        suppressHydrationWarning
-                      >
-                        {formatDisplayDate(r.date, "short")} · {r.readingTime} min read
-                      </span>
-                      <h4 className="font-serif text-base font-bold text-foreground group-hover:underline transition-colors line-clamp-2 leading-snug">
-                        {r.title}
-                      </h4>
-                    </div>
-                    <div className="mt-3 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
-                      <span>Read article</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                  </Link>
+                    #{tag}
+                  </span>
                 ))}
               </div>
+            )}
+          </header>
+
+          {/* Cover Image */}
+          {post.coverImage && (
+            <div className="mb-10 overflow-hidden rounded-[4px] border border-border/80 bg-surface-container shadow-subtle">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="h-auto w-full object-cover max-h-[520px]"
+              />
             </div>
           )}
-        </section>
+
+          {/* Table of Contents */}
+          {tocItems.length > 1 && <TableOfContents items={tocItems} />}
+
+          {/* Markdown Content Column */}
+          <div className="w-full mb-14">
+            <MarkdownRenderer content={post.content} />
+          </div>
+
+          {/* Bottom Actions & Author Info */}
+          <section className="space-y-8 border-t border-border/80 pt-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-mono text-xs">
+              <div className="space-y-1">
+                <span className="text-on-surface-variant block">
+                  Archived on{" "}
+                  <strong className="text-foreground font-semibold">
+                    {formattedDate}
+                  </strong>
+                </span>
+                {post.lastUpdated && (
+                  <span className="text-on-surface-variant/80 text-[11px] block">
+                    Last updated {formatDisplayDate(post.lastUpdated, "long")}
+                  </span>
+                )}
+              </div>
+              <ShareButtons title={post.title} url={articleUrl} />
+            </div>
+
+            {/* Author Card */}
+            <div className="rounded-[4px] border border-border/80 bg-surface/60 p-5 sm:p-6 flex items-start gap-4 sm:gap-5">
+              <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-[3px] border border-border/80 bg-surface text-foreground font-mono text-base sm:text-lg font-bold">
+                {siteConfig.author.initials}
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-foreground font-sans">
+                  {siteConfig.name}
+                </h3>
+                <p className="text-xs text-foreground/80 font-mono">
+                  {siteConfig.tagline}
+                </p>
+                <p className="text-xs leading-relaxed text-on-surface-variant pt-1 font-sans">
+                  {siteConfig.bio}
+                </p>
+              </div>
+            </div>
+
+            {/* Related Articles */}
+            {relatedPosts.length > 0 && (
+              <div className="space-y-3 pt-2">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-on-surface-variant">
+                  Continue Reading
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {relatedPosts.map((r) => (
+                    <Link
+                      key={r.slug}
+                      href={`/posts/${r.slug}`}
+                      className="group flex flex-col justify-between rounded-[4px] border border-border/80 bg-surface/40 p-4 sm:p-5 transition-colors hover:border-foreground/30 hover:bg-surface/70"
+                    >
+                      <div className="space-y-1.5">
+                        <span
+                          className="text-[11px] font-mono text-on-surface-variant"
+                          suppressHydrationWarning
+                        >
+                          {formatDisplayDate(r.date, "short")} · {r.readingTime} min read
+                        </span>
+                        <h4 className="font-serif text-base font-bold text-foreground group-hover:underline transition-colors line-clamp-2 leading-snug">
+                          {r.title}
+                        </h4>
+                      </div>
+                      <div className="mt-3 flex items-center gap-1 text-xs font-mono font-semibold text-foreground">
+                        <span>Read article</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        </div>
       </main>
 
       <Footer />

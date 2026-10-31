@@ -27,7 +27,7 @@ export function ArticleGridCard({ post }: ArticleGridCardProps) {
               alt={post.title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              className="object-cover transition-all duration-300"
             />
           </div>
         )}

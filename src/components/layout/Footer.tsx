@@ -33,7 +33,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="pt-20 pb-28 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12 overflow-hidden"
+      className="pt-20 pb-28 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-5xl lg:max-w-6xl mx-auto space-y-12 overflow-hidden"
     >
       {/* Editorial Contact Block */}
       <div className="border-t border-border/80 pt-8 sm:pt-10 space-y-6">

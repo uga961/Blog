@@ -128,7 +128,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
 
 export function MarkdownRenderer({ content }: { content: string }) {
   return (
-    <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:tracking-tight prose-a:text-foreground prose-a:underline hover:prose-a:opacity-80 prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-0">
+    <article className="prose prose-neutral dark:prose-invert max-w-none text-[16px] sm:text-[17.5px] leading-[1.8] sm:leading-[1.85] prose-headings:font-serif prose-headings:tracking-tight prose-headings:text-foreground prose-p:my-5 prose-p:text-on-surface prose-li:my-1.5 prose-a:text-foreground prose-a:underline hover:prose-a:opacity-80 prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-0">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug, rehypeHighlight, rehypeUnwrapImageParagraphs]}

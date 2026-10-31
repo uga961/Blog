@@ -28,7 +28,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
   return (
     <section
       id="hero"
-      className="pt-24 sm:pt-36 pb-16 sm:pb-20 max-w-5xl mx-auto overflow-hidden"
+      className="pt-24 sm:pt-36 pb-16 sm:pb-20 max-w-5xl lg:max-w-6xl mx-auto overflow-hidden"
     >
       {/* Top Editorial Index Bar */}
       <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">
@@ -40,7 +40,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
           <span className="truncate">PERSONAL BLOG &amp; NOTES</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
           <span>
             B.E. ECE · {totalPosts} {totalPosts === 1 ? "ESSAY" : "ESSAYS"} PUBLISHED
           </span>
@@ -137,7 +137,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
                 fill
                 priority
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 50vw, 380px"
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                className="object-cover transition-all duration-500 ease-out"
               />
             </div>
             <div className="mt-2.5 sm:mt-3 pt-2 border-t border-border/60 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-on-surface-variant">

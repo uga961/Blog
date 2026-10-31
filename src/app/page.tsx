@@ -55,7 +55,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
       />
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
+      <main className="mx-auto w-full max-w-5xl lg:max-w-6xl flex-1 px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
         {/* Author Intro Hero Banner */}
         <HeroBanner totalPosts={posts.length} />
 
@@ -71,8 +71,8 @@ export default function HomePage() {
                 <span className="truncate">LATEST STORY PREVIEW</span>
               </div>
               <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-foreground/40" />
-                <span>FEATURED ARTICLE</span>
+                <span className="inline-block w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                <span className="text-foreground font-medium">FEATURED ARTICLE</span>
               </div>
             </div>
 
@@ -86,7 +86,7 @@ export default function HomePage() {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 380px, 340px"
                       priority
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      className="object-cover transition-all duration-500 ease-out"
                     />
                   </div>
                 )}
