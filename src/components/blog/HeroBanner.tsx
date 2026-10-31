@@ -28,7 +28,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
   return (
     <section
       id="hero"
-      className="pt-24 sm:pt-36 pb-16 sm:pb-20 max-w-5xl lg:max-w-6xl mx-auto overflow-hidden"
+      className="w-full pt-24 sm:pt-36 pb-16 sm:pb-20 overflow-hidden"
     >
       {/* Top Editorial Index Bar */}
       <div className="flex items-center justify-between border-b border-border/80 pb-3 text-xs font-mono text-on-surface-variant">

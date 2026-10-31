@@ -6,8 +6,8 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-3 bg-background/95 sm:bg-background/90 sm:backdrop-blur-md border-b border-border/80 transition-colors gpu-layer">
-      <div className="max-w-5xl lg:max-w-6xl mx-auto flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 lg:px-8 py-3 bg-background/95 sm:bg-background/90 sm:backdrop-blur-md border-b border-border/80 transition-colors gpu-layer">
+      <div className="w-full max-w-5xl lg:max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group touch-manipulation">
           <div className="relative w-6 h-6 flex-shrink-0 flex items-center justify-center">
             <Image

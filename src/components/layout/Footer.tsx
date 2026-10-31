@@ -33,7 +33,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="pt-20 pb-28 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-5xl lg:max-w-6xl mx-auto space-y-12 overflow-hidden"
+      className="w-full max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 sm:pb-32 space-y-12 overflow-hidden"
     >
       {/* Editorial Contact Block */}
       <div className="border-t border-border/80 pt-8 sm:pt-10 space-y-6">
@@ -50,11 +50,11 @@ export function Footer() {
           </span>
         </div>
 
-        <div className="max-w-2xl space-y-4">
+        <div className="space-y-4">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground font-sans uppercase break-words">
             Let&apos;s build something solid.
           </h2>
-          <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans">
+          <p className="max-w-2xl text-sm sm:text-base text-on-surface-variant leading-relaxed font-sans">
             Whether you want to discuss technology, research insights, data science, resilient systems, or collaborative opportunities &mdash; my inbox is always open.
           </p>
 
