@@ -37,7 +37,7 @@ export function HeroBanner({ totalPosts }: { totalPosts: number }) {
             INDEX 001
           </span>
           <span className="text-border flex-shrink-0">/</span>
-          <span className="truncate">PERSONAL BLOG &amp; NOTES</span>
+          <span className="truncate">THOUGHTS, ESSAYS &amp; NOTES</span>
         </div>
         <div className="hidden sm:flex items-center gap-2 flex-shrink-0 font-mono text-[11px]">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />

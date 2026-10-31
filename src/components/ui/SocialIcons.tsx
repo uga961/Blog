@@ -37,6 +37,7 @@ export function SocialIcon({ name, className = "w-5 h-5" }: SocialIconProps) {
       return <SiInstagram {...iconProps} />;
     case "hackerrank":
       return <SiHackerrank {...iconProps} />;
+    case "thoughts":
     case "blog":
       return <BookOpen {...iconProps} />;
     case "website":
