@@ -1,11 +1,11 @@
 export const siteConfig = {
   name: "Ugandhar Vaddi",
-  title: "Ugandhar Vaddi — Personal Blog",
-  tagline: "Writing on my personal blog about technology, data science, and software engineering.",
+  title: "Ugandhar Vaddi — Thoughts",
+  tagline: "Writing and personal thoughts on technology, data science, and software engineering.",
   bio: "Associate Data Scientist and open-source enthusiast. Exploring Statistics, Data Analysis, and resilient systems.",
-  description: "Writing on my personal blog about technology, data science, and software engineering.",
-  url: "https://blog.ugandhar.in",
-  domain: "blog.ugandhar.in",
+  description: "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
+  url: "https://thoughts.ugandhar.in",
+  domain: "thoughts.ugandhar.in",
   portfolioUrl: "https://www.ugandhar.in",
   email: "annajiratnam@gmail.com",
   author: {

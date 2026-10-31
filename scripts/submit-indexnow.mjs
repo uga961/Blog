@@ -9,7 +9,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const HOST = "blog.ugandhar.in";
+const HOST = "thoughts.ugandhar.in";
 const KEY = "2f8745c1a89b4f99a071de8463990b76";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const POSTS_DIR = path.join(process.cwd(), "posts");

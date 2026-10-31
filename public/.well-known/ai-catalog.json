@@ -23,17 +23,17 @@
       ]
     },
     {
-      "identifier": "urn:air:ugandhar.in:website:blog",
-      "displayName": "Personal Blog",
+      "identifier": "urn:air:ugandhar.in:website:thoughts",
+      "displayName": "Thoughts & Technical Journal",
       "type": "text/html",
-      "url": "https://blog.ugandhar.in",
-      "description": "Technical essays, software systems architecture, and engineering notes.",
+      "url": "https://thoughts.ugandhar.in",
+      "description": "Technical essays, software systems architecture, and engineering thoughts.",
       "representativeQueries": [
-        "Ugandhar Vaddi blog",
+        "Ugandhar Vaddi thoughts",
         "Ugandhar Vaddi technical essays"
       ],
       "tags": [
-        "blog",
+        "thoughts",
         "software-engineering",
         "essays"
       ]

@@ -3,7 +3,7 @@ import { getAllPosts } from "@/lib/posts";
 
 export const dynamic = "force-dynamic";
 
-const HOST = "blog.ugandhar.in";
+const HOST = "thoughts.ugandhar.in";
 const KEY = "2f8745c1a89b4f99a071de8463990b76";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 

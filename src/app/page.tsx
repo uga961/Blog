@@ -20,11 +20,11 @@ export default function HomePage() {
   const blogJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "@id": "https://blog.ugandhar.in/#blog",
-    name: "Ugandhar Vaddi — Personal Blog",
-    url: "https://blog.ugandhar.in",
+    "@id": "https://thoughts.ugandhar.in/#blog",
+    name: "Ugandhar Vaddi — Thoughts",
+    url: "https://thoughts.ugandhar.in",
     description:
-      "Writing on my personal blog about technology, data science, and software engineering.",
+      "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
     publisher: {
       "@type": "Person",
       name: "Ugandhar Vaddi",
@@ -32,10 +32,10 @@ export default function HomePage() {
     },
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
-      "@id": `https://blog.ugandhar.in/posts/${post.slug}#article`,
+      "@id": `https://thoughts.ugandhar.in/posts/${post.slug}#article`,
       headline: post.title,
       name: post.title,
-      url: `https://blog.ugandhar.in/posts/${post.slug}`,
+      url: `https://thoughts.ugandhar.in/posts/${post.slug}`,
       datePublished: post.date ? new Date(post.date).toISOString() : undefined,
       dateModified: post.lastUpdated
         ? new Date(post.lastUpdated).toISOString()
@@ -51,14 +51,14 @@ export default function HomePage() {
       image:
         post.coverImage && post.coverImage.trim() !== ""
           ? post.coverImage
-          : "https://blog.ugandhar.in/social/og-image.png",
+          : "https://thoughts.ugandhar.in/social/og-image.png",
       publisher: {
         "@type": "Person",
         name: "Ugandhar Vaddi",
         url: "https://www.ugandhar.in",
         logo: {
           "@type": "ImageObject",
-          url: "https://blog.ugandhar.in/icon.png",
+          url: "https://thoughts.ugandhar.in/icon.png",
         },
       },
     })),

@@ -14,7 +14,7 @@ import { MagneticDock } from "@/components/ui/MagneticDock";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 
-const SITE_URL = "https://blog.ugandhar.in";
+const SITE_URL = "https://thoughts.ugandhar.in";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -94,7 +94,7 @@ export async function generateMetadata({
       authors: [siteConfig.name],
       tags: post.tags,
       images: ogImages,
-      siteName: `${siteConfig.name}'s Blog`,
+      siteName: `${siteConfig.name} — Thoughts`,
       locale: "en_US",
     },
     twitter: {
@@ -161,7 +161,7 @@ export default async function PostPage({ params }: PageProps) {
         isPartOf: {
           "@type": "Blog",
           "@id": `${SITE_URL}/#blog`,
-          name: "Ugandhar Vaddi — Personal Blog",
+          name: "Ugandhar Vaddi — Thoughts",
           url: SITE_URL,
         },
         headline: post.title,
@@ -184,7 +184,7 @@ export default async function PostPage({ params }: PageProps) {
             "https://github.com/uga961",
             "https://www.linkedin.com/in/vaddi-ugandhar-b37877266/",
             "https://www.youtube.com/@uga961",
-            "https://blog.ugandhar.in",
+            "https://thoughts.ugandhar.in",
             "https://www.reddit.com/user/uga961/",
           ],
         },

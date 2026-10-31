@@ -6,7 +6,7 @@ Ugandhar Vaddi is an Associate Data Scientist at Tredence Analytics Solutions, b
 
 ## Core Navigation & Links
 - [Portfolio Homepage](https://ugandhar.in): Central engineering hub, bio, and direct contact.
-- [Personal Blog](https://blog.ugandhar.in): In-depth engineering essays, reflections, and technical notes.
+- [Thoughts](https://thoughts.ugandhar.in): In-depth engineering essays, reflections, and technical notes.
 - [GitHub Profile](https://github.com/uga961): Open-source repositories, VLSI memory models, and native utilities.
 - [LinkedIn Profile](https://www.linkedin.com/in/vaddi-ugandhar-b37877266/): Industry background, roles at Tredence, McKinsey & Company, and Cognizant.
 - [YouTube Channel](https://www.youtube.com/@uga961): Multi-day Python classes, pandas data workshops, and technical tutorials.

@@ -36,18 +36,18 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blog.ugandhar.in"),
+  metadataBase: new URL("https://thoughts.ugandhar.in"),
   title: {
-    default: "Ugandhar Vaddi — Personal Blog",
+    default: "Ugandhar Vaddi — Thoughts",
     template: "%s | Ugandhar Vaddi",
   },
   description:
-    "Writing on my personal blog about technology, data science, and software engineering.",
+    "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
   keywords: [
     "Ugandhar Vaddi",
     "Ugandhar",
-    "Ugandhar Vaddi Blog",
-    "Ugandhar Blog",
+    "Ugandhar Vaddi Thoughts",
+    "Ugandhar Thoughts",
     "uga961",
     "Data Scientist",
     "Associate Data Scientist",
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   publisher: siteConfig.name,
   alternates: {
-    canonical: "https://blog.ugandhar.in",
+    canonical: "https://thoughts.ugandhar.in",
     types: {
-      "application/rss+xml": "https://blog.ugandhar.in/feed.xml",
+      "application/rss+xml": "https://thoughts.ugandhar.in/feed.xml",
     },
   },
   verification: {
@@ -100,26 +100,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://blog.ugandhar.in",
-    siteName: "Ugandhar Vaddi — Blog",
-    title: "Ugandhar Vaddi — Personal Blog",
+    url: "https://thoughts.ugandhar.in",
+    siteName: "Ugandhar Vaddi — Thoughts",
+    title: "Ugandhar Vaddi — Thoughts",
     description:
-      "Writing on my personal blog about technology, data science, and software engineering.",
+      "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
     images: [
       {
-        url: "https://blog.ugandhar.in/social/og-image.png",
+        url: "https://thoughts.ugandhar.in/social/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ugandhar Vaddi — Personal Blog",
+        alt: "Ugandhar Vaddi — Thoughts",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ugandhar Vaddi — Personal Blog",
+    title: "Ugandhar Vaddi — Thoughts",
     description:
-      "Writing on my personal blog about technology, data science, and software engineering.",
-    images: ["https://blog.ugandhar.in/social/og-image.png"],
+      "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
+    images: ["https://thoughts.ugandhar.in/social/og-image.png"],
     creator: "@uga961",
     site: "@uga961",
   },
@@ -140,12 +140,12 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://blog.ugandhar.in/#website",
-      url: "https://blog.ugandhar.in",
-      name: "Ugandhar Vaddi — Personal Blog",
-      alternateName: ["Ugandhar's Blog", "Ugandhar Vaddi Blog", "Ugandhar Vaddi"],
+      "@id": "https://thoughts.ugandhar.in/#website",
+      url: "https://thoughts.ugandhar.in",
+      name: "Ugandhar Vaddi — Thoughts",
+      alternateName: ["Ugandhar's Thoughts", "Ugandhar Thoughts", "Ugandhar Vaddi"],
       description:
-        "Writing on my personal blog about technology, data science, and software engineering.",
+        "Writing and personal thoughts by Ugandhar Vaddi on technology, data science, and software engineering.",
       publisher: { "@id": "https://www.ugandhar.in/#person" },
       inLanguage: "en-US",
     },
@@ -155,12 +155,12 @@ const jsonLd = {
       name: "Ugandhar Vaddi",
       alternateName: ["uga961", "VADDI UGANDHAR"],
       url: "https://www.ugandhar.in",
-      image: "https://blog.ugandhar.in/avatar/profile.jpg",
+      image: "https://thoughts.ugandhar.in/avatar/profile.jpg",
       sameAs: [
         "https://github.com/uga961",
         "https://www.linkedin.com/in/vaddi-ugandhar-b37877266/",
         "https://www.youtube.com/@uga961",
-        "https://blog.ugandhar.in",
+        "https://thoughts.ugandhar.in",
         "https://www.reddit.com/user/uga961/",
       ],
       jobTitle: "Associate Data Scientist",
