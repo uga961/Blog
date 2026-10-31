@@ -31,7 +31,7 @@ export function Header() {
 
         {/* Desktop Navigation Links */}
         <nav
-          aria-label="Blog Navigation"
+          aria-label="Navigation"
           className="hidden md:flex items-center gap-5 text-xs font-mono text-on-surface-variant"
         >
           <Link

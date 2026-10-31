@@ -1,6 +1,6 @@
 ================================================================================
-UGANDHAR VADDI BLOG — MASTER CHEAT SHEET & WORKFLOW GUIDE
-Official repository for blog.ugandhar.in
+UGANDHAR VADDI THOUGHTS — MASTER CHEAT SHEET & WORKFLOW GUIDE
+Official repository for thoughts.ugandhar.in
 ================================================================================
 
 1. QUICK COMMAND REFERENCE
@@ -68,13 +68,13 @@ Step 7: Instant Search Engine Submission
 Google Search Console:
   - Meta verification code is pre-injected in <head>:
     d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8
-  - Dynamic sitemap is located at: https://blog.ugandhar.in/sitemap.xml
-  - Robots.txt is located at: https://blog.ugandhar.in/robots.txt
+  - Dynamic sitemap is located at: https://thoughts.ugandhar.in/sitemap.xml
+  - Robots.txt is located at: https://thoughts.ugandhar.in/robots.txt
   - Submit sitemap.xml in Google Search Console under 'Sitemaps'.
 
 Bing & Copilot (IndexNow):
   - Automatically configured with key file:
-    https://blog.ugandhar.in/2f8745c1a89b4f99a071de8463990b76.txt
+    https://thoughts.ugandhar.in/2f8745c1a89b4f99a071de8463990b76.txt
   - Run 'npm run indexnow' to push changes immediately.
 
 

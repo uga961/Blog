@@ -1,6 +1,6 @@
-# 🚀 Ugandhar Vaddi Blog — Master Cheat Sheet & Workflow Guide
+# 🚀 Ugandhar Vaddi Thoughts — Master Cheat Sheet & Workflow Guide
 
-A step-by-step developer cheat sheet for managing, writing, updating, indexing, and deploying articles on [blog.ugandhar.in](https://blog.ugandhar.in).
+A step-by-step developer cheat sheet for managing, writing, updating, indexing, and deploying articles on [thoughts.ugandhar.in](https://thoughts.ugandhar.in).
 
 ---
 
@@ -47,7 +47,7 @@ published: true
 
 **Key Fields Explained:**
 - **`title`**: The main title displayed on the homepage and article header.
-- **`slug`**: The URL path: `blog.ugandhar.in/posts/your-article-slug`. (If left blank, it auto-generates from the filename or title).
+- **`slug`**: The URL path: `thoughts.ugandhar.in/posts/your-article-slug`. (If left blank, it auto-generates from the filename or title).
 - **`date`**: Publication date in `YYYY-MM-DD` format.
 - **`lastUpdated`**: Can be left blank (`""`). The system automatically detects file modification timestamps!
 - **`excerpt`**: Used for search engine meta descriptions, OpenGraph social previews, and homepage cards.
@@ -84,7 +84,7 @@ git add posts/your-article-slug.md
 git commit -m "feat(blog): publish your article title here"
 git push origin main
 ```
-*Vercel will automatically build and deploy your changes to `https://blog.ugandhar.in` within 45 seconds.*
+*Vercel will automatically build and deploy your changes to `https://thoughts.ugandhar.in` within 45 seconds.*
 
 ### Step 7: Push Instantly to Search Engines (IndexNow)
 Notify search engines (Bing, Copilot, Yandex) to index your new article immediately without waiting for standard crawl cycles:
@@ -115,14 +115,14 @@ You do **NOT** have to update dates manually!
 ### Google Search Console
 - **Meta Verification**: Automatically injected into the `<head>` of every page:
   `d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8`
-- **Sitemap**: Available at `https://blog.ugandhar.in/sitemap.xml`.
-  Submit `https://blog.ugandhar.in/sitemap.xml` in your Google Search Console dashboard under **Sitemaps**.
-- **Robots.txt**: Live at `https://blog.ugandhar.in/robots.txt` allowing all legitimate crawlers.
+- **Sitemap**: Available at `https://thoughts.ugandhar.in/sitemap.xml`.
+  Submit `https://thoughts.ugandhar.in/sitemap.xml` in your Google Search Console dashboard under **Sitemaps**.
+- **Robots.txt**: Live at `https://thoughts.ugandhar.in/robots.txt` allowing all legitimate crawlers.
 - **Rich Structured Data**: Every article automatically includes JSON-LD `BlogPosting`, `BreadcrumbList`, and `Person` schema markup.
 
 ### Microsoft Bing & Copilot (IndexNow)
 - **Protocol**: IndexNow allows instant, push-based URL submission.
-- **Key File**: Hosted at `https://blog.ugandhar.in/2f8745c1a89b4f99a071de8463990b76.txt`.
+- **Key File**: Hosted at `https://thoughts.ugandhar.in/2f8745c1a89b4f99a071de8463990b76.txt`.
 - **Command**: Run `npm run indexnow` anytime you publish or update articles.
 
 ---

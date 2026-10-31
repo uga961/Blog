@@ -1,8 +1,8 @@
-# Ugandhar Vaddi — Personal Blog & Technical Journal
+# Ugandhar Vaddi — Thoughts & Technical Journal
 
-Official repository for [blog.ugandhar.in](https://blog.ugandhar.in).
+Official repository for [thoughts.ugandhar.in](https://thoughts.ugandhar.in).
 
-A high-performance, file-based personal technical blog and engineering diary built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Designed with an architectural, minimal editorial aesthetic synchronized with [ugandhar.in](https://www.ugandhar.in) — high-contrast typography, hairline borders, generous whitespace, real-time audio telemetry, and 100% pure Markdown content delivery with zero external database dependencies.
+A high-performance, file-based personal technical blog, thoughts, and engineering diary built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Designed with an architectural, minimal editorial aesthetic synchronized with [ugandhar.in](https://www.ugandhar.in) — high-contrast typography, hairline borders, generous whitespace, real-time audio telemetry, and 100% pure Markdown content delivery with zero external database dependencies.
 
 ---
 
@@ -50,7 +50,7 @@ The blog is engineered to match the precision and elegance of the portfolio site
 ## 📂 Project Directory Structure
 
 ```
-Blog/
+Thoughts/
 ├── posts/                          # Published markdown articles
 │   ├── debloat-android-tv-adb-guide.md
 │   ├── i-decided-to-start-this-again.md
@@ -221,7 +221,7 @@ Deploying to Vercel takes less than 2 minutes:
 
 1. **Import Project into Vercel**:
    - Go to [vercel.com/new](https://vercel.com/new).
-   - Select your GitHub repository: `username/project_name`.
+   - Select your GitHub repository: `uga961/Thoughts`.
 
 2. **Configure Project Settings**:
    - **Framework Preset**: `Next.js` (detected automatically)
@@ -243,12 +243,12 @@ Deploying to Vercel takes less than 2 minutes:
 4. **Deploy**:
    - Click **Deploy**. Vercel will build the project and output your live deployment preview.
 
-5. **Connect Custom Domain *(Optional)* (`yourdomain.com`)**:
+5. **Connect Custom Domain (`thoughts.ugandhar.in`)**:
    - In your Vercel Project Dashboard, navigate to **Settings** → **Domains**.
-   - Add `yourdomain.com`.
+   - Add `thoughts.ugandhar.in`.
    - Vercel will prompt you to add a **CNAME** DNS record at your domain registrar:
      - **Type**: `CNAME`
-     - **Name / Host**: `blog`
+     - **Name / Host**: `thoughts`
      - **Value / Target**: `cname.vercel-dns.com`
    - Within minutes, SSL certificates generate automatically and site goes live!
 

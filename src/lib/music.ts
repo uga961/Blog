@@ -30,7 +30,7 @@ async function getLastFmNowPlaying(): Promise<MusicTrack | null> {
 
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "UgandharBlog/2.0",
+        "User-Agent": "UgandharThoughts/2.0",
       },
       cache: "no-store",
     });
