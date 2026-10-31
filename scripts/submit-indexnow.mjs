@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Submits blog URLs to IndexNow (Bing, Microsoft Copilot, and Yandex).
+ * Submits thought article URLs to IndexNow (Bing, Microsoft Copilot, and Yandex).
  * Protocol spec: https://www.indexnow.org/
  */
 

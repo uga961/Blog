@@ -81,7 +81,7 @@ npm run update-dates
 Commit using portfolio conventional commit style:
 ```bash
 git add posts/your-article-slug.md
-git commit -m "feat(blog): publish your article title here"
+git commit -m "feat(thoughts): publish your article title here"
 git push origin main
 ```
 *Vercel will automatically build and deploy your changes to `https://thoughts.ugandhar.in` within 45 seconds.*
@@ -106,7 +106,7 @@ You do **NOT** have to update dates manually!
    - `date`: Displayed as the official published date (e.g. `October 31, 2026`).
    - `lastUpdated`: Displayed as a subtle badge `Updated Oct 31, 2026` if it differs from the publication date, and detailed in the footer metadata as `Last updated October 31, 2026`.
 3. **The Audit Script (`npm run update-dates`)**:
-   Runs [`scripts/update-post-dates.mjs`](file:///home/uga961/Projects/Blog/scripts/update-post-dates.mjs) which scans every file in `/posts`, checks timestamps, and reports any out-of-sync frontmatter.
+   Runs [`scripts/update-post-dates.mjs`](file:///home/uga961/Projects/Thoughts/scripts/update-post-dates.mjs) which scans every file in `/posts`, checks timestamps, and reports any out-of-sync frontmatter.
 
 ---
 

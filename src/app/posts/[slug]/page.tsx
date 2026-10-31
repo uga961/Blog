@@ -6,10 +6,10 @@ import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { extractTableOfContents } from "@/lib/markdown";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
-import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
-import { TableOfContents } from "@/components/blog/TableOfContents";
-import { ShareButtons } from "@/components/blog/ShareButtons";
+import { ReadingProgressBar } from "@/components/thoughts/ReadingProgressBar";
+import { MarkdownRenderer } from "@/components/thoughts/MarkdownRenderer";
+import { TableOfContents } from "@/components/thoughts/TableOfContents";
+import { ShareButtons } from "@/components/thoughts/ShareButtons";
 import { MagneticDock } from "@/components/ui/MagneticDock";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -160,7 +160,7 @@ export default async function PostPage({ params }: PageProps) {
         "@id": `${articleUrl}#article`,
         isPartOf: {
           "@type": "Blog",
-          "@id": `${SITE_URL}/#blog`,
+          "@id": `${SITE_URL}/#thoughts`,
           name: "Ugandhar Vaddi — Thoughts",
           url: SITE_URL,
         },

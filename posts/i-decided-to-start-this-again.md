@@ -29,7 +29,7 @@ Then I just sat.
 
 I didn’t know what to do next. No big goals. No urgent tasks. Just silence in the room.
 
-And that’s when the thought came — start the blog again.
+And that’s when the thought came — start writing again.
 
 Maybe today wasn’t “productive.” I didn’t build anything big. I didn’t study for hours. But the day felt full in a quiet way. I took care of small things. I enjoyed small comforts. I spoke to people I care about.
 

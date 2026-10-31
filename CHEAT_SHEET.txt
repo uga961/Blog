@@ -7,7 +7,7 @@ Official repository for thoughts.ugandhar.in
 --------------------------------------------------------------------------------
 npm run dev             Start local development server at http://localhost:3000
 npm run update-dates    Audit & sync lastUpdated timestamps across all posts
-npm run indexnow        Instantly push all blog URLs to Bing & Copilot
+npm run indexnow        Instantly push all article URLs to Bing & Copilot
 npm test                Run the 20 automated Vitest unit tests
 npm run lint            Run Next.js ESLint and TypeScript checks
 npm run build           Compile production build and generate all 16 static routes
@@ -46,7 +46,7 @@ Step 5: (Optional) Auto-Sync Dates
 
 Step 6: Commit & Push to GitHub
   git add posts/your-article-slug.md
-  git commit -m "feat(blog): publish your article title here"
+  git commit -m "feat(thoughts): publish your article title here"
   git push origin main
 
 Step 7: Instant Search Engine Submission

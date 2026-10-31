@@ -4,9 +4,9 @@ import Image from "next/image";
 import { formatDisplayDate } from "@/lib/date";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ArticleList } from "@/components/blog/ArticleList";
-import { ActivityShowcase } from "@/components/blog/ActivityShowcase";
-import { HeroBanner } from "@/components/blog/HeroBanner";
+import { ArticleList } from "@/components/thoughts/ArticleList";
+import { ActivityShowcase } from "@/components/thoughts/ActivityShowcase";
+import { HeroBanner } from "@/components/thoughts/HeroBanner";
 import { getAllPosts, getFeaturedPost } from "@/lib/posts";
 import { MagneticDock } from "@/components/ui/MagneticDock";
 import { ArrowRight } from "lucide-react";
@@ -17,10 +17,10 @@ export default function HomePage() {
   const posts = getAllPosts(false).map(({ content, ...summary }) => summary);
   const featured = getFeaturedPost();
 
-  const blogJsonLd = {
+  const thoughtsJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "@id": "https://thoughts.ugandhar.in/#blog",
+    "@id": "https://thoughts.ugandhar.in/#thoughts",
     name: "Ugandhar Vaddi — Thoughts",
     url: "https://thoughts.ugandhar.in",
     description:
@@ -70,7 +70,7 @@ export default function HomePage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(thoughtsJsonLd) }}
       />
 
       <main className="mx-auto w-full max-w-5xl lg:max-w-6xl flex-1 px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">

@@ -2,13 +2,13 @@
 
 Official repository for [thoughts.ugandhar.in](https://thoughts.ugandhar.in).
 
-A high-performance, file-based personal technical blog, thoughts, and engineering diary built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Designed with an architectural, minimal editorial aesthetic synchronized with [ugandhar.in](https://www.ugandhar.in) — high-contrast typography, hairline borders, generous whitespace, real-time audio telemetry, and 100% pure Markdown content delivery with zero external database dependencies.
+A high-performance, file-based personal technical thoughts, essays, and engineering diary built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Designed with an architectural, minimal editorial aesthetic synchronized with [ugandhar.in](https://www.ugandhar.in) — high-contrast typography, hairline borders, generous whitespace, real-time audio telemetry, and 100% pure Markdown content delivery with zero external database dependencies.
 
 ---
 
 ## 🏛 Design System & Architecture
 
-The blog is engineered to match the precision and elegance of the portfolio site while delivering an optimal long-form reading experience:
+The site is engineered to match the precision and elegance of the portfolio site while delivering an optimal long-form reading experience:
 
 - **Minimal Editorial Architecture**: Clean horizontal divider rules (`border-b border-border/80`), structured index numbers (`INDEX 001`, `INDEX 002`, `INDEX 003`...), and intentional whitespace.
 - **Tri-Font Typographic Hierarchy**:
@@ -85,7 +85,7 @@ Thoughts/
 │   │   ├── robots.ts               # Robots.txt route
 │   │   └── sitemap.ts              # Dynamic sitemap route
 │   ├── components/
-│   │   ├── blog/
+│   │   ├── thoughts/
 │   │   │   ├── ActivityShowcase.tsx # Live building + Spotify turntable
 │   │   │   ├── ArticleCard.tsx     # List view article row
 │   │   │   ├── ArticleGridCard.tsx # Grid view article card
@@ -163,7 +163,7 @@ Visit `http://localhost:3000/posts/your-post-title-here`.
 
 ## 🕒 Automatic Last Updated Date Script
 
-Every blog post automatically receives a `lastUpdated` timestamp from the filesystem or git commit date. To audit or regenerate timestamps across all markdown files:
+Every article automatically receives a `lastUpdated` timestamp from the filesystem or git commit date. To audit or regenerate timestamps across all markdown files:
 
 ```bash
 npm run update-dates
@@ -173,7 +173,7 @@ npm run update-dates
 
 ## 🚀 Push to Search Engines (IndexNow)
 
-To instantly submit all blog articles to Microsoft Bing and Copilot:
+To instantly submit all articles to Microsoft Bing and Copilot:
 
 ```bash
 npm run indexnow

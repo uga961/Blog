@@ -40,7 +40,7 @@ You do not need root access for the documented ADB setup. The project uses Andro
 
 Start with the [TV Detox README](https://github.com/uga961/tv-detox#readme). It is the source of truth for the current install command, supported options, warnings, and rollback process.
 
-Do not rely on an old command from this blog *(in case)* if it conflicts with the repository. The installer and its safety checks may evolve, and TV behaviour is not identical across manufacturers.
+Do not rely on an old command from this guide *(in case)* if it conflicts with the repository. The installer and its safety checks may evolve, and TV behaviour is not identical across manufacturers.
 
 ## 2. Enable developer options and debugging
 

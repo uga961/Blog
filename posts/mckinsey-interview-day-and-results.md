@@ -133,7 +133,7 @@ Career journeys rarely follow a perfectly straight line. Sometimes you get the o
 
 For me, that long day in Chennai remains a meaningful part of my journey—not because everything went exactly as I wanted, but because I got to experience it, learn from it, and move forward.
 
-This is only the first part of the story. **A separate blog post about my work experience during the internship, the projects I worked on, and what I learned is coming later this week.**
+This is only the first part of the story. **A separate article about my work experience during the internship, the projects I worked on, and what I learned is coming later this week.**
 
 ---
 

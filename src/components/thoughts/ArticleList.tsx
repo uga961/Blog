@@ -30,7 +30,9 @@ export function ArticleList({
 
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage.getItem("blog_view_mode");
+    const saved =
+      localStorage.getItem("thoughts_view_mode") ||
+      localStorage.getItem("blog_view_mode");
     if (saved === "grid" || saved === "list") {
       setViewMode(saved);
     }
@@ -39,7 +41,7 @@ export function ArticleList({
   const handleToggleView = (mode: "list" | "grid") => {
     setViewMode(mode);
     try {
-      localStorage.setItem("blog_view_mode", mode);
+      localStorage.setItem("thoughts_view_mode", mode);
     } catch {}
   };
 
