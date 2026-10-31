@@ -53,13 +53,14 @@ describe("Markdown Posts System", () => {
     expect(post).toBeNull();
   });
 
-  it("verifies all post seoTitles are concise and under 70 characters for Bing/Google guidelines", () => {
+  it("verifies all posts have descriptive titles and valid frontmatter", () => {
     const posts = getAllPosts();
+    expect(posts.length).toBeGreaterThan(0);
     for (const post of posts) {
-      if (post.seoTitle) {
-        expect(post.seoTitle.length).toBeLessThanOrEqual(70);
-        expect(post.seoTitle).toContain("Ugandhar Vaddi");
-      }
+      expect(post.title).toBeDefined();
+      expect(post.title.length).toBeGreaterThan(5);
+      expect(post.slug).toBeDefined();
+      expect(post.date).toBeDefined();
     }
   });
 });

@@ -40,17 +40,7 @@ export async function generateMetadata({
 
   const postUrl = `${SITE_URL}/posts/${post.slug}`;
   const authorName = "Ugandhar Vaddi";
-
-  let seoTitle = post.seoTitle;
-  if (!seoTitle) {
-    const candidate = `${post.title} by ${authorName}`;
-    if (candidate.length <= 68) {
-      seoTitle = candidate;
-    } else {
-      const shortened = post.title.split(":")[0].slice(0, 45).trim();
-      seoTitle = `${shortened} by ${authorName}`;
-    }
-  }
+  const title = post.title;
 
   const description =
     post.excerpt || `${post.title} — Written by ${authorName}`;
@@ -63,7 +53,7 @@ export async function generateMetadata({
   const ogImages = [
     {
       url: cleanOgImage,
-      alt: seoTitle,
+      alt: title,
       width: 1200,
       height: 630,
     },
@@ -75,9 +65,7 @@ export async function generateMetadata({
     : isoPublished;
 
   return {
-    title: {
-      absolute: seoTitle,
-    },
+    title,
     description,
     authors: [{ name: siteConfig.name, url: "https://www.ugandhar.in" }],
     creator: siteConfig.name,
@@ -97,7 +85,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: seoTitle,
+      title,
       description,
       url: postUrl,
       type: "article",
@@ -111,7 +99,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: seoTitle,
+      title,
       description,
       images: [cleanOgImage],
       creator: "@uga961",
@@ -119,7 +107,7 @@ export async function generateMetadata({
     },
     other: {
       "dc.creator": siteConfig.name,
-      "dc.title": seoTitle,
+      "dc.title": title,
       "dc.description": description,
       "article:published_time": isoPublished || "",
       "article:modified_time": isoModified || "",
@@ -163,17 +151,6 @@ export default async function PostPage({ params }: PageProps) {
     ? new Date(post.lastUpdated).toISOString()
     : isoPublished;
 
-  let seoTitle = post.seoTitle;
-  if (!seoTitle) {
-    const candidate = `${post.title} by Ugandhar Vaddi`;
-    if (candidate.length <= 68) {
-      seoTitle = candidate;
-    } else {
-      const shortened = post.title.split(":")[0].slice(0, 45).trim();
-      seoTitle = `${shortened} by Ugandhar Vaddi`;
-    }
-  }
-
   // Rich JSON-LD structured data for Google Search (BlogPosting + BreadcrumbList)
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -187,8 +164,8 @@ export default async function PostPage({ params }: PageProps) {
           name: "Ugandhar Vaddi — Personal Blog",
           url: SITE_URL,
         },
-        headline: seoTitle,
-        name: seoTitle,
+        headline: post.title,
+        name: post.title,
         description: post.excerpt || post.title,
         url: articleUrl,
         mainEntityOfPage: {
@@ -202,7 +179,7 @@ export default async function PostPage({ params }: PageProps) {
           "@id": "https://www.ugandhar.in/#person",
           name: siteConfig.name,
           url: "https://www.ugandhar.in",
-          image: "https://www.ugandhar.in/avatar/profile.jpg",
+          image: `${SITE_URL}/avatar/profile.jpg`,
           sameAs: [
             "https://github.com/uga961",
             "https://www.linkedin.com/in/vaddi-ugandhar-b37877266/",
@@ -240,12 +217,6 @@ export default async function PostPage({ params }: PageProps) {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Articles",
-            item: `${SITE_URL}/#articles`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
             name: post.title,
             item: articleUrl,
           },

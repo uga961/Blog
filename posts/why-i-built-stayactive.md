@@ -12,7 +12,6 @@ tags:
 - Projects
 - Digital Wellbeing
 title: "Why I Built StayActive: A Small Reminder to Take Care of Myself"
-seoTitle: "Why I Built StayActive by Ugandhar Vaddi"
 ---
 
 There are days when I sit down to work on something and lose track of

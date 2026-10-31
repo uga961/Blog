@@ -49,6 +49,7 @@ export async function GET() {
   return new NextResponse(rssFeed, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
+      "X-Robots-Tag": "noindex, follow",
       "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
     },
   });

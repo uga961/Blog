@@ -1,6 +1,5 @@
 ---
 title: "I Decided to Start This Again"
-seoTitle: "I Decided to Start This Again by Ugandhar Vaddi"
 slug: "i-decided-to-start-this-again"
 date: "2026-03-01"
 excerpt: "A quiet Sunday in Chennai reminded me that a day doesn't have to be perfectly productive to feel full. Sometimes, taking care of small things is enough to begin again."

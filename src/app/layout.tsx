@@ -80,6 +80,9 @@ export const metadata: Metadata = {
     google:
       process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
       "d6qC6JXOnKpcVtH15DHGM1LslxfSPMTZd2mavDkuMY8",
+    other: {
+      "msvalidate.01": "2f8745c1a89b4f99a071de8463990b76",
+    },
   },
   robots: {
     index: true,
@@ -145,11 +148,6 @@ const jsonLd = {
         "Writing on my personal blog about technology, data science, and software engineering.",
       publisher: { "@id": "https://www.ugandhar.in/#person" },
       inLanguage: "en-US",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://blog.ugandhar.in/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@type": "Person",
@@ -157,7 +155,7 @@ const jsonLd = {
       name: "Ugandhar Vaddi",
       alternateName: ["uga961", "VADDI UGANDHAR"],
       url: "https://www.ugandhar.in",
-      image: "https://www.ugandhar.in/avatar/profile.jpg",
+      image: "https://blog.ugandhar.in/avatar/profile.jpg",
       sameAs: [
         "https://github.com/uga961",
         "https://www.linkedin.com/in/vaddi-ugandhar-b37877266/",
@@ -185,9 +183,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/icon.png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
         {/* Inline theme script — prevents flash of light/dark mode */}
         <script
           dangerouslySetInnerHTML={{

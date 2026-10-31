@@ -33,8 +33,8 @@ export default function HomePage() {
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
       "@id": `https://blog.ugandhar.in/posts/${post.slug}#article`,
-      headline: post.seoTitle || `${post.title} by Ugandhar Vaddi`,
-      name: post.seoTitle || `${post.title} by Ugandhar Vaddi`,
+      headline: post.title,
+      name: post.title,
       url: `https://blog.ugandhar.in/posts/${post.slug}`,
       datePublished: post.date ? new Date(post.date).toISOString() : undefined,
       dateModified: post.lastUpdated
@@ -43,6 +43,24 @@ export default function HomePage() {
         ? new Date(post.date).toISOString()
         : undefined,
       description: post.excerpt,
+      author: {
+        "@type": "Person",
+        name: "Ugandhar Vaddi",
+        url: "https://www.ugandhar.in",
+      },
+      image:
+        post.coverImage && post.coverImage.trim() !== ""
+          ? post.coverImage
+          : "https://blog.ugandhar.in/social/og-image.png",
+      publisher: {
+        "@type": "Person",
+        name: "Ugandhar Vaddi",
+        url: "https://www.ugandhar.in",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://blog.ugandhar.in/icon.png",
+        },
+      },
     })),
   };
 

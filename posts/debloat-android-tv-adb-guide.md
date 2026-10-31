@@ -1,6 +1,5 @@
 ---
 title: "How I Debloated My Android TV: A Step-by-Step Guide Using ADB"
-seoTitle: "Debloat Android TV Using ADB by Ugandhar Vaddi"
 slug: "debloat-android-tv-adb-guide"
 date: "2026-10-30"
 excerpt: "My practical guide to cleaning up a slow Android TV with ADB over Wi-Fi, a lighter home screen, careful package checks, reversible changes, and troubleshooting steps."
